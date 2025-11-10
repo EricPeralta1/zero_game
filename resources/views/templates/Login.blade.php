@@ -5,48 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="{{ asset('css/Login.css') }}" rel="stylesheet"> 
+</head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso al Mundo - ZERO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <link href="{{ asset('css/Login.css') }}" rel="stylesheet"> 
 </head>
 <body class="imagenfondo">
     <div class="contenedorlogin">
-            <div class="col-md-8 col-lg-6 login-container bg-white">
-                <h2 class="text-center mb-4">Iniciar Sesión</h2>
-                    <div class="mb-3">
-                        <label for="email" class="form-label"> Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" required autofocus>
-                        @error('email')
-                            <div class="text-danger mt-2">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                        @error('password')
-                            <div class="text-danger mt-2">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                        <label class="form-check-label" for="remember">Recordarme</label>
-                    </div>
-
-                    <div class="d-grid gap-2 mb-3">
-                        <button type="submit" class="btn btn-primary">Entrar</button>
-                    </div>
-
-                   
-                        <div class="text-center">
-                            <a class="text-muted" >¿Olvidaste tu contraseña?</a>
-                        </div>
-                    
-                </form>
-
+        <div class="login-box">
+            <div class="logo-area mb-4">
+               <img src="{{ asset('images/zero_logo_full.png') }}" alt="Logo ZERO" class="zero-logo">
             </div>
-        
-    </div>
 
+            <h2 class="text-center acceso-mundo">ACCESO AL MUNDO</h2>
+
+            <form method="POST" action="/login"> 
+                @csrf 
+            
+                <div class="mb-3">
+                    <input type="text" class="form-control custom-input" placeholder="Nombre Usuario" id="username" name="username" required autofocus>
+                    @error('username') 
+                        <div class="text-danger mt-2 error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+                
+                <div class="mb-5"> 
+                  
+                    <input type="password" class="form-control custom-input" placeholder="Contraseña" id="password" name="password" required>
+                    @error('password')
+                        <div class="text-danger mt-2 error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="d-grid gap-2 mb-4">
+                    <button type="submit" class="boton">Iniciar Mundo</button>
+                </div>
+
+               <div class="text-center register-link">
+                   ¿No tienes cuenta? <a href="{{ route('templates.Registro') }}" class="register-text">Regístrate</a>
+                     </div>
+            </form>
+        </div>
+    </div>
 </body>
+</html>
 
     
