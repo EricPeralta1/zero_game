@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/x-icon" href="images/icon.png">
+    <link rel="icon" type="image/x-icon" href="images/zero_icon.png">
     <title>ZERO</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <nav class="navbar" style="background-color: #372358;" data-bs-theme="dark">
+    <nav class="navbar" style="background-color: #372358; padding: 0px" data-bs-theme="dark">
         <div class="container-fluid d-flex justify-content-around">
 
             <div class="navbar-brand d-flex align-items-center" href="#"
@@ -29,7 +29,7 @@
                 @yield('window_link')
             </div>
             <div>
-                <img src="images/zero_logo_navbar.png" alt="leaderboard" width="auto" height=100%>
+                <img src="images/zero_logo_navbar.png" alt="leaderboard" width="auto" height=75px>
             </div>
             <div>
                 @yield('user')

@@ -12,7 +12,7 @@
             class="d-inline-block align-text-center">
         <span class="text-white" style="font-family: VT323; font-size: 30px">ERIC PERALTA</span>
         <a class="ms-2">
-            <img src="images/exit.png" alt="Logout" width="60" height="60"
+            <img src="images/exit.png" alt="Logout" width="50" height="50"
                 class="d-inline-block align-text-center">
         </a>
     </div>
