@@ -25,11 +25,11 @@
         <div class="container-fluid d-flex justify-content-around">
 
             <div class="navbar-brand d-flex align-items-center" href="#"
-                style="font-family: 'VT323', sans-serif; font-weight: 600;">
+                style="font-family: 'VT323', sans-serif">
                 @yield('window_link')
             </div>
             <div>
-                <img src="images/zero_logo_navbar.png" alt="leaderboard" width="100" height=auto>
+                <img src="images/zero_logo_navbar.png" alt="leaderboard" width="auto" height=100%>
             </div>
             <div>
                 @yield('user')
