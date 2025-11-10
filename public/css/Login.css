@@ -1,6 +1,6 @@
 
 .imagenfondo { 
-    background-color: #202020; /* Color de fondo sólido */
+    background-color: #202020;
     min-height: 100vh;
     display: flex; 
     justify-content: center;
@@ -28,7 +28,7 @@
 
 .login-box {
     width: 650px; 
-    padding: 10%; /* Ajuste del padding */
+    padding: 10%;
     border-radius: 8px;
     text-align: center;
     position: relative; 
