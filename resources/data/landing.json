@@ -1,0 +1,175 @@
+{
+    "en": {
+        "navbar": ["HOME", "STORY", "LEVELS", "RANKING", "TEAM", "PROFILE"],
+        "hero_title": "HELP ZERO SAVE DIGIT TOWN!",
+        "hero_btn": "PLAY NOW",
+        "story_section": {
+            "title": "STORY",
+            "text": [
+                "<p>In Digit Town, Mathmagical Energy keeps the balance between numbers, shapes, and measures.</p><p>But one day, Professor Kaos, a brilliant yet clumsy inventor, accidentally releases the Errors: tiny creatures that devour numbers and scramble operations.</p><p>Chaos spreads across the land, and only Zero, a determined young boy living on the outskirts, can restore harmony. To do so, he must recover the four Mathmagical Crystals, each protected in a different region.</p>",
+                "<p>Each crystal represents a mathematical challenge that will test your logic, speed, and skill.</p><p>Will you help Zero master Mathmagic and save Digit Town from Kaos?</p>"
+            ]
+        },
+        "levels_section": {
+            "title": "UNLOCK ALL LEVELS!",
+            "lvl_titles": [
+                "THE FOREST OF ADDITION",
+                "THE ADVANCED DESERT",
+                "THE GEOMETRIC MOUNTAINS",
+                "THE CITY OF KNOWLEDGE"
+            ]
+        },
+        "ranking_section": {
+            "title": "EARN POINTS AND CLIMB THE RANKING!"
+        },
+        "team_section": {
+            "title": "CREATIVE TEAM",
+            "team": {
+                "tasks_title": "Responsibilities",
+                "ferdinand": {
+                    "role": "Role",
+                    "responsibilities": ["", ""]
+                },
+                "eric": {
+                    "role": "Role",
+                    "responsibilities": ["", ""]
+                },
+                "brian": {
+                    "role": "Role",
+                    "responsibilities": ["", ""]
+                },
+                "max": {
+                    "role": "Role",
+                    "responsibilities": ["", ""]
+                }
+            }
+        },
+        "contact_section": {
+            "title": "CONTACT",
+            "form_labels": ["Name", "Email", "Message", "SEND"]
+        },
+        "footer_section": {
+            "copyright": "© 2025 ZERO / DAW2 - All rights reserved"
+        }
+    },
+    "ca": {
+        "navbar": [
+            "INICI",
+            "HISTÒRIA",
+            "NIVELLS",
+            "RÀNQUING",
+            "EQUIP",
+            "PERFIL"
+        ],
+        "hero_title": "AJUDA EN ZERO A SALVAR EL POBLE DÍGIT!",
+        "hero_btn": "JUGAR ARA",
+        "story_section": {
+            "title": "HISTÒRIA",
+            "text": [
+                "<p>A Poble Dígit, l’Energia Matemàgica manté l’equilibri entre nombres, formes i mesures.</p><p>Però un dia, el Professor Kaos, un inventor brillant però despistat, allibera per accident els Errors: petites criatures que devoren nombres i desordenen les operacions.</p><p>El caos s’estén per tot el regne, i només en Zero, un jove decidit que viu als afores, pot restaurar l’harmonia. Per aconseguir-ho, haurà de recuperar els quatre Cristalls Matemàgics, cadascun protegit en una regió diferent.</p>",
+                "<p>Cada cristall representa un desafiament matemàtic que posarà a prova la teva lògica, velocitat i habilitat.</p><p>Ajudaràs en Zero a dominar la Matemàgia i salvar el Poble Dígit del Kaos?</p>"
+            ]
+        },
+        "levels_section": {
+            "title": "DESBLOQUEJA TOTS ELS NIVELLS!",
+            "lvl_titles": [
+                "EL BOSC DE LA SUMA",
+                "EL DESERT AVANÇAT",
+                "LES MUNTANYES GEOMÈTRIQUES",
+                "LA CIUTAT DEL SABER"
+            ]
+        },
+        "ranking_section": {
+            "title": "SUMA PUNTS I ENTRA AL RÀNQUING!"
+        },
+        "team_section": {
+            "title": "EQUIP CREATIU",
+            "team": {
+                "tasks_title": "Responsabilitats",
+                "ferdinand": {
+                    "role": "Rol",
+                    "responsibilities": ["", ""]
+                },
+                "eric": {
+                    "role": "Rol",
+                    "responsibilities": ["", ""]
+                },
+                "brian": {
+                    "role": "Rol",
+                    "responsibilities": ["", ""]
+                },
+                "max": {
+                    "role": "Rol",
+                    "responsibilities": ["", ""]
+                }
+            }
+        },
+        "contact_section": {
+            "title": "CONTACTE",
+            "form_labels": ["Nom", "Correu", "Missatge", "ENVIAR"]
+        },
+        "footer_section": {
+            "copyright": "© 2025 ZERO / DAW2 - Tots els drets reservats"
+        }
+    },
+    "es": {
+        "navbar": [
+            "INICIO",
+            "HISTORIA",
+            "NIVELES",
+            "RANKING",
+            "EQUIPO",
+            "PERFIL"
+        ],
+        "hero_title": "¡AYUDA A ZERO A SALVAR EL PUEBLO DÍGITO!",
+        "hero_btn": "JUGAR YA",
+        "story_section": {
+            "title": "HISTORIA",
+            "text": [
+                "<p>En Pueblo Dígito, la Energía Matemágica mantiene el equilibrio entre números, formas y medidas.</p><p>Pero un día, el Profesor Kaos, un inventor brillante pero despistado, libera por accidente a los Errores: pequeñas criaturas que devoran números y desordenan las operaciones.</p><p>El caos se extiende por todo el reino, y solo Zero, un joven decidido que vive en las afueras, puede restaurar la armonía. Para lograrlo, deberá recuperar los cuatro Cristales Matemágicos, cada uno protegido en una región distinta.</p>",
+                "<p>Cada cristal representa un desafío matemático que pondrá a prueba tu lógica, velocidad y habilidad.</p><p>¿Ayudarás a Zero a dominar la Matemágia y salvar Pueblo Dígito del kaos?</p>"
+            ]
+        },
+        "levels_section": {
+            "title": "¡DESBLOQUEA TODOS LOS NIVELES!",
+            "lvl_titles": [
+                "EL BOSQUE DE LA SUMA",
+                "EL DESIERTO AVANZADO",
+                "LAS MONTAÑAS GEOMÉTRICAS",
+                "LA CIUDAD DEL SABER"
+            ]
+        },
+        "ranking_section": {
+            "title": "¡SUMA PUNTOS Y ENTRA EN EL RANKING!"
+        },
+        "team_section": {
+            "title": "EQUIPO CREATIVO",
+            "team": {
+                "tasks_title": "Responsabilidades",
+                "ferdinand": {
+                    "role": "Rol",
+                    "responsibilities": ["", ""]
+                },
+                "eric": {
+                    "role": "Rol",
+                    "responsibilities": ["", ""]
+                },
+                "brian": {
+                    "role": "Rol",
+                    "responsibilities": ["", ""]
+                },
+                "max": {
+                    "role": "Rol",
+                    "responsibilities": ["", ""]
+                }
+            }
+        },
+        "contact_section": {
+            "title": "CONTACTO",
+            "form_labels": ["Nombre", "Correo", "Mensaje", "ENVIAR"]
+        },
+        "footer_section": {
+            "copyright": "© 2025 ZERO / DAW2 - Todos los derechos reservados"
+        }
+    }
+}
