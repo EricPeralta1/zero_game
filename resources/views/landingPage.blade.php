@@ -22,9 +22,13 @@
         --color-black: #000;
     }
 
-    body {
-        margin: 0;
+    * {
+
         padding: 0;
+        margin: 0;
+    }
+
+    body {
         background: var(--color-violet)
     }
 
@@ -179,6 +183,7 @@
     main>div {
         max-width: 1200px;
         width: 100%;
+        padding: 20px
     }
 
     /* STORY SECTION */
@@ -207,23 +212,90 @@
         flex-direction: column;
         justify-content: center;
         align-content: center;
-    }
-
-    #niveles>div:nth-child(2)>img {
-        margin: 0 auto 40px auto;
-        width: 50%;
-        height: auto;
+        margin: 0 0 80px 0;
     }
 
     #niveles>div>img {
-        margin: 0 auto 0 auto;
-        width: 70%;
+        width: 100%;
+        max-width: 1100px;
         height: auto;
+        margin: 0 auto 0 auto;
+    }
+
+    #niveles>div:nth-child(2)>img {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+    }
+
+    #niveles>div>img:last-child {
+        margin: 0 auto 40px auto;
     }
 
     #niveles>div>h3 {
         margin: 0;
         font-size: 1.5rem;
+    }
+
+    /* RANKING SECTION */
+    #ranking {
+        text-align: center;
+    }
+
+    #ranking img {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    /* TEAM SECTION */
+    #equipo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #equipo>div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        max-width: fit-content;
+        margin: 0 auto;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .card-team {
+        background-color: var(--color-black);
+
+        max-width: fit-content;
+        padding: 30px;
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .card-team img {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .card-team>p:nth-child(2) {
+        font-family: 'Pixeloid', sans-serif;
+        font-size: 1rem;
+    }
+
+    /* CONTACT FORM */
+    #contacto>form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (max-width: 600px) {
+        #inicio {
+            height: 60dvh;
+        }
     }
 </style>
 
@@ -297,33 +369,35 @@
             </section>
             <section id="ranking">
                 <h2>{{ $texts['ranking_section']['title'] }}</h2>
-                <img src="" alt="Ejemplo ranking">
+                <img src="{{ asset('images/landingPage/landing_ranking.png') }}" alt="Ejemplo ranking">
             </section>
             <section id="equipo">
                 <h2>{{ $texts['team_section']['title'] }}</h2>
-                <div class="card-team">
-                    <img src="" alt="Ferdinand">
-                    <p>Ferdinand Pinto</p>
-                    <p>{{ $texts['team_section']['team']['max']['role'] }}</p>
-                    <p>{{ $texts['team_section']['team']['tasks_title'] }}</p>
-                </div>
-                <div class="card-team">
-                    <img src="" alt="Eric">
-                    <p>Eric Peralta</p>
-                    <p>{{ $texts['team_section']['team']['max']['role'] }}</p>
-                    <p>{{ $texts['team_section']['team']['tasks_title'] }}</p>
-                </div>
-                <div class="card-team">
-                    <img src="" alt="Brian">
-                    <p>Brian</p>
-                    <p>{{ $texts['team_section']['team']['max']['role'] }}</p>
-                    <p>{{ $texts['team_section']['team']['tasks_title'] }}</p>
-                </div>
-                <div class="card-team">
-                    <img src="" alt="Max">
-                    <p>Max Vidal</p>
-                    <p>{{ $texts['team_section']['team']['max']['role'] }}</p>
-                    <p>{{ $texts['team_section']['team']['tasks_title'] }}</p>
+                <div>
+                    <div class="card-team">
+                        <img src="{{ asset('images/landingPage/default_avatar.jpg') }}" alt="Ferdinand">
+                        <p>Ferdinand Pinto</p>
+                        <p>{{ $texts['team_section']['team']['max']['role'] }}</p>
+                        <p>{{ $texts['team_section']['team']['tasks_title'] }}</p>
+                    </div>
+                    <div class="card-team">
+                        <img src="{{ asset('images/landingPage/default_avatar.jpg') }}" alt="Eric">
+                        <p>Eric Peralta</p>
+                        <p>{{ $texts['team_section']['team']['max']['role'] }}</p>
+                        <p>{{ $texts['team_section']['team']['tasks_title'] }}</p>
+                    </div>
+                    <div class="card-team">
+                        <img src="{{ asset('images/landingPage/default_avatar.jpg') }}" alt="Brian">
+                        <p>Brian</p>
+                        <p>{{ $texts['team_section']['team']['max']['role'] }}</p>
+                        <p>{{ $texts['team_section']['team']['tasks_title'] }}</p>
+                    </div>
+                    <div class="card-team">
+                        <img src="{{ asset('images/landingPage/default_avatar.jpg') }}" alt="Max">
+                        <p>Max Vidal</p>
+                        <p>{{ $texts['team_section']['team']['max']['role'] }}</p>
+                        <p>{{ $texts['team_section']['team']['tasks_title'] }}</p>
+                    </div>
                 </div>
             </section>
             <section id="contacto">
