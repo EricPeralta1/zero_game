@@ -1,0 +1,73 @@
+.mapbackground {
+    height: calc(100vh - 75px); 
+    background-image: url(../images/level_wide_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.levelCard {
+    max-height:fit-content;
+    margin-left: auto;
+    padding: 17px;
+    background-color: #716F6F;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: 000000;
+    align-items: center;
+    text-align: center;
+    font-family: VT323;
+    width: 35%;
+}
+
+.levelImg {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    object-fit: cover;
+    border: 2px solid #000;
+}
+
+.levelDesc{
+    margin-top: 10px;
+    background-color: #C7C7C7;
+    border-radius: 20px;
+    border-style: solid;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.levelScore{
+    background-color: #C7C7C7;
+    padding: 0px 10px 0px 10px;
+    align-items: center;
+    border-radius: 20px;
+    border-style: solid;
+    font-size: 30px;
+    margin: 0;
+}
+
+.playButton{
+    margin-left: 20px;
+    background-color: #F96702;
+    padding: 0px 10px 0px 10px;
+    align-items: center;
+    border-radius: 20px;
+    border-style: solid;
+    font-size: 30px;
+    color: #fff;
+}
+
+.lvlNum{
+    margin-bottom: 0%;
+    color: white;
+}
+
+.lvlNum.active{
+    margin-bottom: 0%;
+    color: #F96702;
+}
+
+.lvlNum:hover{
+    color: #BE440F;
+}

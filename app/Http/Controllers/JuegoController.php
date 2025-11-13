@@ -12,7 +12,9 @@ class JuegoController extends Controller
      */
     public function index()
     {
-        //
+        $juegos = juego::all();
+
+        return view('Levels.levelscreen', compact('juegos'));
     }
 
     /**

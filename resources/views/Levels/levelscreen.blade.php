@@ -17,3 +17,36 @@
         </a>
     </div>
 @endsection
+
+@section('content')
+   @php
+       $juego1 = $juegos->find(1);
+       $juego2 = $juegos->find(2);
+       $juego3 = $juegos->find(3);
+       $juego4 = $juegos->find(4);
+   @endphp
+    <div class="d-flex align-items-center mapbackground levelview">
+        <div class="levelCard">
+            <h3 class="levelTitle">NIVEL {{$juego1->id_game }} | {{ $juego1->nombre_juego }}</h3>
+            <hr style="height:2px;border-width:0;color:rgb(0, 0, 0);background-color:rgb(0, 0, 0)">
+            <div>
+                <img src="images/level_1.png" alt="Map" height="300" width="600" class="levelImg">
+            </div>
+            <p class="levelDesc">{{ $juego1->descripcion }}</p>
+            <div class="d-flex justify-content-center align-items-center">
+                <p class="levelScore">HIGHSCORE: 0p</p>
+                <button class="playButton">COMENZAR</button>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+            <p class="ms-2 lvlNum" style="font-size: 40px" data-level="1" id="lvl1">1</a>
+            <p class="ms-2 lvlNum" style="font-size: 40px" data-level="2" id="lvl2">2</a>
+            <p class="ms-2 lvlNum" style="font-size: 40px" data-level="3" id="lvl3">3</a>
+            <p class="ms-2 lvlNum" style="font-size: 40px" data-level="4" id="lvl4">4</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const juegos = @json($juegos);
+    </script>
+    <script src="js/levels.js"></script>
+@endsection
