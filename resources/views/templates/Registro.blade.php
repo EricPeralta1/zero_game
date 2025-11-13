@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=VT323&display=swap" rel="stylesheet">
-    
+    s
     <link href="{{ asset('css/Login.css') }}" rel="stylesheet"> 
 </head>
 <body class="imagenfondo">
@@ -22,13 +22,13 @@
 
             <h2 class="text-center acceso-mundo">REGISTRO AL MUNDO</h2>
 
-            <form method="POST" action="/registro"> 
+            <form method="post" action="{{ route('usuario.store') }}"> 
                 @csrf 
                 
                 <div class="row mb-3 gx-3">
                     
                     <div class="col-md-6">
-                        <input type="text" class="form-control custom-input" placeholder="Nombre Usuario" id="username" name="username" required autofocus>
+                        <input type="text" class="form-control custom-input" placeholder="Nombre Usuario" id="nom_usuario" name="nom_usuario" required autofocus>
                         @error('username') 
                             <div class="text-danger mt-2 error-message">{{ $message }}</div>
                         @enderror
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <input type="password" class="form-control custom-input" placeholder="Confirmar Contraseña" id="password_confirmation" name="password_confirmation" required>
+                        <input type="password" class="form-control custom-input" placeholder="Confirmar Contraseña" id="password" name="password" required>
                         </div>
                 </div>
 
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="text-center register-link">
-                    ¿Ya tienes cuenta? <a href="{{ route('templates.Login') }}" class="register-text">Acceder</a>
+                    ¿Ya tienes cuenta? <a href="{{ route('login') }}" class="register-text">Acceder</a>
                 </div>
             </form>
         </div>

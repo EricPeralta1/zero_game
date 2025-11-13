@@ -29,19 +29,16 @@
             </div>
 
             <h2 class="text-center acceso-mundo">ACCESO AL MUNDO</h2>
-
-            <form method="POST" action="/login"> 
+            <form method="post" action="{{ route('login.submit') }}"> 
                 @csrf 
-            
                 <div class="mb-3">
-                    <input type="text" class="form-control custom-input" placeholder="Nombre Usuario" id="username" name="username" required autofocus>
-                    @error('username') 
+                    <input type="text" class="form-control custom-input" placeholder="Nombre Usuario" id="nom_usuario" name="nom_usuario" required autofocus>
+                    @error('nom_usuario') 
                         <div class="text-danger mt-2 error-message">{{ $message }}</div>
                     @enderror
                 </div>
-                
+
                 <div class="mb-5"> 
-                  
                     <input type="password" class="form-control custom-input" placeholder="Contraseña" id="password" name="password" required>
                     @error('password')
                         <div class="text-danger mt-2 error-message">{{ $message }}</div>

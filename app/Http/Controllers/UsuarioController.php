@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use App\Classes\UsuarioClass;
 
 class UsuarioController extends Controller
 {
@@ -12,7 +13,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('templates.Login');
+        return view('templates.Registro');
     }
 
 
@@ -21,7 +22,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('templates.Registro');
+       
     }
 
     /**
@@ -29,7 +30,16 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario=new Usuario();
+        $usuario->nom_usuario=$request->input('nom_usuario');
+        $usuario->email=$request->input('email');
+         $usuario->password=$request->input('password');
+        $usuario->id_rol = 1; 
+
+           $usuario->save();
+        
+        // 5. Redirección después del registro exitoso
+        return redirect()->route('usuario.index')->with('success', '¡Registro exitoso! Por favor, inicia sesión con tus nuevas credenciales.');
     }
 
     /**
