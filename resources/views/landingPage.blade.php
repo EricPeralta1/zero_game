@@ -23,13 +23,13 @@
     }
 
     * {
-
         padding: 0;
         margin: 0;
     }
 
     body {
-        background: var(--color-violet)
+        background: var(--color-violet);
+        scroll-behavior: smooth;
     }
 
     h1,
@@ -41,7 +41,7 @@
     }
 
     h2 {
-        margin: 40px 0;
+        margin: 40px 0 20px 0;
     }
 
     h3 {
@@ -52,6 +52,7 @@
     p,
     a,
     label,
+    input,
     ul {
         font-family: "VT323", monospace;
         color: var(--color-white);
@@ -76,13 +77,27 @@
         color: var(--color-white)
     }
 
+    /* MAIN */
+    main {
+        display: flex;
+        justify-content: center;
+    }
+
+    main>div {
+        max-width: 1200px;
+        width: 100%;
+        padding: 20px
+    }
+
     /* NAVBAR */
     nav {
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
         align-content: center;
         justify-content: center;
-        position: fixed;
+        position: absolute;
+        top: 0;
     }
 
     nav>div {
@@ -91,8 +106,30 @@
         padding: 10px 20px;
 
         display: flex;
+        flex-wrap: wrap;
         align-content: center;
         gap: 20px;
+    }
+
+    nav.scrolled {
+        position: fixed;
+        background: var(--color-violet);
+        border-bottom: 2px solid var(--color-orange);
+        opacity: 0;
+        transform: translateY(-100px);
+        animation: nav-bg 800ms forwards;
+        z-index: 100;
+    }
+
+    @keyframes nav-bg {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     nav>div>img {
@@ -133,18 +170,22 @@
     }
 
     #inicio>div {
+        padding: 20px;
         display: flex;
         flex-direction: column;
         max-width: 1200px;
+        width: 100%;
 
         justify-content: start;
+        text-align: start;
         align-content: center;
-        margin: auto 0 auto 0
+        margin: auto 0 auto 0;
     }
 
     #inicio>div>h1 {
         font-size: 3rem;
         text-align: start;
+        margin-bottom: 40px;
     }
 
     #inicio>div>button {
@@ -154,8 +195,6 @@
         font-size: 1.5rem;
         border: 5px solid black;
         font-family: 'Pixeloid', sans-serif;
-
-        transition: all 400ms;
     }
 
     #inicio>div>button:hover {
@@ -171,19 +210,6 @@
     #inicio img {
         width: 200px;
         height: auto;
-        z-index: 100;
-    }
-
-    /* MAIN */
-    main {
-        display: flex;
-        justify-content: center;
-    }
-
-    main>div {
-        max-width: 1200px;
-        width: 100%;
-        padding: 20px
     }
 
     /* STORY SECTION */
@@ -193,10 +219,12 @@
         align-content: center;
         gap: 20px;
         margin: 50px 0;
+        width: auto;
     }
 
-    #historia>div>img {
-        height: 100px;
+    .gema {
+        height: 100%;
+        max-height: 100px;
         width: auto;
     }
 
@@ -207,7 +235,7 @@
         gap: 20px;
     }
 
-    #niveles>div {
+    #niveles>div>div {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -215,26 +243,48 @@
         margin: 0 0 80px 0;
     }
 
-    #niveles>div>img {
+    .levels-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        gap: 40px;
+    }
+
+    .levels-container::before {
+        content: '';
+        position: absolute;
+        top: 50px;
+        bottom: 100px;
+        left: 50%;
+        width: 2px;
+        border-left: 2px dashed rgb(185, 185, 185);
+        z-index: 0;
+    }
+
+
+    #niveles>div>div>img {
         width: 100%;
         max-width: 1100px;
         height: auto;
         margin: 0 auto 0 auto;
+        z-index: 1;
     }
 
-    #niveles>div:nth-child(2)>img {
-        width: 100%;
+    #niveles>div>div:nth-child(1)>img {
+        width: 75%;
         max-width: 800px;
         height: auto;
     }
 
-    #niveles>div>img:last-child {
-        margin: 0 auto 40px auto;
+    #niveles>div>div>img:last-child {
+        margin: 0 auto 0 auto;
     }
 
-    #niveles>div>h3 {
+    #niveles>div>div>h3 {
         margin: 0;
         font-size: 1.5rem;
+        z-index: 1;
     }
 
     /* RANKING SECTION */
@@ -288,25 +338,201 @@
 
     /* CONTACT FORM */
     #contacto>form {
+        box-sizing: border-box;
+        padding: 30px;
+        display: flex;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    #contacto>form>div {
         display: flex;
         flex-direction: column;
+        width: 100%;
+        max-width: 600px;
+
+        margin: 0 auto;
+    }
+
+    label {
+        font-size: 1.5rem;
+        padding-bottom: 10px;
+    }
+
+    input,
+    textarea {
+        padding: 5px;
+        margin: 0 0 20px 0;
+        color: var(--color-black);
+        font-family: 'VT323', sans-serif;
+        border: 3px solid transparent;
+        outline: none;
+        transition: all 200ms;
+    }
+
+    textarea {
+        height: 200px;
+        max-height: 200px;
+        max-width: 100%;
+        width: 100%;
+        resize: none;
+        font-size: 1.3rem;
+    }
+
+    input:is(:hover, :focus, :active),
+    textarea:is(:hover, :focus, :active) {
+        border: 3px solid var(--color-black);
+    }
+
+    #submit-contact {
+        font-family: 'VT323';
+        font-size: 1.5rem;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        max-width: 200px;
+        width: 100%;
+        margin: 0 0 0 auto;
+        background-color: var(--color-black);
+        border: none;
+    }
+
+    #submit-contact:is(:hover, :focus, :active) {
+        background: #2b2b2b;
+    }
+
+    /* FOOTER */
+    footer {
+        margin-top: 80px;
+        width: 100%;
+        text-align: center;
+        background: var(--color-black);
+    }
+
+    footer>div {
+        display: flex;
+        flex-direction: column;
+        max-width: 1000px;
+        padding: 20px;
+        margin: 0 auto;
+        gap: 60px;
+    }
+
+    footer>div>div {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        row-gap: 20px;
+    }
+
+    footer img {
+        scale: 1;
+    }
+
+    footer>div>div>ul {
+        display: flex;
+        gap: 20px;
+        margin: auto 0 auto 20px;
+    }
+
+    @media (max-width: 900px) {
+        nav>div {
+            gap: 15px;
+        }
+
+        nav>div img {
+            width: 90px;
+            height: auto;
+        }
+
+        nav>div a,
+        nav>div select {
+            font-size: 1.4rem;
+        }
+
+        #inicio {}
+
+        #inicio>div>h1 {
+            font-size: 2.2rem
+        }
+
+        #inicio>div img {
+            width: 150px;
+            height: auto;
+        }
+
+        #inicio>div button {
+            font-size: 1.4rem;
+        }
     }
 
     @media (max-width: 600px) {
+        nav>div {
+            gap: 15px;
+        }
+
+        nav>div img {
+            width: 50px;
+            height: auto;
+        }
+
+        nav>div a,
+        nav>div select {
+            font-size: 1rem;
+        }
+
         #inicio {
-            height: 60dvh;
+            height: 100%;
+            max-height: 70%;
+        }
+
+        #inicio>div>h1 {
+            font-size: 1.8rem
+        }
+
+        #inicio>div img {
+            width: 100px;
+            height: auto;
+        }
+
+        #inicio>div button {
+            font-size: 1rem;
+        }
+
+        #equipo>div {
+            grid-template-columns: 1fr;
+        }
+
+        .gema {
+            height: 100%;
+            max-height: 60px;
+            width: auto;
+        }
+
+        li>a {
+            font-size: .8rem;
         }
     }
 </style>
+<html lang="{{ $lang }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ZERO</title>
+</head>
 
 <body>
     <header>
         <nav>
             <div>
                 <img src="{{ asset('images/landingPage/zero_logo_nobg.png') }}" alt="zero logo">
-
-                @foreach ($texts['navbar'] as $item)
-                    <a href="#">{{ $item }}</a>
+                @php
+                    $sectionIds = ['inicio', 'historia', 'niveles', 'ranking', 'equipo', 'perfil'];
+                @endphp
+                @foreach ($texts['navbar'] as $index => $item)
+                    <a href="#{{ $sectionIds[$index] }}">{{ $item }}</a>
                 @endforeach
 
 
@@ -345,32 +571,38 @@
 
                 {!! $texts['story_section']['text'][1] !!}
             </section>
+
             <section id="niveles">
                 <h2>{{ $texts['levels_section']['title'] }}</h2>
-                <div>
-                    <h3>{{ $texts['levels_section']['lvl_titles'][0] }}</h3>
-                    <img src="{{ asset('images/landingPage/landing_lvl1.png') }}" alt="Pueblo digito">
-                </div>
-                <div>
-                    <h3>{{ $texts['levels_section']['lvl_titles'][1] }}</h3>
-                    <img src="{{ asset('images/landingPage/landing_lvl_blocked.png') }}" alt="El Desierto Avanzado">
+                <div class="levels-container">
+                    <div>
+                        <h3>{{ $texts['levels_section']['lvl_titles'][0] }}</h3>
+                        <img src="{{ asset('images/landingPage/landing_lvl1.png') }}" alt="Pueblo digito">
+                    </div>
+                    <div>
+                        <h3>{{ $texts['levels_section']['lvl_titles'][1] }}</h3>
+                        <img src="{{ asset('images/landingPage/landing_lvl_blocked.png') }}"
+                            alt="El Desierto Avanzado">
 
-                </div>
-                <div>
-                    <h3>{{ $texts['levels_section']['lvl_titles'][2] }}</h3>
-                    <img src="{{ asset('images/landingPage/landing_lvl_blocked.png') }}"
-                        alt="Las Montañas Geométricas">
+                    </div>
+                    <div>
+                        <h3>{{ $texts['levels_section']['lvl_titles'][2] }}</h3>
+                        <img src="{{ asset('images/landingPage/landing_lvl_blocked.png') }}"
+                            alt="Las Montañas Geométricas">
 
-                </div>
-                <div>
-                    <h3>{{ $texts['levels_section']['lvl_titles'][3] }}</h3>
-                    <img src="{{ asset('images/landingPage/landing_lvl_blocked.png') }}" alt="La Ciudad del Saber">
+                    </div>
+                    <div>
+                        <h3>{{ $texts['levels_section']['lvl_titles'][3] }}</h3>
+                        <img src="{{ asset('images/landingPage/landing_lvl_blocked.png') }}" alt="La Ciudad del Saber">
+                    </div>
                 </div>
             </section>
+
             <section id="ranking">
                 <h2>{{ $texts['ranking_section']['title'] }}</h2>
                 <img src="{{ asset('images/landingPage/landing_ranking.png') }}" alt="Ejemplo ranking">
             </section>
+
             <section id="equipo">
                 <h2>{{ $texts['team_section']['title'] }}</h2>
                 <div>
@@ -400,21 +632,26 @@
                     </div>
                 </div>
             </section>
+
             <section id="contacto">
                 <h2>{{ $texts['contact_section']['title'] }}</h2>
                 <form action="">
-                    <label for="name">{{ $texts['contact_section']['form_labels'][0] }}</label>
-                    <input type="text" name="name" id="name">
+                    <div>
+                        <label for="name">{{ $texts['contact_section']['form_labels'][0] }}*</label>
+                        <input type="text" name="name" id="name" required maxlength="255">
 
-                    <label for="email">{{ $texts['contact_section']['form_labels'][1] }}</label>
-                    <input type="email" name="email" id="email">
+                        <label for="email">{{ $texts['contact_section']['form_labels'][1] }}*</label>
+                        <input type="email" name="email" id="email" required maxlength="255">
 
-                    <label for="message">{{ $texts['contact_section']['form_labels'][2] }}</label>
-                    <textarea name="message" id="message"></textarea>
+                        <label for="message">{{ $texts['contact_section']['form_labels'][2] }}*</label>
+                        <textarea name="message" id="message" maxlength="500"></textarea>
 
-                    <button type="submit">{{ $texts['contact_section']['form_labels'][3] }}</button>
+                        <button type="submit"
+                            id="submit-contact">{{ $texts['contact_section']['form_labels'][3] }}</button>
+                    </div>
                 </form>
             </section>
+
         </div>
     </main>
     <footer>
@@ -422,8 +659,11 @@
             <div>
                 <img src="{{ asset('images/landingPage/zero_logo_og.png') }}" alt="Zero logo">
                 <ul>
-                    @foreach ($texts['navbar'] as $item)
-                        <li><a href="#">{{ $item }}</a></li>
+                    @php
+                        $sectionIds = ['inicio', 'historia', 'niveles', 'ranking', 'equipo', 'perfil'];
+                    @endphp
+                    @foreach ($texts['navbar'] as $index => $item)
+                        <li><a href="#{{ $sectionIds[$index] }}">{{ $item }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -438,4 +678,13 @@
     selectLanguage.addEventListener("change", function() {
         window.location.href = `./${selectLanguage.value}`
     })
+
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 600) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
 </script>
