@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class juego extends Model
 {
-      protected $table = 'juegos';
+    protected $table = 'juegos';
     protected $primaryKey = 'id_game';
     public $timestamps = false;
     protected $fillable=['nombre_juego'];
