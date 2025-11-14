@@ -1,6 +1,6 @@
 {
     "en": {
-        "navbar": ["HOME", "STORY", "LEVELS", "RANKING", "TEAM", "PROFILE"],
+        "navbar": ["HOME", "STORY", "LEVELS", "RANKING", "TEAM"],
         "hero_title": "HELP ZERO SAVE DIGIT TOWN!",
         "hero_btn": "PLAY NOW",
         "story_section": {
@@ -58,8 +58,7 @@
             "HISTÒRIA",
             "NIVELLS",
             "RÀNQUING",
-            "EQUIP",
-            "PERFIL"
+            "EQUIP"
         ],
         "hero_title": "AJUDA EN ZERO A SALVAR EL POBLE DÍGIT!",
         "hero_btn": "JUGAR ARA",
@@ -118,8 +117,7 @@
             "HISTORIA",
             "NIVELES",
             "RANKING",
-            "EQUIPO",
-            "PERFIL"
+            "EQUIPO"
         ],
         "hero_title": "¡AYUDA A ZERO A SALVAR EL PUEBLO DÍGITO!",
         "hero_btn": "JUGAR YA",
