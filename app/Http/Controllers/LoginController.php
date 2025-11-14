@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Container\Attributes\Auth;
 
 class LoginController extends Controller
 {
@@ -12,12 +13,12 @@ class LoginController extends Controller
 
         return view ('templates.Login');
     }
-
     public function login(Request $request ){
 
            $Usuario = Usuario::where('nom_usuario',$request-> input('nom_usuario'))->first();
             if($Usuario && Hash::check($request->input('password'),$Usuario->password)){
 
+                Auth::login($Usuario);
               $response = redirect('/levels') ;
               
             }

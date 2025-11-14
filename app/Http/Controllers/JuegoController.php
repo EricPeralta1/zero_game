@@ -15,7 +15,18 @@ class JuegoController extends Controller
         $juegos = juego::all();
 
         return view('Levels.levelscreen', compact('juegos'));
+        // No tocar 
     }
+
+    public function introduccion(){
+
+        $juegos = juego::all();
+        return view('Levels.level1', compact('juegos'));
+
+
+    }
+    
+
 
     /**
      * Show the form for creating a new resource.

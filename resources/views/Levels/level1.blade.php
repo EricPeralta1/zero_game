@@ -20,6 +20,11 @@
 
 
 @section('content')
+
+ @php
+       $juego1 = $juegos->find(1);
+       
+   @endphp
 <div class="background-level-container d-flex justify-content-center align-items-center py-4">
     <div class="level-box container p-4">
         
@@ -27,7 +32,7 @@
             {{-- IMAGEN DEL CRISTAL AHORA CON CLASE Y TAMAÑO --}}
             <img src="images/cristal_forest.png" alt="cristal bosque" class="title-icon me-3"> 
             <h2 class="m-0 text-white" style="font-family: VT323; font-size: 28px;">
-                NIVEL 1 | BOSQUE DE LA SUMA
+                NIVEL {{$juego1->id_game }} | {{ $juego1->nombre_juego }}
             </h2>
         </div>
 
@@ -35,21 +40,19 @@
             <div class="col-12 col-lg-7 text-content text-white">
                 
                 <p class="description mb-4" style="font-family: 'VT323'; font-size: 18px;">
-                    En su búsqueda de los cristales, Zero se encuentra con una bosque en mitad del 
-                    "Desierto Avanzado" y sabe que dentro hay un cristal.
+                    {{ $juego1->descripcion }}
                 </p>
                 {{-- Instrucciones --}}
                 <h3 class="mt-4 mb-2 text-white" style="font-family: 'VT323'; font-size: 20px;">INSTRUCCIONES</h3>
                 <blockquote class="instructions-quote p-3" style="font-size: 16px;">
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                    incididunt ut labore et dolore magna aliqua."
+                  {{ $juego1->instrucciones }}
                 </blockquote>
             </div>
             
             <div class="col-12 col-lg-5 d-flex flex-column align-items-end image-action-container mt-4 mt-lg-0">
                 
                 <div class="level-image-container w-100 mb-4">
-                    <img src="images/forest_levelview.png" alt="Zero en el bosque" class="img-fluid d-block"> 
+                    <img src="images/level_1.png" alt="Zero en el bosque" class="img-fluid d-block"> 
                 </div>
                 <div class="action-buttons d-flex gap-3 w-100 justify-content-end">
                     <button class=" btn-orange">COMENZAR</button>

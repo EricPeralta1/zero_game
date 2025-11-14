@@ -11,6 +11,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/levels', JuegoController::class);
+Route::get('/Level1', [JuegoController::class, 'introduccion'])->name('levels.level1');
 
 
 route:: get ('/Login',[LoginController::class, 'showLogin'])->name('login');
@@ -23,7 +24,7 @@ route:: get ('/Registro',[UsuarioController::class, 'index'])->name('templates.R
 
 //NIVELES
 
-route:: get ('/Level1',[SeccionController::class, 'index'])->name('Level.level1');
+
 
 
 

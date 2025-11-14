@@ -15,10 +15,7 @@ function changeLevelView(event) {
 
     levelTitle.textContent = `NIVEL ${juego.id_game} | ${juego.nombre_juego}`;
     levelDesc.textContent = juego.descripcion;
-
     levelImage.src = `images/level_${juego.id_game}.png`;
-9
     levelButtons.forEach(btn => btn.classList.remove("active"));
-
     event.target.classList.add("active");
 }
