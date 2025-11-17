@@ -1,3 +1,5 @@
+/*ESTILOS USADOS EN LA VISTA LEVELS*/
+
 .mapbackground {
     height: calc(100vh - 75px); 
     background-image: url(../images/level_wide_bg.png);
@@ -70,4 +72,56 @@
 
 .lvlNum:hover{
     color: #BE440F;
+}
+
+/*ESTILOS DE LA VISTA DE PUNTUACIONES*/
+
+.lbbackground {
+    height: calc(100vh - 75px); 
+    background-image: url(../images/leaderboard_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.lbTitle{
+    max-width: 200px;
+    margin-bottom: 0;
+    text-wrap: balance;
+    text-align: center;
+    padding: 15px;
+    border-color: #000000;
+    border-style: solid;
+    border-radius: 20px;
+    background-color: #372358;
+    color: white;
+    font-size: 30px;
+}
+
+.levelDataSelect{
+    padding: 15px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    background-color: #372358;
+    color: white;
+    font-size: 30px;
+
+}
+
+.btnLb{
+    padding: 15px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    background-color: #372358;
+    color: white;
+    font-size: 30px;
+}
+
+.navbar_style{
+    text-decoration: none;
+    color: white;
 }
