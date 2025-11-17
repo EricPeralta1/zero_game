@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use App\Models\puntuacion;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,10 @@ class PuntuacionController extends Controller
      */
     public function index()
     {
-        //
+       $puntuaciones = puntuacion::All();
+       $usuarios = Usuario::All();
+
+       return view('results.leaderboard', compact('puntuaciones', 'usuarios'));
     }
 
     /**
