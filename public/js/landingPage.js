@@ -6,16 +6,13 @@ selectLanguage.addEventListener("change", function () {
 
 // HACER QUE APAREZCA LA NAVABAR CUANDO PASE EL BOTÓN DE PLAY NOW
 const playNowBtn = document.getElementById("play-now-btn");
-const navbarPositionAppear = playNowBtn.getBoundingClientRect();
-const nav = document.querySelector("nav");
+const navbarPositionAppear = playNowBtn.offsetTop + playNowBtn.offsetHeight;
 
 window.addEventListener("scroll", () => {
-    if (
-        window.scrollY >
-        navbarPositionAppear.top + navbarPositionAppear.height
-    ) {
+    const nav = document.querySelector("nav");
+    if (window.scrollY > navbarPositionAppear) {
         nav.classList.add("scrolled");
-    } else {
+    } else if (window.scrollY < navbarPositionAppear) {
         nav.classList.remove("scrolled");
     }
 });
