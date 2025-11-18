@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function showLogin() {
 
-        return view ('templates.Login');
+        return view ('Templates.Login');
     }
 
     public function login(Request $request ){
