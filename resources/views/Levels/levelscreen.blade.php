@@ -49,6 +49,7 @@
     </div>
     <script>
         const juegos = @json($juegos);
+        const userScores = @json($userScores)
     </script>
     <script src="js/levels.js"></script>
 @endsection

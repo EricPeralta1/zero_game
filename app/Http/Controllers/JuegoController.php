@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\juego;
+use App\Models\Usuario;
+use App\Models\puntuacion;
 use Illuminate\Http\Request;
 
 class JuegoController extends Controller
@@ -13,8 +15,10 @@ class JuegoController extends Controller
     public function index()
     {
         $juegos = juego::all();
+        $user = Usuario::find(2);
+        $userScores = puntuacion::select('PUNTUACIONES.*')->where('PUNTUACIONES.id_user', $user->id_user)->get();
 
-        return view('Levels.levelscreen', compact('juegos'));
+        return view('Levels.levelscreen', compact('juegos', 'userScores'));
     }
 
     /**
