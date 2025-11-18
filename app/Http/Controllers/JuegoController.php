@@ -15,7 +15,7 @@ class JuegoController extends Controller
     public function index()
     {
         $juegos = juego::all();
-        $user = Usuario::find(1);
+        $user = Usuario::find(Auth::user()->id_user);
         $userScores = puntuacion::select('PUNTUACIONES.*')->where('PUNTUACIONES.id_user', $user->id_user)->get();
         $lvl1Score = 0;
         
