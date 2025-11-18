@@ -1,5 +1,3 @@
-
-
 const levelButtons = document.querySelectorAll('.lvlNum');
 let nivelActivoId = 1;
 levelButtons.forEach(btn => {
@@ -24,7 +22,7 @@ function changeLevelView(event) {
 
     if (userScores != null) {
         userScores.forEach(score => {
-            if (score.id_game == juego.id_game && score.puntos>highestscore) {
+            if (score.id_game == juego.id_game && score.puntos > highestscore) {
                 highestscore = score.puntos;
             }
         });
@@ -37,15 +35,16 @@ function changeLevelView(event) {
     nivelActivoId = juego.id_game;
     nivelActivoId = parseInt(level);
 
-    function redirectToLevel() {
-    // CLAVE: Forzar la navegación a la URL del nivel activo
-    window.location.href = `/levels/${nivelActivoId}`;
+
+
+    let playButton = document.querySelector(".playButton")
+    playButton.addEventListener('click', () => {
+        redirectToLevel(juego);
+    });
 }
 
-// 4. Agregar el Event Listener al botón COMERZAR
-if (playButton) {
-    playButton.addEventListener('click', redirectToLevel);
-}
+function redirectToLevel(juego) {
+    window.location.href = `http://localhost/zero_game/public/levels/${juego.id_game}`;
 }
 
 function lockLevels() {
