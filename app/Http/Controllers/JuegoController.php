@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\juego;
+use App\Models\Usuario;
+use App\Models\puntuacion;
 use Illuminate\Http\Request;
 
 class JuegoController extends Controller
@@ -13,9 +15,19 @@ class JuegoController extends Controller
     public function index()
     {
         $juegos = juego::all();
+        $user = Usuario::find(Auth::user()->id_user);
+        $userScores = puntuacion::select('PUNTUACIONES.*')->where('PUNTUACIONES.id_user', $user->id_user)->get();
+        $lvl1Score = 0;
+        
+        if($userScores != null) {
+            foreach ($userScores as $score) {
+                if($score->puntos > $lvl1Score){
+                    $lvl1Score = $score->puntos;
+                }
+            }
+        }
 
-        return view('Levels.levelscreen', compact('juegos'));
-        // No tocar 
+        return view('Levels.levelscreen', compact('juegos', 'userScores', 'lvl1Score'));
     }
 
     public function introduccion($id_game){

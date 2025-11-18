@@ -14,10 +14,24 @@ function changeLevelView(event) {
     let levelTitle = document.querySelector('.levelTitle')
     let levelDesc = document.querySelector('.levelDesc')
     let levelImage = document.querySelector('.levelImg')
+    let hiscore = document.querySelector('.levelScore')
 
     levelTitle.textContent = `NIVEL ${juego.id_game} | ${juego.nombre_juego}`;
     levelDesc.textContent = juego.descripcion;
     levelImage.src = `images/level_${juego.id_game}.png`;
+
+    let highestscore = 0
+
+    if (userScores != null) {
+        userScores.forEach(score => {
+            if (score.id_game == juego.id_game && score.puntos>highestscore) {
+                highestscore = score.puntos;
+            }
+        });
+    }
+
+    hiscore.textContent = `HIGHSCORE: ${highestscore}p`
+
     levelButtons.forEach(btn => btn.classList.remove("active"));
     event.target.classList.add("active");
     nivelActivoId = juego.id_game;
@@ -33,3 +47,30 @@ if (playButton) {
     playButton.addEventListener('click', redirectToLevel);
 }
 }
+
+function lockLevels() {
+    let highestUnlockedLevel = 1
+
+    if (userScores != null) {
+        userScores.forEach(score => {
+            if (score.id_game >= highestUnlockedLevel && score.id_game != 4) {
+                highestUnlockedLevel++;
+            }
+        })
+        levelButtons.forEach(btn => {
+            if (btn.getAttribute('data-level') > highestUnlockedLevel) {
+                btn.style.pointerEvents = "none";
+                btn.style.color = "#431806";
+            }
+        })
+    } else {
+        levelButtons.forEach(btn => {
+            if (btn.getAttribute('data-level') != highestUnlockedLevel) {
+                btn.style.pointerEvents = "none";
+                btn.style.color = "#431806";
+            }
+        })
+    }
+}
+
+lockLevels()

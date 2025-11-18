@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JuegoController;
+use App\Http\Controllers\PuntuacionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -11,10 +12,24 @@ route::get('/Registro', [UsuarioController::class, 'index'])->name('templates.Re
 route::get('/Login', [LoginController::class, 'showLogin'])->name('login');
 route::post('/Login', [LoginController::class, 'Login'])->name('login.submit');
 
+
 Route::middleware(['auth'])->group(function () {
 
-Route::resource('/levels', JuegoController::class);
-route::resource('/levels', JuegoController::class);
+Route::get("/zero/{lang}", function ($lang) {
+    $lang = in_array($lang, ["en","es","ca"]) ? $lang : "en";
+
+    $jsonPath = "../resources/data/landingPage.json";
+    $jsonContent = file_get_contents($jsonPath);
+    $translations = json_decode($jsonContent, true);
+
+    $texts = $translations[$lang] ?? $translations["en"];
+
+    return view("landingPage", compact("texts", "lang"));
+});
+
+/*RUTAS DE NIVELES Y CLASSIFICACION*/
+Route::get('/levels', [JuegoController::class, 'index'])->name('levels.index');
+Route::get('/leaderboard', [PuntuacionController::class, 'index'])->name('score.index');
 Route::get('/levels/{id_game}', [JuegoController::class, 'introduction'])->name('levels.introduction');
 //CERRAR SESSION
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -23,5 +38,8 @@ route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::fallback(function () {
     return redirect('/Login');
 });
+
+
+
 
 

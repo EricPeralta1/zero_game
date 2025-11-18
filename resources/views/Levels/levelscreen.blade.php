@@ -1,9 +1,11 @@
 @extends('Templates.navbar')
 
 @section('window_link')
-    <img src="images/leaderboard_icon.png" alt="leaderboard" width="55" height="50"
-        class="d-inline-block align-text-center">
-    <span class="ms-2" style="font-family: VT323; font-size: 30px">CLASIFICACIÓN</span>
+    <a class="d-flex align-items-center navbar_style" href="{{ route('score.index') }}">
+        <img src="images/leaderboard_icon.png" alt="leaderboard" width="55" height="50"
+            class="d-inline-block align-text-center">
+        <span class="ms-2" style="font-family: VT323; font-size: 30px">CLASIFICACIÓN</span>
+    </a>
 @endsection
 
 @section('user')
@@ -19,29 +21,26 @@
 @endsection
 
 @section('content')
-   @php
-       $juego1 = $juegos->find(1);
-       $juego2 = $juegos->find(2);
-       $juego3 = $juegos->find(3);
-       $juego4 = $juegos->find(4);
-   @endphp
+    @php
+        $juego1 = $juegos->find(1);
+    @endphp
     <div class="d-flex align-items-center mapbackground levelview">
         <div class="levelCard">
-            <h3 class="levelTitle">NIVEL {{$juego1->id_game }} | {{ $juego1->nombre_juego }}</h3>
+            <h3 class="levelTitle">NIVEL {{ $juego1->id_game }} | {{ $juego1->nombre_juego }}</h3>
             <hr style="height:2px;border-width:0;color:rgb(0, 0, 0);background-color:rgb(0, 0, 0)">
             <div>
                 <img src="images/level_1.png" alt="Map" height="300" width="600" class="levelImg">
             </div>
             <p class="levelDesc">{{ $juego1->descripcion }}</p>
             <div class="d-flex justify-content-center align-items-center">
-                <p class="levelScore">HIGHSCORE: 0p</p>
+                <p class="levelScore">HIGHSCORE: {{ $lvl1Score}}</p>
                 <button class="playButton">COMENZAR</button>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-            <p class="ms-2 lvlNum" style="font-size: 40px" data-level="1" id="lvl1">1</a>
-            <p class="ms-2 lvlNum" style="font-size: 40px" data-level="2" id="lvl2">2</a>
-            <p class="ms-2 lvlNum" style="font-size: 40px" data-level="3" id="lvl3">3</a>
-            <p class="ms-2 lvlNum" style="font-size: 40px" data-level="4" id="lvl4">4</a>
+                <p class="ms-2 lvlNum active" style="font-size: 40px" data-level="1" id="lvl1">1</a>
+                <p class="ms-2 lvlNum" style="font-size: 40px" data-level="2" id="lvl2">2</a>
+                <p class="ms-2 lvlNum" style="font-size: 40px" data-level="3" id="lvl3">3</a>
+                <p class="ms-2 lvlNum" style="font-size: 40px" data-level="4" id="lvl4">4</a>
             </div>
         </div>
     </div>
@@ -49,6 +48,7 @@
     
     <script>
         const juegos = @json($juegos);
+        const userScores = @json($userScores)
     </script>
     <script src="js/levels.js"></script>
 @endsection
