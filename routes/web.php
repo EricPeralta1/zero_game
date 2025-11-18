@@ -16,6 +16,7 @@ route::post ('/Login',[LoginController::class, 'Login'])->name('login.submit');
 
 route::post ('/Registro',[LoginController::class, 'store'])->name('usuario.store');
 route:: get ('/Registro',[UsuarioController::class, 'index'])->name('templates.Registro');
+
 Route::get("/zero/{lang}", function ($lang) {
     $lang = in_array($lang, ["en","es","ca"]) ? $lang : "en";
 
@@ -27,6 +28,9 @@ Route::get("/zero/{lang}", function ($lang) {
 
     return view("landingPage", compact("texts", "lang"));
 });
+Route::get('/config', function() {
+    return view('config');
+})->name('superadmin.config');
 
 /*RUTAS DE NIVELES Y CLASSIFICACION*/
 Route::get('/levels', [JuegoController::class, 'index'])->name('levels.index');
