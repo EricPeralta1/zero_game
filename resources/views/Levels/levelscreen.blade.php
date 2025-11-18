@@ -23,9 +23,6 @@
 @section('content')
     @php
         $juego1 = $juegos->find(1);
-        $juego2 = $juegos->find(2);
-        $juego3 = $juegos->find(3);
-        $juego4 = $juegos->find(4);
     @endphp
     <div class="d-flex align-items-center mapbackground levelview">
         <div class="levelCard">
@@ -36,11 +33,11 @@
             </div>
             <p class="levelDesc">{{ $juego1->descripcion }}</p>
             <div class="d-flex justify-content-center align-items-center">
-                <p class="levelScore">HIGHSCORE: 0p</p>
+                <p class="levelScore">HIGHSCORE: {{ $lvl1Score}}</p>
                 <button class="playButton">COMENZAR</button>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <p class="ms-2 lvlNum" style="font-size: 40px" data-level="1" id="lvl1">1</a>
+                <p class="ms-2 lvlNum active" style="font-size: 40px" data-level="1" id="lvl1">1</a>
                 <p class="ms-2 lvlNum" style="font-size: 40px" data-level="2" id="lvl2">2</a>
                 <p class="ms-2 lvlNum" style="font-size: 40px" data-level="3" id="lvl3">3</a>
                 <p class="ms-2 lvlNum" style="font-size: 40px" data-level="4" id="lvl4">4</a>

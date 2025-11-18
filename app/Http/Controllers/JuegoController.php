@@ -15,10 +15,19 @@ class JuegoController extends Controller
     public function index()
     {
         $juegos = juego::all();
-        $user = Usuario::find(2);
+        $user = Usuario::find(1);
         $userScores = puntuacion::select('PUNTUACIONES.*')->where('PUNTUACIONES.id_user', $user->id_user)->get();
+        $lvl1Score = 0;
+        
+        if($userScores != null) {
+            foreach ($userScores as $score) {
+                if($score->puntos > $lvl1Score){
+                    $lvl1Score = $score->puntos;
+                }
+            }
+        }
 
-        return view('Levels.levelscreen', compact('juegos', 'userScores'));
+        return view('Levels.levelscreen', compact('juegos', 'userScores', 'lvl1Score'));
     }
 
     /**
