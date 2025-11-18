@@ -18,10 +18,16 @@ class JuegoController extends Controller
         // No tocar 
     }
 
-    public function introduccion(){
+    public function introduccion($id_game){
 
         $juegos = juego::all();
-        return view('Levels.level1', compact('juegos'));
+        $juegoEspecifico = $juegos->find($id_game);
+
+        return view('Levels.levelscreen', 
+        [
+        'juegos' => $juegos, // Aún puedes pasar toda la colección si es necesario
+        'juegoSeleccionado' => $juegoEspecifico
+    ]);
 
 
     }
