@@ -6,6 +6,7 @@ use App\Models\juego;
 use App\Models\Usuario;
 use App\Models\puntuacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JuegoController extends Controller
 {
