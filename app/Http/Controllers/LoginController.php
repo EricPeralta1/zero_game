@@ -13,7 +13,6 @@ class LoginController extends Controller
 
         return view ('Templates.Login');
     }
-
     public function login(Request $request ){
 
            $Usuario = Usuario::where('nom_usuario',$request-> input('nom_usuario'))->first();
@@ -39,10 +38,15 @@ class LoginController extends Controller
         $hashedPassword = Hash::make($request->input('password'));
         $usuario->password = $hashedPassword;
           $usuario->id_rol = 1; 
-
            $usuario->save();
-        
         // 5. Redirección después del registro exitoso
         return redirect()->route('login')->with('success', '¡Registro exitoso! Por favor, inicia sesión con tus nuevas credenciales.');
     }
+    public function logout(Request $request){
+        Auth::logout();
+        return redirect('/');
+
+
+    }
+
 }

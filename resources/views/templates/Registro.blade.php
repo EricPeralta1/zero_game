@@ -24,9 +24,7 @@
 
             <form method="post" action="{{ route('usuario.store') }}"> 
                 @csrf 
-                
                 <div class="row mb-3 gx-3">
-                    
                     <div class="col-md-6">
                         <input type="text" class="form-control custom-input" placeholder="Nombre Usuario" id="nom_usuario" name="nom_usuario" required autofocus>
                         @error('username') 
@@ -51,7 +49,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <input type="password" class="form-control custom-input" placeholder="Confirmar Contraseña" id="password" name="password" required>
+                        <input type="password" class="form-control custom-input" placeholder="Confirmar Contraseña" id="password_confirmation" name="password_confirmation" required>
                         </div>
                 </div>
 
@@ -65,5 +63,6 @@
             </form>
         </div>
     </div>
+    <script src="{{ asset('js/Registro.js') }}"></script>
 </body>
 </html>

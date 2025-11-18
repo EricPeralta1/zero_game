@@ -12,8 +12,8 @@
     <div class="d-flex align-items-center gap-3 ">
         <img src="images/zero_icon.png" alt="User Icon" width="65" height="60"
             class="d-inline-block align-text-center">
-        <span class="text-white" style="font-family: VT323; font-size: 30px">{{Auth::user()->nom_usuario}}</span>
-        <a class="ms-2">
+        <span class="text-white" style="font-family: VT323; font-size: 30px">{{ Auth::user()->nom_usuario }} </span>
+        <a class="ms-2" href="{{ route('logout') }}">
             <img src="images/exit.png" alt="Logout" width="50" height="50"
                 class="d-inline-block align-text-center">
         </a>
@@ -44,6 +44,8 @@
             </div>
         </div>
     </div>
+
+    
     <script>
         const juegos = @json($juegos);
         const userScores = @json($userScores)

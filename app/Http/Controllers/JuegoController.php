@@ -31,6 +31,22 @@ class JuegoController extends Controller
         return view('Levels.levelscreen', compact('juegos', 'userScores', 'lvl1Score'));
     }
 
+    public function introduccion($id_game){
+
+        $juegos = juego::all();
+        $juegoEspecifico = $juegos->find($id_game);
+
+        return view('Levels.levelscreen', 
+        [
+        'juegos' => $juegos, // Aún puedes pasar toda la colección si es necesario
+        'juegoSeleccionado' => $juegoEspecifico
+    ]);
+
+
+    }
+    
+
+
     /**
      * Show the form for creating a new resource.
      */

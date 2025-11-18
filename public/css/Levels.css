@@ -1,0 +1,80 @@
+
+.background-level-container {
+   
+    background-image: url('../images/forest_background.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-color: #2e4d2e;
+    min-height: calc(100vh - 75px); 
+ 
+
+}
+
+.level-box {
+    max-width: 900px;
+    background-color: #444444; 
+    border: 5px solid #000000;
+    box-shadow: 
+        10px 10px 0 #000000, 
+        inset 0 0 0 4px #777777; 
+}
+
+.level-title-section {
+    background-color: #666666; /* Gris más claro para la franja del título */
+    border: 3px solid #000000;
+    padding: 10px 15px;
+}
+
+
+.title-icon {
+    width: 40px;   
+    height: auto;  /* Mantiene la proporción de la imagen */
+    border: 2px solid #000000; /* Borde negro como el del ícono original */
+    background-color: transparent; /* Fondo transparente o ajusta si es necesario */
+    padding: 0; /* Elimina padding si lo tiene por defecto */
+    display: block; /* Asegura que se comporte como un bloque para width/height */
+}
+
+
+.instructions-quote {
+    background-color: #333333; /* Fondo más oscuro para el bloque de cita */
+    border-left: 5px solid #ffffff;
+    font-style: italic;
+    font-family: 'VT323'; 
+}
+
+
+.btn-orange{
+   background-color: #ff8c00; 
+  color: #ffffff; 
+ font-family: 'VT323'; 
+  font-size: 24px; 
+  font-weight: bold;
+  text-transform: uppercase; 
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4); 
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.btn-red{
+ background-color: #F91202; 
+  color: #ffffff; 
+  font-family: 'VT323'; 
+  font-size: 24px; 
+  font-weight: bold;
+  text-transform: uppercase; 
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4); 
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+

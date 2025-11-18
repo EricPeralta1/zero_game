@@ -12,7 +12,8 @@ class SeccionController extends Controller
      */
     public function index()
     {
-        //
+        return view('Levels.level1');
+    
     }
 
     /**
