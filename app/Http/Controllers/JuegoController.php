@@ -6,6 +6,7 @@ use App\Models\juego;
 use App\Models\Usuario;
 use App\Models\puntuacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JuegoController extends Controller
 {
@@ -26,21 +27,15 @@ class JuegoController extends Controller
                 }
             }
         }
-
+            //no tocar porfavor
         return view('Levels.levelscreen', compact('juegos', 'userScores', 'lvl1Score'));
     }
 
-    public function introduccion($id_game){
+    public function introduccion(){
 
         $juegos = juego::all();
         $juegoEspecifico = $juegos->find($id_game);
-
-        return view('Levels.levelscreen', 
-        [
-        'juegos' => $juegos, // Aún puedes pasar toda la colección si es necesario
-        'juegoSeleccionado' => $juegoEspecifico
-    ]);
-
+        return view('Levels.levelscreen',compact('juegoEspecifico'));
 
     }
     

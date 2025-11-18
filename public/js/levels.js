@@ -1,13 +1,25 @@
-
-
 const levelButtons = document.querySelectorAll('.lvlNum');
 let nivelActivoId = 1;
+
+// 1. Función para la redirección (definida fuera de changeLevelView)
+function redirectToLevel() {
+    // Usa la variable global nivelActivoId
+    window.location.href = `/levels${nivelActivoId}`;
+}
+
+// 2. Event Listener para el botón COMENZAR (adjuntado una sola vez)
+const playButton = document.querySelector('.playButton');
+if (playButton) {
+    playButton.addEventListener('click', redirectToLevel);
+}
+
+// 3. Event Listeners para los botones de Nivel
 levelButtons.forEach(btn => {
     btn.addEventListener('click', changeLevelView);
 });
 
-function changeLevelView(event) {
 
+function changeLevelView(event) {
     const level = event.target.getAttribute('data-level');
     const juego = juegos.find(j => j.id_game == level);
 
@@ -24,7 +36,7 @@ function changeLevelView(event) {
 
     if (userScores != null) {
         userScores.forEach(score => {
-            if (score.id_game == juego.id_game && score.puntos>highestscore) {
+            if (score.id_game == juego.id_game && score.puntos > highestscore) {
                 highestscore = score.puntos;
             }
         });
@@ -34,18 +46,9 @@ function changeLevelView(event) {
 
     levelButtons.forEach(btn => btn.classList.remove("active"));
     event.target.classList.add("active");
-    nivelActivoId = juego.id_game;
+    
+    // 4. Actualiza la variable global nivelActivoId para que redirectToLevel la use
     nivelActivoId = parseInt(level);
-
-    function redirectToLevel() {
-    // CLAVE: Forzar la navegación a la URL del nivel activo
-    window.location.href = `/levels/${nivelActivoId}`;
-}
-
-// 4. Agregar el Event Listener al botón COMERZAR
-if (playButton) {
-    playButton.addEventListener('click', redirectToLevel);
-}
 }
 
 function lockLevels() {
@@ -53,17 +56,19 @@ function lockLevels() {
 
     if (userScores != null) {
         userScores.forEach(score => {
-            if (score.id_game >= highestUnlockedLevel && score.id_game != 4) {
-                highestUnlockedLevel++;
+            // Lógica para determinar el siguiente nivel a desbloquear
+            if (score.id_game == highestUnlockedLevel && score.id_game != 4) {
+                 highestUnlockedLevel++;
             }
         })
         levelButtons.forEach(btn => {
-            if (btn.getAttribute('data-level') > highestUnlockedLevel) {
+            if (parseInt(btn.getAttribute('data-level')) > highestUnlockedLevel) {
                 btn.style.pointerEvents = "none";
                 btn.style.color = "#431806";
             }
         })
     } else {
+        // Si no hay scores, solo el nivel 1 está activo
         levelButtons.forEach(btn => {
             if (btn.getAttribute('data-level') != highestUnlockedLevel) {
                 btn.style.pointerEvents = "none";
