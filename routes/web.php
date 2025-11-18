@@ -12,6 +12,9 @@ route::get('/Registro', [UsuarioController::class, 'index'])->name('templates.Re
 route::get('/Login', [LoginController::class, 'showLogin'])->name('login');
 route::post('/Login', [LoginController::class, 'Login'])->name('login.submit');
 
+Route::get('/', function () {
+    return redirect()->route('login') ;
+});
 
 Route::middleware(['auth'])->group(function () {
 
@@ -30,7 +33,8 @@ Route::get("/zero/{lang}", function ($lang) {
 /*RUTAS DE NIVELES Y CLASSIFICACION*/
 Route::get('/levels', [JuegoController::class, 'index'])->name('levels.index');
 Route::get('/leaderboard', [PuntuacionController::class, 'index'])->name('score.index');
-Route::get('/levels/{id_game}', [JuegoController::class, 'introduction'])->name('levels.introduction');
+Route::get('/levels/{id_game}', [JuegoController::class, 'introduction'])->name('levels.game');
+
 //CERRAR SESSION
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });

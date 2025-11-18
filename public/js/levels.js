@@ -49,6 +49,17 @@ function changeLevelView(event) {
     
     // 4. Actualiza la variable global nivelActivoId para que redirectToLevel la use
     nivelActivoId = parseInt(level);
+
+
+
+    let playButton = document.querySelector(".playButton")
+    playButton.addEventListener('click', () => {
+        redirectToLevel(juego);
+    });
+}
+
+function redirectToLevel(juego) {
+    window.location.href = `http://localhost/zero_game/public/levels/${juego.id_game}`;
 }
 
 function lockLevels() {

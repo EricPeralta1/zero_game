@@ -27,19 +27,20 @@ class JuegoController extends Controller
                 }
             }
         }
-            //no tocar porfavor
         return view('Levels.levelscreen', compact('juegos', 'userScores', 'lvl1Score'));
     }
 
-    public function introduccion(){
+    public function introduction($id_game){
 
         $juegos = juego::all();
-        $juegoEspecifico = $juegos->find($id_game);
-        return view('Levels.levelscreen',compact('juegoEspecifico'));
+        $juegoespecifico = $juegos->find($id_game);
 
+        if ($juegoespecifico->id_game == 1){
+            return view('Levels.level1', compact('juegos', 'juegoespecifico'));
+        } else if ($juegoespecifico->id_game == 2){
+            return view('Levels.level3', compact('juegos', 'juegoespecifico'));
+        }
     }
-    
-
 
     /**
      * Show the form for creating a new resource.
