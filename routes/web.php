@@ -5,6 +5,7 @@ use App\Http\Controllers\JuegoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PuntuacionController;
+use App\Http\Controllers\LandingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,17 +18,9 @@ route::post ('/Login',[LoginController::class, 'Login'])->name('login.submit');
 route::post ('/Registro',[LoginController::class, 'store'])->name('usuario.store');
 route:: get ('/Registro',[UsuarioController::class, 'index'])->name('templates.Registro');
 
-Route::get("/zero/{lang}", function ($lang) {
-    $lang = in_array($lang, ["en","es","ca"]) ? $lang : "en";
-
-    $jsonPath = "../resources/data/landingPage.json";
-    $jsonContent = file_get_contents($jsonPath);
-    $translations = json_decode($jsonContent, true);
-
-    $texts = $translations[$lang] ?? $translations["en"];
-
-    return view("landingPage", compact("texts", "lang"));
-});
+/* LANDING PAGE MULTIIDIOMA*/
+Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
+/* CONFIGURACIÓN DE ADMINS PARA SUPERADMIN*/
 Route::get('/config', function() {
     return view('config');
 })->name('superadmin.config');

@@ -46,6 +46,7 @@ nav {
 
 nav > p:first-child {
     margin-right: auto;
+    width: 50%;
 }
 
 nav > p:last-child {
