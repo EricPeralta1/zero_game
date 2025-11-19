@@ -33,7 +33,7 @@
                 @yield('window_link')
             </div>
             <div>
-                <img src="images/zero_logo_navbar.png" alt="leaderboard" width="auto" height=75px>
+                <img src="{{ asset('Images/zero_logo_navbar.png') }}" alt="leaderboard" width="auto" height=75px>
             </div>
             <div>
                 @yield('user')

@@ -1,7 +1,7 @@
 /*ESTILOS USADOS EN LA VISTA LEVELS*/
 
 .mapbackground {
-    height: calc(100vh - 75px); 
+    height: calc(100vh - 75px);
     background-image: url(../images/level_wide_bg.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -9,7 +9,7 @@
 }
 
 .levelCard {
-    max-height:fit-content;
+    max-height: fit-content;
     margin-left: auto;
     padding: 17px;
     background-color: #716F6F;
@@ -30,7 +30,7 @@
     border: 2px solid #000;
 }
 
-.levelDesc{
+.levelDesc {
     margin-top: 10px;
     background-color: #C7C7C7;
     border-radius: 20px;
@@ -39,7 +39,7 @@
     font-size: 18px;
 }
 
-.levelScore{
+.levelScore {
     background-color: #C7C7C7;
     padding: 0px 10px 0px 10px;
     align-items: center;
@@ -49,7 +49,7 @@
     margin: 0;
 }
 
-.playButton{
+.playButton {
     margin-left: 20px;
     background-color: #F96702;
     padding: 0px 10px 0px 10px;
@@ -60,31 +60,31 @@
     color: #fff;
 }
 
-.lvlNum{
+.lvlNum {
     margin-bottom: 0%;
     color: white;
 }
 
-.lvlNum.active{
+.lvlNum.active {
     margin-bottom: 0%;
     color: #F96702;
 }
 
-.lvlNum:hover{
+.lvlNum:hover {
     color: #BE440F;
 }
 
 /*ESTILOS DE LA VISTA DE PUNTUACIONES*/
 
 .lbbackground {
-    height: calc(100vh - 75px); 
+    height: calc(100vh - 75px);
     background-image: url(../images/leaderboard_bg.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.lbTitle{
+.lbTitle {
     max-width: 200px;
     margin-bottom: 0;
     text-wrap: balance;
@@ -98,7 +98,7 @@
     font-size: 30px;
 }
 
-.levelDataSelect{
+.levelDataSelect {
     padding: 15px;
     border-color: #000000;
     border-style: solid;
@@ -110,7 +110,7 @@
 
 }
 
-.btnLb{
+.btnLb {
     padding: 15px;
     border-color: #000000;
     border-style: solid;
@@ -121,7 +121,59 @@
     font-size: 30px;
 }
 
-.navbar_style{
+.navbar_style {
     text-decoration: none;
+    color: white;
+}
+
+.level3background {
+    height: calc(100vh - 75px);
+    background-image: url(../images/snowy_mountain.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.gameContainer{
+    padding: 40px;
+    font-family: VT323;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 15px;
+    border-color: #000;
+    background-color: #716F6F;
+    color: white;
+}
+
+.gameData{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.startGame{
+    width:50%;
+    display:block;
+    padding: 5px;
+    font-size: 20px;
+    border-style: solid;
+    border-color: #000;
+    border-width: 2px;
+    border-radius: 10px;
+    background-color: #F96702;
+    color: white;
+}
+
+
+.goback{
+    width:50%;
+    display:block;
+    padding: 5px;
+    font-size: 20px;
+    border-style: solid;
+    border-color: #000;
+    border-width: 2px;
+    border-radius: 10px;
+    background-color: #F91202;
     color: white;
 }

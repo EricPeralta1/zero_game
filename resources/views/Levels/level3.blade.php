@@ -21,7 +21,33 @@
 @endsection
 
 @section('content')
-
-
-
+    <div class="d-flex align-items-center justify-content-center level3background">
+        <div class="gameContainer">
+            <div class="d-flex align-items-center levelT">
+                <img src="{{ asset('images/gemas/gema_3.png') }}" alt="GEM3" width="50" height="50"
+                    class="d-inline-block align-text-center" style="image-rendering: pixelated">
+                <h2 class="ms-3">NIVEL 3 | LAS MONTAÑAS GEOMÉTRICAS</h2>
+            </div>
+            <div class="d-flex gameData">
+                <div class="gameInfo w-25">
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...”</p>
+                    <h3>INSTRUCCIONES</h3>
+                    <hr style="margin-top: 0px">
+                    <p>"Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit, sed
+                        do eiusmod tempor
+                        incididunt...”</p>
+                    <div class="d-flex justify-content-between">
+                        <button class="startGame">COMENZAR</button>
+                        <button class="goback ms-2">ATRAS</button>
+                    </div>
+                </div>
+                <div class="gameImage">
+                    <img src="{{ asset('images/level_3.png') }}" alt="GEM3" width="700" height="400"
+                        class="d-inline-block align-text-center" style="border-style: solid; border-radius: 5px; border-color: #000">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('js/level3.js') }}"></script>
 @endsection
