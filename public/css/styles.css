@@ -127,53 +127,64 @@
 }
 
 .level3background {
-    height: calc(100vh - 75px);
+    min-height: calc(100vh - 75px);
     background-image: url(../images/snowy_mountain.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.gameContainer{
+.gameContainer {
     padding: 40px;
     font-family: VT323;
-    border-style: solid;
-    border-width: 3px;
+    border: 3px solid #000;
     border-radius: 15px;
-    border-color: #000;
     background-color: #716F6F;
     color: white;
+    max-width: 1200px;
+    width: 95%;
 }
 
-.gameData{
+.gameData {
     display: flex;
-    justify-content: space-between;
+    gap: 30px;
     margin-top: 15px;
 }
 
-.startGame{
-    width:50%;
-    display:block;
-    padding: 5px;
-    font-size: 20px;
-    border-style: solid;
-    border-color: #000;
-    border-width: 2px;
+.gameInfo {
+    flex: 1;
+}
+
+.gameImage img {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    border: 3px solid #000;
     border-radius: 10px;
-    background-color: #F96702;
+    image-rendering: pixelated;
+}
+
+.startGame, .goback {
+    width: 45%;
+    padding: 5px;
+    font-size: 25px;
+    border: 2px solid #000;
+    border-radius: 10px;
     color: white;
 }
 
+.startGame {
+    background-color: #F96702;
+}
 
-.goback{
-    width:50%;
-    display:block;
-    padding: 5px;
-    font-size: 20px;
-    border-style: solid;
-    border-color: #000;
-    border-width: 2px;
-    border-radius: 10px;
+.goback {
     background-color: #F91202;
-    color: white;
+}
+
+.gameOverImg{
+    border-style: solid; 
+    border-radius: 5px; 
+    border-color: #000;
+    width: 500px;
+    height: 300px;
 }

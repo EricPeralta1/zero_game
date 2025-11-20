@@ -2,7 +2,7 @@
 
 @section('window_link')
     <a class="d-flex align-items-center navbar_style" href="{{ route('score.index') }}">
-        <img src="images/leaderboard_icon.png" alt="leaderboard" width="55" height="50"
+        <img src="{{ asset('images/leaderboard_icon.png') }}" alt="leaderboard" width="55" height="50"
             class="d-inline-block align-text-center">
         <span class="ms-2" style="font-family: VT323; font-size: 30px">CLASIFICACIÓN</span>
     </a>
@@ -10,11 +10,11 @@
 
 @section('user')
     <div class="d-flex align-items-center gap-3 ">
-        <img src="images/zero_icon.png" alt="User Icon" width="65" height="60"
+        <img src="{{ asset('images/zero_icon.png') }}" alt="User Icon" width="65" height="60"
             class="d-inline-block align-text-center">
         <span class="text-white" style="font-family: VT323; font-size: 30px">{{ Auth::user()->nom_usuario }} </span>
         <a class="ms-2" href="{{ route('logout') }}">
-            <img src="images/exit.png" alt="Logout" width="50" height="50"
+            <img src="{{ asset('images/exit.png') }}" alt="Logout" width="50" height="50"
                 class="d-inline-block align-text-center">
         </a>
     </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="d-flex gameData">
                 <div class="gameInfo w-25">
-                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...”</p>
+                    <p>"Zero ha obtenido 2 de las 4 gemas. Su aventura lo lleva hasta las Montañas Geométricas. Deberá encontrar el camino hasta la cima sin perderse, siguiendo piedras guía.”</p>
                     <h3>INSTRUCCIONES</h3>
                     <hr style="margin-top: 0px">
                     <p>"Lorem ipsum dolor sit amet,
@@ -39,7 +39,7 @@
                         incididunt...”</p>
                     <div class="d-flex justify-content-between">
                         <button class="startGame">COMENZAR</button>
-                        <button class="goback ms-2">ATRAS</button>
+                        <button class="goback ms-2" data-url="{{ route('levels.index') }}">ATRAS</button>
                     </div>
                 </div>
                 <div class="gameImage">
