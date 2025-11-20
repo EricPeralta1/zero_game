@@ -28,15 +28,23 @@
     <nav class="navbar" style="background-color: #372358; padding: 0px" data-bs-theme="dark">
         <div class="container-fluid d-flex justify-content-around">
 
-            <div class="navbar-brand d-flex align-items-center" href="#"
-                style="font-family: 'VT323', sans-serif">
+            <div class="navbar-brand d-flex align-items-center" href="#" style="font-family: 'VT323', sans-serif">
                 @yield('window_link')
             </div>
             <div>
                 <img src="images/zero_logo_navbar.png" alt="leaderboard" width="auto" height=75px>
             </div>
             <div>
-                @yield('user')
+                <div class="d-flex align-items-center gap-3 ">
+                    <img src="images/zero_icon.png" alt="User Icon" width="65" height="60"
+                        class="d-inline-block align-text-center">
+                    <span class="text-white"
+                        style="font-family: VT323; font-size: 30px">{{ Auth::user()->nom_usuario }}</span>
+                    <a class="ms-2">
+                        <img src="images/exit.png" alt="Logout" width="50" height="50"
+                            class="d-inline-block align-text-center">
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

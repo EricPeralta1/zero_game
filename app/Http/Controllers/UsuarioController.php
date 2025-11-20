@@ -73,4 +73,19 @@ class UsuarioController extends Controller
     {
         //
     }
+
+    public function updateAdmin(Request $request) {
+        $user = Usuario::find($request->input('id'));
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'Usuario no encontrado');
+        }
+
+        $user->nom_usuario = $request->input("username");
+        $user->email = $request->input("email");
+        $user->id_rol = $request->input("role");
+
+        $user->save();
+        return redirect()->back()->with('success', 'Usuario actualizado correctamente');
+    }
 }
