@@ -4,6 +4,7 @@ use App\Http\Controllers\JuegoController;
 use App\Http\Controllers\PuntuacionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 // REGISTRO
 route::post('/Registro', [LoginController::class, 'store'])->name('usuario.store');
