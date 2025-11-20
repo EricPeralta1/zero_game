@@ -37,7 +37,7 @@
                         consectetur adipiscing elit, sed
                         do eiusmod tempor
                         incididunt...”</p>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-evenly">
                         <button class="startGame">COMENZAR</button>
                         <button class="goback ms-2" data-url="{{ route('levels.index') }}">ATRAS</button>
                     </div>
@@ -49,5 +49,10 @@
             </div>
         </div>
     </div>
+    <script>
+        const defeatLvl = "{{ asset('images/zero_defeat_lvl3.png') }}";
+        const winImgLvl = "{{ asset('images/zero_win_lvl3.png') }}";
+        const levelRt = "{{ route('levels.index') }}";
+    </script>
     <script src="{{ asset('js/level3.js') }}"></script>
 @endsection
