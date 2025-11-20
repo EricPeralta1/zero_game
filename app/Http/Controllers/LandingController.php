@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Usuario;
 
 class LandingController extends Controller
 {
@@ -19,5 +20,10 @@ class LandingController extends Controller
         $user = Auth::user();
 
         return view("landingPage", compact("texts", "lang", "user"));
+    }
+
+    public function config() {
+        $admins = Usuario::all()->where('id_rol', "is", 2);
+        return view("config", compact("admins"));
     }
 }

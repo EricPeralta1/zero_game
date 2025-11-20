@@ -21,9 +21,8 @@ route:: get ('/Registro',[UsuarioController::class, 'index'])->name('templates.R
 /* LANDING PAGE MULTIIDIOMA*/
 Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
 /* CONFIGURACIÓN DE ADMINS PARA SUPERADMIN*/
-Route::get('/config', function() {
-    return view('config');
-})->name('superadmin.config');
+Route::get('/config', [LandingController::class, 'config'])->name('superadmin.config');
+Route::patch('/config', [UsuarioController::class, 'updateAdmin'])->name("update.admin");
 
 /*RUTAS DE NIVELES Y CLASSIFICACION*/
 Route::get('/levels', [JuegoController::class, 'index'])->name('levels.index');

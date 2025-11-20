@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/zero_icon.png') }}">
     <title>ZERO</title>
     <link rel="stylesheet" href="{{ asset('css/landingPage.css') }}">
 </head>
@@ -31,8 +32,7 @@
                                 {{ Str::upper($language) }}</option>
                         @endforeach
                     </select>
-                    @dd(Auth::user());
-                    @if (Auth::user())
+                    @if (Auth::user()->id_rol == 3)
                         <a href="{{ route('superadmin.config') }}"><svg class="w-6 h-6 text-gray-800 dark:text-white"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
@@ -50,14 +50,13 @@
                 <h1>{{ $texts['hero_title'] }}</h1>
                 <img src="{{ asset('images/landingPage/zero_fight.png') }}" alt="zero character">
                 @php
-                    $user = Auth::user();
-                    if ($user) {
-                        $route = '/levels';
+                    if (Auth::user()) {
+                        $route = route('levels.index');
                     } else {
-                        $route = 'templates.Registro';
+                        $route = route('templates.Registro');
                     }
                 @endphp
-                <a href="{{ route($route) }}"><button id="play-now-btn">{{ $texts['hero_btn'] }}</button></a>
+                <a href="{{ $route }}"><button id="play-now-btn">{{ $texts['hero_btn'] }}</button></a>
             </div>
             <span id="#faded-bg"></span>
         </div>

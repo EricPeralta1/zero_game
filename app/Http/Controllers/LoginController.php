@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -13,23 +14,20 @@ class LoginController extends Controller
         return view ('templates.Login');
     }
 
-    public function login(Request $request ){
-
-           $Usuario = Usuario::where('nom_usuario',$request-> input('nom_usuario'))->first();
-            if($Usuario && Hash::check($request->input('password'),$Usuario->password)){
-
-              $response = redirect('/levels') ;
-              
-            }
-
-            else{
-                session()->flash('error','credenciales incorrectos');
-                 $response= redirect()->back()->withInput();
-            }
-
-
-         return $response;
-    } /**
+    public function login(Request $request) {
+        $Usuario = Usuario::where('nom_usuario', $request->input('nom_usuario'))->first();
+        
+        if($Usuario && Hash::check($request->input('password'), $Usuario->password)){
+            Auth::login($Usuario);
+            
+            return redirect()->route('levels.index');
+        } else {
+            session()->flash('error','credenciales incorrectos');
+            return redirect()->back()->withInput();
+        }
+    } 
+    
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
