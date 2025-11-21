@@ -20,7 +20,7 @@
 }
 
 .level-title-section {
-    background-color: #666666; /* Gris más claro para la franja del título */
+    background-color: #666666; 
     border: 3px solid #000000;
     padding: 10px 15px;
 }
@@ -28,16 +28,16 @@
 
 .title-icon {
     width: 40px;   
-    height: auto;  /* Mantiene la proporción de la imagen */
-    border: 2px solid #000000; /* Borde negro como el del ícono original */
-    background-color: transparent; /* Fondo transparente o ajusta si es necesario */
-    padding: 0; /* Elimina padding si lo tiene por defecto */
-    display: block; /* Asegura que se comporte como un bloque para width/height */
+    height: auto;  
+    border: 2px solid #000000; 
+    background-color: transparent; 
+    padding: 0; 
+    display: block; 
 }
 
 
 .instructions-quote {
-    background-color: #333333; /* Fondo más oscuro para el bloque de cita */
+    background-color: #333333; 
     border-left: 5px solid #ffffff;
     font-style: italic;
     font-family: 'VT323'; 

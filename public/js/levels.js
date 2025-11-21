@@ -59,7 +59,7 @@ function changeLevelView(event) {
 }
 
 function redirectToLevel(juego) {
-    window.location.href = `http://localhost/zero_game/public/levels/${juego.id_game}`;
+    window.location.href = `http://localhost:8080/zero_game/public/levels/${juego.id_game}`;
 }
 
 function lockLevels() {

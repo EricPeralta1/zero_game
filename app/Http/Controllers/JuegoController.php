@@ -42,6 +42,15 @@ class JuegoController extends Controller
         }
     }
 
+    public function inicio_juego($id_game){
+
+        $juegos = juego::all();
+         $juegoespecifico = $juegos->find($id_game);
+         return view('game.game1', compact('juegos','juegoespecifico'));
+         
+          
+    }
+
     /**
      * Show the form for creating a new resource.
      */
