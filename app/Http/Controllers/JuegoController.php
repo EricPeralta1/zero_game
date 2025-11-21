@@ -39,6 +39,8 @@ class JuegoController extends Controller
             return view('Levels.level1', compact('juegos', 'juegoespecifico'));
         } else if ($juegoespecifico->id_game == 2){
             return view('Levels.level3', compact('juegos', 'juegoespecifico'));
+        } else if ($juegoespecifico->id_game == 4){
+            return view('Levels.level4', compact('juegos', 'juegoespecifico'));
         }
     }
 
