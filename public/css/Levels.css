@@ -7,7 +7,15 @@
     background-color: #2e4d2e;
     min-height: calc(100vh - 75px); 
  
+}
 
+.background-level-container2 {
+   
+    background-image: url('../images/level_2.png'); 
+    background-size: cover;
+    background-position: center;
+    background-color: #2e4d2e;
+    min-height: calc(100vh - 75px); 
 }
 
 .level-box {
