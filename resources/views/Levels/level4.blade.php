@@ -14,8 +14,8 @@
 
 @section('content')
     <div id="game-container">
-        <div id="overlay">
-            <div id="instructions-container">
+        <div id="overlay"style="display: none">
+            <div id="instructions-container" style="display: none">
                 <div>
                     <img src="{{ asset('Images/gemas/gema_4.png') }}" alt="Cristal 4">
                 </div>
@@ -44,31 +44,37 @@
             </div>
             <div id="game-over-container" style="display: none">
                 <h2>ZERO FUE DERROTADO...</h2>
-                <img src="" alt="Zero dead">
+                <img src="{{ asset('Images/zero_defeat_lvl4.png') }}" alt="Zero dead">
                 <span>
-                    <button>REINTENTAR</button><button>ABANDONAR</button>
+                    <button>REINTENTAR</button>
+                    <a href="{{ route('levels.index') }}">ABANDONAR</a>
                 </span>
             </div>
             <div id="game-win-container" style="display: none">
-                <img src="" alt="Zero win">
+                <img src="{{ asset('Images/zero_defeat_lvl4.png') }}" alt="Zero win">
                 <div>
                     <p>¡FELICIDADES! ¡HAS DERROTADO A KAOS Y HAS CONSEGUIDO EL ÚLTIMO CRISTAL!</p>
                     <p>ESTADÍSTICAS</p>
-                    <hr>
                     <p>Tiempo: 02:42s</p>
                     <p>Puntos: 5473p</p>
                     <button>CONTINUAR</button>
                 </div>
             </div>
         </div>
-        <div id="level-container" style="display: none">
-            <span></span>
+        <div id="level-container">
+            <span id="hp-container">
+            </span>
+            <div>
+                <img src="{{ asset('Images/zero_fight.png') }}" alt="Zero fighting pose">
+                <img src="{{ asset('Images/Kaos.png') }}" alt="Kaos fighting pose">
+            </div>
         </div>
     </div>
     <div id="game-complete-container" style="display: none">
         <div>
             <p>¡HAS RESTAURADO EL EQUILIBRIO EN PUEBLO DÍGITO!</p>
-            <button>REGRESAR</button>
+            <a href="{{ route('levels.index') }}">REGRESAR</a>
         </div>
     </div>
+    <script src="{{ asset('js/level4.js') }}"></script>
 @endsection
