@@ -53,6 +53,9 @@
         const defeatLvl = "{{ asset('images/zero_defeat_lvl3.png') }}";
         const winImgLvl = "{{ asset('images/zero_win3.png') }}";
         const levelRt = "{{ route('levels.index') }}";
+        const playerIdleImg = "{{ asset('images/zero_icon.png') }}";
+        const playerHp = "{{ asset('images/zero_hp.png') }}";
+        const fallWord = "{{ asset('images/falling_word.png') }}";
     </script>
     <script src="{{ asset('js/level3.js') }}"></script>
 @endsection

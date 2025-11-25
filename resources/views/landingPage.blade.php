@@ -41,7 +41,7 @@
                 @php
                     $user = Auth::user();
                     if ($user) {
-                        $route = '/levels';
+                        $route = route('score.index') ;
                     } else {
                         $route = 'templates.Registro';
                     }
