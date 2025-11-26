@@ -1,6 +1,26 @@
-let answersList = ["Altura", "1", "2", "Ancho", "Circulo", "Rectangulo", "Triangulo", "2 x π x radio", "Lado x lado", "Ancho x Altura"]
+let gameQuestions = [
+    { question: "¿Cuál es el área de un círculo?", answer: "π x r x r" },
+    { question: "¿Cuál es el perímetro de un cuadrado?", answer: "4 x lado" },
+    { question: "¿Cuál es el área de un cuadrado?", answer: "lado x lado" },
+     {question: "¿Cuál es el área de un rectángulo?", answer: "base x altura"}
+];
+
+let shownQuestions = []
+let droppedAnswersIndex = []
+
+let points = 0
+let lifes = 3
+let streak = 0;
+let startTime
+let endTime
+
+let start = document.querySelector('.startGame')
+start.addEventListener('click', startGame)
 
 function startGame() {
+
+    startTime = Date.now()
+
     let gameContainer = document.querySelector(".gameContainer");
     gameContainer.remove();
 
@@ -30,6 +50,7 @@ function startGame() {
         lifeIcon.src = playerHp
         lifeIcon.style.height = "80px"
         lifeIcon.style.width = "80px"
+        lifeIcon.dataset.numhp = i
         livesBar.append(lifeIcon)
     }
 
@@ -37,7 +58,7 @@ function startGame() {
     playerIcon.src = playerIdleImg;
     playerIcon.style.height = "100px"
     playerIcon.style.width = "100px"
-    playerIcon.classList.add("ms-3")
+    playerIcon.classList.add("ms-3", "playerStatus")
 
     let actionScreen = document.createElement("div")
     actionScreen.classList.add("actionScreen")
@@ -49,29 +70,51 @@ function startGame() {
     let screenContainer = document.querySelector(".level3background");
     screenContainer.append(gameScreen);
 
-    loadQuestion()
-    dropAnswers()
+    let random = Math.floor(Math.random() * gameQuestions.length)
+
+    loadQuestion(random)
+    dropAnswers(random)
 }
 
-function loadQuestion() {
-    let question = document.createElement("p")
-    question.style.wordBreak = "break-all"
-    question.textContent = "Que número va después del 2?"
-    question.style.fontSize = "30px"
+function loadQuestion(random) {
+    let questionCont = document.querySelector(".questionBg");
 
-    let questionCont = document.querySelector(".questionBg")
+    let question = document.createElement("p")
+    question.style.wordBreak = "break-word"
+    question.textContent = gameQuestions[random].question;
+    question.style.fontSize = "30px"
+    question.style.maxWidth = "275px"
+    question.style.textAlign = "center"
+
     questionCont.append(question)
 }
 
-function dropAnswers() {
+/* INICIA EL COMPORTAMIENTO DE CAIDA DE RESPUESTAS. COGE LAS RESPUESTAS GUARDADAS, Y ALEATORIAMENTE CADA 1S GENERA UNA EN EL CONTENEDOR,
+QUE CADA 0.15S ACTUALIZA SU TOP PARA HACER QUE BAJE HACIA ABAJO PROGRESIVAMENTE. AL LLEGAR EL TOP DEL ELEMENTO A UN VALOR LIMITE, SE ELMINA.*/
+function dropAnswers(random) {
     let gamePanel = document.querySelector(".actionScreen")
     gamePanel.style.color = "#000"
 
-    setInterval(() => {
+    let answersInterval = setInterval(() => {
         let word = document.createElement("p")
         word.classList.add('fallingWord')
-        let random = Math.floor(Math.random()*10)
-        answer = answersList[random]
+
+        let newAnswer
+        let rdAnswer
+
+        do {
+            newAnswer = true
+
+            rdAnswer = Math.floor(Math.random() * gameQuestions.length)
+
+            droppedAnswersIndex.forEach(answerIndex => {
+                if (rdAnswer == answerIndex) {
+                    newAnswer = false;
+                }
+            });
+        } while (!newAnswer)
+
+        answer = gameQuestions[rdAnswer].answer
         word.textContent = answer
         word.style.top = "0px"
         randomPos = Math.random() * (gamePanel.clientWidth - 80) + "px"
@@ -79,6 +122,13 @@ function dropAnswers() {
 
 
         gamePanel.append(word)
+        word.addEventListener("click", () => checkQTE(answersInterval, word, random))
+
+        droppedAnswersIndex.push(rdAnswer)
+
+        if (droppedAnswersIndex.length == gameQuestions.length) {
+            droppedAnswersIndex.splice(0, droppedAnswersIndex.length)
+        }
 
         setInterval(() => {
             let wordTop = parseInt(window.getComputedStyle(word).getPropertyValue("top"))
@@ -91,13 +141,155 @@ function dropAnswers() {
     }, 1500)
 }
 
-function climbTE() {
-    let leftPanel = document.querySelector("questionBg")
-    let 
+function checkQTE(answersInterval, word, random) {
+
+    if (word.textContent != gameQuestions[random].answer) {
+        clearInterval(answersInterval)
+
+        shownQuestions.push(random)
+        lifes = lifes - 1
+
+        if (lifes == 0) {
+            displayGameOver()
+        } else {
+            let life = document.querySelector(`[data-numhp="${lifes}"] `)
+            life.remove()
+
+            let playerIcon = document.querySelector(".playerStatus")
+            playerIcon.src = playerFailImg
+
+            setTimeout(function () {
+                playerIcon.src = playerIdleImg
+            }, 3500)
+
+            let leftPanel = document.querySelector(".questionBg")
+            leftPanel.innerHTML = '';
+            leftPanel.style.backgroundImage = "url('../images/zero_climb.gif')";
+            let gamePanel = document.querySelector(".actionScreen")
+            gamePanel.innerHTML = '';
+            gamePanel.style.backgroundImage = "url('../images/climbing_console.png')"
+
+            climbQTE()
+        }
+
+
+    } else {
+        clearInterval(answersInterval)
+
+        shownQuestions.push(random)
+
+        points = points + 500
+
+        let leftPanel = document.querySelector(".questionBg")
+        leftPanel.innerHTML = '';
+        leftPanel.style.backgroundImage = "url('../images/zero_climb.gif')";
+        let gamePanel = document.querySelector(".actionScreen")
+        gamePanel.innerHTML = '';
+        gamePanel.style.backgroundImage = "url('../images/climbing_console.png')"
+
+        climbQTE()
+    }
+
+
 }
 
-let start = document.querySelector('.startGame')
-start.addEventListener('click', startGame)
+function climbQTE() {
+    let gamePanel = document.querySelector(".actionScreen")
+
+    let QTEInterval = setInterval(() => {
+        let input = document.createElement("p")
+
+        let allowed = true
+
+        do {
+
+            allowed = true
+
+            input.classList.add('inputBackground')
+            let random = Math.floor(Math.random() * 14)
+            let keyOptions = ["W", "A", "S", "D", "F", "G", "Y", "I", "L", "Q", "B", "M", "N", "C"]
+            inputKey = keyOptions[random]
+
+            let allInputs = document.querySelectorAll(".inputBackground")
+            allInputs.forEach(input => {
+                if (input.textContent == inputKey) {
+                    allowed = false
+                }
+            });
+
+        } while (!allowed)
+
+        input.textContent = inputKey
+
+        let x = Math.floor(Math.random() * (gamePanel.offsetWidth - 80));
+        let y = Math.floor(Math.random() * (gamePanel.offsetHeight - 80));
+
+        input.style.left = x + "px"
+        input.style.top = y + "px"
+
+        gamePanel.append(input)
+
+
+        setTimeout(function () {
+            if (input) {
+                input.remove()
+            }
+        }, 5000)
+
+    }, 2000)
+
+    checkPress()
+
+    setTimeout(function () {
+        clearInterval(QTEInterval)
+
+        if (gameQuestions.length == shownQuestions.length) {
+            displayResults()
+        } else {
+            let leftPanel = document.querySelector(".questionBg")
+            leftPanel.innerHTML = '';
+            leftPanel.style.backgroundImage = "url('../images/question_bkg.png')";
+            let gamePanel = document.querySelector(".actionScreen")
+            gamePanel.innerHTML = '';
+            gamePanel.style.backgroundImage = "url('../images/gamepanel_lvl3.png')"
+
+            let validQuestion
+            let random
+
+            do {
+                validQuestion = true
+                random = Math.floor(Math.random() * gameQuestions.length)
+
+                shownQuestions.forEach(index => {
+                    if (index == random) {
+                        validQuestion = false
+                    }
+                });
+
+            } while (!validQuestion)
+
+            loadQuestion(random)
+            dropAnswers(random)
+        }
+
+
+    }, 3000)
+}
+
+function checkPress() {
+    document.addEventListener("keydown", event => {
+        let currKeys = document.querySelectorAll(".inputBackground")
+        if (currKeys != null) {
+            currKeys.forEach(inputKey => {
+                if (event.key.toUpperCase() == inputKey.textContent) {
+                    points = points + 100
+                    console.log(points)
+                    inputKey.remove()
+                }
+            });
+        }
+    })
+}
 
 /*PERMITE VOLVER A LA PANTALLA DE NIVELES*/
 function goToLevelScreen() {
@@ -131,6 +323,10 @@ function displayGameOver() {
     let continueBtn = document.createElement('button');
     continueBtn.classList.add("startGame");
     continueBtn.textContent = "CONTINUAR?"
+    continueBtn.addEventListener("click", () => {
+        window.location.href = window.location.href
+    })
+    
 
     let backBtn = document.createElement('button');
     backBtn.classList.add("goback");
@@ -142,7 +338,7 @@ function displayGameOver() {
 
     gameOverContainer.append(gameOverText, gameOverImg, buttonDiv);
 
-    let gameContainer = document.querySelector(".gameContainer");
+    let gameContainer = document.querySelector(".ingameContainer");
     gameContainer.remove();
 
     let screenContainer = document.querySelector(".level3background");
@@ -151,6 +347,9 @@ function displayGameOver() {
 
 /*CARGA LA PANTALLA DE RESULTADOS EN EL DOM*/
 function displayResults() {
+    endTime = Date.now()
+    let totalTime = calculateTime()
+
     let resultsScreen = document.createElement('div')
     resultsScreen.classList.add("d-flex", "align-items-center", "justify-content-between")
 
@@ -170,12 +369,12 @@ function displayResults() {
     let sp = document.createElement('hr')
 
     let time = document.createElement('p')
-    time.textContent = "TIEMPO: 02:42s"
+    time.textContent = "TIEMPO:" + totalTime + "s"
     time.style.fontSize = "25px"
 
-    let points = document.createElement('p')
-    points.textContent = "PUNTOS: 4753p"
-    points.style.fontSize = "25px"
+    let pointsText = document.createElement('p')
+    pointsText.textContent = "PUNTOS:" + points
+    pointsText.style.fontSize = "25px"
 
     let backBtn = document.createElement('button')
     backBtn.classList.add("goback")
@@ -184,14 +383,27 @@ function displayResults() {
         window.location.href = levelRt;
     })
 
-    let gameContainer = document.querySelector(".gameContainer");
+    let gameContainer = document.querySelector(".ingameContainer");
     gameContainer.remove();
 
 
-    scoreContainer.append(winText, stats, sp, time, points, backBtn)
+    scoreContainer.append(winText, stats, sp, time, pointsText, backBtn)
     resultsScreen.append(winImage, scoreContainer)
 
     let screenContainer = document.querySelector(".level3background");
     screenContainer.append(resultsScreen);
 
+}
+
+function calculateTime() {
+    let diff = endTime - startTime;
+
+    let seconds = Math.floor(diff / 1000);
+    let minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+
+    let mm = String(minutes).padStart(2, '0');
+    let ss = String(seconds).padStart(2, '0');
+
+    return `${mm}:${ss}`;
 }

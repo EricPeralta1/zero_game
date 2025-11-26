@@ -33,10 +33,11 @@
                     <p>"Zero ha obtenido 2 de las 4 gemas. Su aventura lo lleva hasta las Montañas Geométricas. Deberá encontrar el camino hasta la cima sin perderse, siguiendo piedras guía.”</p>
                     <h3>INSTRUCCIONES</h3>
                     <hr style="margin-top: 0px">
-                    <p>"Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit, sed
-                        do eiusmod tempor
-                        incididunt...”</p>
+                    <p> Al comenzar cada ronda, aparecerá una pregunta a la izquierda. Encuentra la respuesta correcta en el panel inferior derecho.
+                        Si lo haces bien, no perderás ninguna vida. Tras acertar o fallar, deberás completar un pequeño minijuego.
+                        En este, aparecerán teclas con letras. Clica la tecla adecudada según vayan apareciendo.
+                        Las teclas desaparecen tras un corto periodo, pero no hay penalización. ¡Consigue todos los puntos que puedas!
+                    </p>
                     <div class="d-flex justify-content-evenly">
                         <button class="startGame">COMENZAR</button>
                         <button class="goback ms-2" data-url="{{ route('levels.index') }}">ATRAS</button>
@@ -55,6 +56,7 @@
         const levelRt = "{{ route('levels.index') }}";
         const playerIdleImg = "{{ asset('images/zero_icon.png') }}";
         const playerHp = "{{ asset('images/zero_hp.png') }}";
+        const playerFailImg = "{{ asset('images/zero_gameover.png') }}";
         const fallWord = "{{ asset('images/falling_word.png') }}";
     </script>
     <script src="{{ asset('js/level3.js') }}"></script>

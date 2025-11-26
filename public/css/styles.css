@@ -265,3 +265,20 @@
     text-align: center;
     font-size: 16px; 
 }
+
+.inputBackground{
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../images/key_ic.png);
+    height: 60px;
+    width: 60px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    position: absolute;
+    text-align: center;
+    font-size: 14px; 
+}
