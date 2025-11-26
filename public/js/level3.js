@@ -273,7 +273,7 @@ function climbQTE() {
         }
 
 
-    }, 3000)
+    }, 30000)
 }
 
 function checkPress() {
