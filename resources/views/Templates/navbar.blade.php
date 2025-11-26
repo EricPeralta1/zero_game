@@ -22,6 +22,7 @@
     </script>
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/introduccion.css') }}" />
 </head>
 
 <body>

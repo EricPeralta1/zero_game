@@ -72,6 +72,7 @@
     </div>
     <script>
         const DEFEAT_IMAGE_SRC = "{{ asset('images/zero_defeat_forest.png') }}";
+        const ZERO_IMAGE_SRC = "{{ asset('images/zero_analize.png') }}";
     </script>
 <script src="{{ asset('js/introduccion.js') }}"></script>
 @endsection

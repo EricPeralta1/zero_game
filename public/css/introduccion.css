@@ -1,0 +1,195 @@
+
+.defeat-container {
+    background-color: #6C757D;
+    border: 2px solid #495057;
+    max-width: 500px;
+    width: 90%;
+    padding: 1.5rem !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+
+.defeat-container h2 {
+    
+    color: white !important;
+    margin-bottom: 1.5rem !important;
+
+    
+    font-family: 'VT323', monospace; 
+    font-size: 24px;
+}
+
+/* Estilos para el contenedor de la imagen */
+.image-wrapper {
+    /* Estilos de la clase mb-4 */
+    margin-bottom: 1.5rem !important;
+
+    /* Estilos en línea del JS */
+    border: 1px solid #495057;
+    padding: 5px;
+    background-color: #343A40;
+}
+
+/* Estilos para la imagen en sí */
+.image-wrapper img {
+    /* Estilos de la clase img-fluid */
+    max-width: 100%;
+    height: auto;
+    
+    /* Estilos en línea del JS */
+    max-height: 200px;
+    object-fit: cover;
+}
+
+/* Estilos para el contenedor de botones */
+.defeat-container .d-flex {
+    /* Estilos de la clase mt-4 y gap-3 */
+    margin-top: 1.5rem !important;
+    
+    gap: 1rem; 
+}
+
+/* Estilos para el botón CONTINUAR? */
+.btn-warning.btn-lg {
+    /* Estilos en línea del JS */
+    font-family: 'VT323'; 
+    background-color: #fd7e14; 
+    border-color: #e66a00;
+    color: white;
+    
+}
+
+.btn-danger.btn-lg {
+    /* Estilos en línea del JS */
+    font-family: 'VT323';
+    background-color: #dc3545; /* Rojo de peligro de Bootstrap */
+    border-color: #bd2130;
+    color: white;
+    
+}
+
+.juego_box{
+
+    background-image: url(../images/game_1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   min-height: calc(85vh - 75px); 
+   position: relative;
+   display: flex; 
+    
+    /* 💡 CRÍTICO: Asegurar que ocupe todo el espacio del padre para anclajes absolutos */
+    width: 100%;
+    height: 100%;
+    flex-direction: column; 
+    align-items: center;
+}
+
+
+.puzzle-title {
+    /* Mantenemos el estilo de título */
+    color: white; 
+    font-family: 'VT323', monospace; 
+}
+
+.puzzle-equation {
+    /* Estilo del texto de la ecuación (3x + 5 = 11) */
+    color: white; 
+    font-family: 'VT323', monospace; 
+    font-size: 40px; /* Tamaño grande para destacar */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para mejor lectura */
+    margin-top: -10px; /* Ajuste para acercarlo al título */
+}
+.inner-puzzle-box {
+    
+    
+width: 100%;
+    height: 100%;
+    /* Altura definida como el contenedor padre */
+    min-height: calc(85vh - 75px); 
+    
+    flex-direction: column; 
+    
+    align-items: center; 
+    position: relative; 
+}
+/* Posicionar el contenido superior */
+.header-content {
+    text-align: center; 
+    margin-top: 3rem; 
+    z-index: 2; 
+}
+
+/* Disponer las opciones como botones en fila */
+.grid-area-options {
+    display: flex;
+    width: 100%;
+    justify-content: space-around; 
+    position: absolute;
+    
+    /* Ajustado para que los números estén centrados verticalmente dentro de las entradas */
+    top: 50%; /* Modificar este valor si es necesario */
+    
+    height: 100px; 
+    z-index: 2;
+    padding:  0 5%; /* Ajuste de espaciado lateral */
+}
+.grid-area-character {
+    /* 💡 FALTA: Activar el posicionamiento absoluto para que 'bottom' funcione */
+    position: absolute; 
+ 
+    /* 💡 FALTA: Centrar horizontalmente */
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Ahora sí, se ancla a 10px del suelo del inner-puzzle-box */
+    bottom: 10px;
+    
+    width: 150px; 
+    height: auto; 
+    z-index: 5; /* Asegura que esté por encima de otros elementos */
+}
+.btn-option-puzzle {
+    /* CRÍTICO: Eliminar la apariencia de botón */
+    background: none; /* Fondo transparente */
+    border: none; /* Sin borde */
+    box-shadow: none; /* Sin sombra */
+    padding: 0;
+    
+    /* CRÍTICO: Anclaje al centro del arco */
+    align-self: center; /* Centra el número en el eje vertical de su espacio */
+    
+    /* Estilo de Fuente y Color */
+    font-family: 'VT323', monospace; /* Fuente de estilo juego retro */
+    font-size: 50px; /* Tamaño grande para llenar el espacio */
+    color: white; /* Color blanco o ligeramente azulado para el brillo */
+    
+    /* Efecto de brillo o sombra exterior (simulando los píxeles claros de la imagen) */
+    text-shadow: 
+        0 0 5px #00FFFF, /* Sombra azul claro (simula brillo) */
+        0 0 10px #00FFFF,
+        2px 2px 0 #000, /* Sombra negra para el contorno pixelado */
+        -2px -2px 0 #000;
+        
+    /* Asegurar que el botón no tenga un comportamiento de click visible */
+    transition: none;
+    cursor: pointer;
+    
+    /* Ajuste de tamaño para el área de click */
+    width: 50px; 
+    height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Asegurar que el efecto de click no cambie la apariencia */
+.btn-option-puzzle:hover, 
+.btn-option-puzzle:active {
+    background: none;
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+    opacity: 0.9; /* Pequeño cambio para indicar que es clickeable */
+}
