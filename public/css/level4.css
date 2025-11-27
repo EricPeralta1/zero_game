@@ -13,6 +13,10 @@
     font-family: "VT323", sans-serif;
 }
 
+p {
+    margin-bottom: 0 !important;
+}
+
 button {
     color: var(--color-white);
 }
@@ -207,15 +211,11 @@ button {
 }
 
 #game-win-container > div > p {
-    margin-bottom: 10px !important;
+    margin-bottom: 10px;
 }
 #game-win-container > div > p:nth-child(2) {
     width: 100%;
     border-bottom: 0.5px solid rgb(206, 206, 206);
-}
-
-#game-win-container > div > p:nth-child(3) {
-    margin-bottom: 0 !important;
 }
 
 /* LEVEL CONTAINER */
@@ -257,17 +257,123 @@ button {
     display: flex;
 }
 
-#level-container > div > img:first-child {
+#zero-fighting {
     height: 200px;
     width: max-content;
-    margin-right: auto;
     margin-top: auto;
 }
 
-#level-container > div > img:nth-child(2) {
+#level-container > div > div {
+    margin-right: auto;
+    margin-top: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#level-container > div > div p {
+    padding: 7px 12px;
+    text-align: center;
+    font-weight: bold;
+    background-color: gray;
+    color: rgb(32, 32, 32);
+    border: 3px solid rgb(32, 32, 32);
+    font-size: 1.2rem;
+    cursor: grabbing;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+
+#kaos-fighting {
     height: 400px;
     width: max-content;
     margin-left: auto;
+}
+
+/* SPAWN ERROR ANIMATION */
+@keyframes errorSpawn {
+    0% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes errorFloat {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+/* ERRORS */
+.error-container {
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 5px;
+    z-index: 100;
+    cursor: grab;
+
+    width: max-content;
+    height: max-content;
+    animation: errorSpawn 400ms;
+}
+
+.error-enemy {
+    width: max-content;
+    height: 100px;
+    background: url("../Images/error_character.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 100;
+
+    display: flex;
+    align-items: end;
+    justify-content: center;
+
+    transition: all 400ms;
+
+    animation: errorFloat 2000ms linear infinite;
+}
+
+.error-enemy:hover {
+    transform: scale(1.1);
+}
+
+.error-content {
+    width: max-content;
+    height: auto;
+    max-height: 200px;
+    padding: 5px;
+}
+
+.error-problem {
+    max-width: 200px;
+    width: max-content;
+    font-size: 0.8rem;
+    padding: 5px;
+    margin-top: auto;
+    background-color: gray;
+    border: 3px solid rgb(32, 32, 32);
+    color: white;
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
 }
 
 /* GAME COMPLETED CONTAINER */
@@ -309,4 +415,3 @@ button {
     border: 2px solid black;
     text-decoration: none;
 }
-

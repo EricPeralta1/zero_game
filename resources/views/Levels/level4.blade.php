@@ -65,8 +65,14 @@
             <span id="hp-container">
             </span>
             <div>
-                <img src="{{ asset('Images/zero_fight.png') }}" alt="Zero fighting pose">
-                <img src="{{ asset('Images/Kaos.png') }}" alt="Kaos fighting pose">
+                <img src="{{ asset('Images/zero_fight.png') }}" alt="Zero fighting pose" id="zero-fighting">
+                <div>
+                    <p draggable="true">+</p>
+                    <p draggable="true">-</p>
+                    <p draggable="true">x</p>
+                    <p draggable="true">/</p>
+                </div>
+                <img src="{{ asset('Images/Kaos.png') }}" alt="Kaos fighting pose" id="kaos-fighting">
             </div>
         </div>
     </div>
@@ -78,3 +84,8 @@
     </div>
     <script src="{{ asset('js/level4.js') }}"></script>
 @endsection
+
+<div class="error-container">
+    <div class="error-enemy"></div>
+    <div class="error-content"></div>
+</div>
