@@ -11,6 +11,8 @@ let droppedAnswersIndex = []
 let points = 0
 let lifes = 3
 let streak = 0;
+let inputSpeed = 1000
+let inputDeleteSpeed = 1750
 let startTime
 let endTime
 
@@ -149,6 +151,9 @@ function checkQTE(answersInterval, word, random) {
         shownQuestions.push(random)
         lifes = lifes - 1
 
+        inputSpeed = 2000
+        inputDeleteSpeed = 4000
+
         if (lifes == 0) {
             displayGameOver()
         } else {
@@ -179,6 +184,15 @@ function checkQTE(answersInterval, word, random) {
         shownQuestions.push(random)
 
         points = points + 500
+        streak = streak + 1
+
+        if (streak == 2){
+            inputSpeed = 700
+            inputDeleteSpeed = 1000
+        } else if (streak == 3){
+            inputSpeed = 400
+            inputDeleteSpeed = 850
+        }
 
         let leftPanel = document.querySelector(".questionBg")
         leftPanel.innerHTML = '';
@@ -234,9 +248,9 @@ function climbQTE() {
             if (input) {
                 input.remove()
             }
-        }, 5000)
+        }, inputDeleteSpeed)
 
-    }, 2000)
+    }, inputSpeed)
 
     checkPress()
 
@@ -273,7 +287,7 @@ function climbQTE() {
         }
 
 
-    }, 30000)
+    }, 20000)
 }
 
 function checkPress() {
