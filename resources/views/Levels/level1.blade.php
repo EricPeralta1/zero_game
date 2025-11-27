@@ -73,6 +73,7 @@
     <script>
         const DEFEAT_IMAGE_SRC = "{{ asset('images/zero_defeat_forest.png') }}";
         const ZERO_IMAGE_SRC = "{{ asset('images/zero_analize.png') }}";
+        const VICTORY_IMAGE_SRC = "{{ asset('images/zero_win _forest.png') }}";
     </script>
 <script src="{{ asset('js/introduccion.js') }}"></script>
 @endsection
