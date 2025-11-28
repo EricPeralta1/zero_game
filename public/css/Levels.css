@@ -33,11 +33,9 @@
     padding: 10px 15px;
 }
 
-
 .title-icon {
     width: 40px;   
     height: auto;  /* Mantiene la proporción de la imagen */
-    border: 2px solid #000000; /* Borde negro como el del ícono original */
     background-color: transparent; /* Fondo transparente o ajusta si es necesario */
     padding: 0; /* Elimina padding si lo tiene por defecto */
     display: block; /* Asegura que se comporte como un bloque para width/height */
