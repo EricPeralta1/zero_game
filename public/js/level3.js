@@ -1,8 +1,7 @@
 let gameQuestions = [
     { question: "¿Cuál es el área de un círculo?", answer: "π x r x r" },
     { question: "¿Cuál es el perímetro de un cuadrado?", answer: "4 x lado" },
-    { question: "¿Cuál es el área de un cuadrado?", answer: "lado x lado" },
-     {question: "¿Cuál es el área de un rectángulo?", answer: "base x altura"}
+    { question: "¿Cuál es el área de un cuadrado?", answer: "lado x lado" }
 ];
 
 let shownQuestions = []
@@ -15,12 +14,15 @@ let inputSpeed = 1000
 let inputDeleteSpeed = 1750
 let startTime
 let endTime
+let dateToday
+let playTime = ""
 
 let start = document.querySelector('.startGame')
 start.addEventListener('click', startGame)
 
 function startGame() {
 
+    dateToday = new Date();
     startTime = Date.now()
 
     let gameContainer = document.querySelector(".gameContainer");
@@ -186,10 +188,10 @@ function checkQTE(answersInterval, word, random) {
         points = points + 500
         streak = streak + 1
 
-        if (streak == 2){
+        if (streak == 2) {
             inputSpeed = 700
             inputDeleteSpeed = 1000
-        } else if (streak == 3){
+        } else if (streak == 3) {
             inputSpeed = 400
             inputDeleteSpeed = 850
         }
@@ -340,7 +342,7 @@ function displayGameOver() {
     continueBtn.addEventListener("click", () => {
         window.location.href = window.location.href
     })
-    
+
 
     let backBtn = document.createElement('button');
     backBtn.classList.add("goback");
@@ -362,7 +364,7 @@ function displayGameOver() {
 /*CARGA LA PANTALLA DE RESULTADOS EN EL DOM*/
 function displayResults() {
     endTime = Date.now()
-    let totalTime = calculateTime()
+    calculateTime()
 
     let resultsScreen = document.createElement('div')
     resultsScreen.classList.add("d-flex", "align-items-center", "justify-content-between")
@@ -383,11 +385,11 @@ function displayResults() {
     let sp = document.createElement('hr')
 
     let time = document.createElement('p')
-    time.textContent = "TIEMPO:" + totalTime + "s"
+    time.textContent = "TIEMPO:" + playTime + "s"
     time.style.fontSize = "25px"
 
     let pointsText = document.createElement('p')
-    pointsText.textContent = "PUNTOS:" + points
+    pointsText.textContent = "PUNTOS:" + points + "p"
     pointsText.style.fontSize = "25px"
 
     let backBtn = document.createElement('button')
@@ -407,17 +409,35 @@ function displayResults() {
     let screenContainer = document.querySelector(".level3background");
     screenContainer.append(resultsScreen);
 
+    saveScore();
 }
 
 function calculateTime() {
     let diff = endTime - startTime;
 
     let seconds = Math.floor(diff / 1000);
-    let minutes = Math.floor(seconds / 60);
+    let minutes = Math.floor((seconds % 3600) / 60);
     seconds = seconds % 60;
 
     let mm = String(minutes).padStart(2, '0');
     let ss = String(seconds).padStart(2, '0');
 
-    return `${mm}:${ss}`;
+    playTime = `${mm}:${ss}`; 
+}
+
+function saveScore() {
+    const scoreGame3 = { puntos: points, tiempo_nivel: playTime, vidas: lifes, errores: 3 - lifes, id_user: id_usuario, id_game: id_juego, fecha: dateToday }
+    const score3Str = JSON.stringify(scoreGame3)
+    document.cookie = `score3=${score3Str}; path=/; max-age=3600 `;
+
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`http://localhost/zero_game/public/saveScore`, {
+        method: 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+    })
 }

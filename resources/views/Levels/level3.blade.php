@@ -58,6 +58,8 @@
         const playerHp = "{{ asset('images/zero_hp.png') }}";
         const playerFailImg = "{{ asset('images/zero_gameover.png') }}";
         const fallWord = "{{ asset('images/falling_word.png') }}";
+        const id_usuario = "{{ Auth::user()->id_user }}";
+        const id_juego = 3
     </script>
     <script src="{{ asset('js/level3.js') }}"></script>
 @endsection
