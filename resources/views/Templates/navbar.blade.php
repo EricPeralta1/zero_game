@@ -34,11 +34,7 @@
                 @yield('window_link')
             </div>
             <div>
-<<<<<<< HEAD
                 <img src="{{asset('images/zero_logo_navbar.png')}}" alt="leaderboard" width="auto" height=75px>
-=======
-                <img src="{{ asset('images/zero_logo_navbar.png') }}" alt="leaderboard" width="auto" height=75px>
->>>>>>> main
             </div>
             <div>
                 <div class="d-flex align-items-center gap-3 ">
