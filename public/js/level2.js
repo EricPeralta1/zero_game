@@ -14,7 +14,7 @@ function iniciarJuego(e) {
     const box = document.querySelector(".level-box");
     if (!box) return;
 
-    const fondo = box.getAttribute("data-bg") || "/images/lvl2_pantalla2.jpg";
+    const fondo = "../images/lvl2_pantalla2.jpg";
 
     resetBox(box, fondo);
 
@@ -107,7 +107,7 @@ function crearContenido(box, numeroCorrecto) {
         width: "100%",
         padding: "0 30px",
     });
-
+ 
     /* Número a la izquierda */
     const spanIzq = crearSpan(numeroCorrecto);
     mainContent.appendChild(spanIzq);
@@ -147,13 +147,14 @@ function crearSpan(texto) {
     span.className = "badge badge-pill badge-light";
     Object.assign(span.style, {
         padding: "30px",
-        border: "2px solid #000",
+        border: "5px solid #000",
         backgroundColor: "#fff",
         fontSize: "25px",
         fontWeight: "bold",
         color: "#000",
         cursor: "pointer",
         transition: "transform 0.3s ease-in-out",
+        borderRadius: "35%",
     });
     span.textContent = texto;
     
@@ -185,6 +186,7 @@ function animarMovimiento(span) {
     // Guardar el intervalo para poder detenerlo si es necesario
     span.dataset.animationInterval = intervalo;
 }
+
 
 /* ----------------------------------------
    Generar 3 Operaciones (una correcta)
