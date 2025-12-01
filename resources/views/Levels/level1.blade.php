@@ -1,7 +1,7 @@
 @extends('Templates.navbar')
 
 @section('window_link')
-    <img src="images/leaderboard_icon.png" alt="leaderboard" width="55" height="50"
+    <img src={{ asset("images/leaderboard_icon.png") }} alt="leaderboard" width="55" height="50"
         class="d-inline-block align-text-center">
     <span class="ms-2" style="font-family: VT323; font-size: 30px">Niveles</span>
 @endsection
