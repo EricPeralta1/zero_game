@@ -1,62 +1,45 @@
 
+//  1. Variables Globales y Datos 
 
-// --- 1. Variables Globales y Datos ---
 let currentQuestionIndex = 0;
-let score = 0;
-let lives = 3;
+let points = 0;
+let lifes = 3;
 let errors = 0;
 const gameRoot = document.getElementById('dynamic-container');
+let dateToday;
+let startTime;
+let endTime;
+let playTime = ""; 
 
-// Datos de las preguntas (Añade 6 preguntas más para llegar a 10)
 const puzzleQuestions = [
     {
         equation: '3x + 5 = 11',
         options: [2, 3, 4, 5],
         correctAnswer: 2
     },
-
     {
         equation: '2x + 9 =21',
         options: [5, 9, 7, 6],
         correctAnswer: 6
     },
     {
-        equation: '2x - 1 = 9',
-        options: [4, 5, 6, 7],
-        correctAnswer: 5
+         equation: '2x +1=3',
+        options: [1, 2, 6, 0],
+        correctAnswer: 1
     },
+
     {
-        equation: 'x / 2 + 3 = 7',
-        options: [6, 8, 10, 12],
-        correctAnswer: 8
-    },
-    {
-        equation: '4x = 24',
-        options: [4, 5, 6, 7],
-        correctAnswer: 6
-    },
-    {
-        equation:'2x =2',
-        options:[7,9,3,1],
-        correctAnswer:1
-    },
-    {
-        equation:'2^x=1',
-        options:[2,0,1,3],
-        correctAnswer:0,
+         equation: '2^x=1',
+        options: [1, 2, 3, 0],
+        correctAnswer: 0
     },
     
-
-
-
-
 ];
-
-
 
 const totalQuestions = puzzleQuestions.length;
 
-// --- 2. Inicialización del Juego ---
+// Inicialización del Juego
+
 document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById('boton_comenzar');
     const introContent = document.getElementById('main-content-area');
@@ -67,41 +50,47 @@ document.addEventListener('DOMContentLoaded', function () {
             if (introContent) {
                 introContent.classList.add('d-none');
             }
-            // Reiniciar el estado del juego (por si se juega de nuevo)
+            
             currentQuestionIndex = 0;
-            score = 0;
-            lives = 3;
+            points = 0;
+            lifes = 3;
             errors = 0;
+            
+            dateToday = new Date();
+            startTime = Date.now();
 
             createPuzzleScreen(dynamicContainer);
         });
     }
 });
 
-// --- 3. Función para Actualizar el HUD (Score y Vidas) ---
+
+//  3. Función para Actualizar 
+
 function updateHud() {
     const hudScore = document.getElementById('hud-score');
     const hudLives = document.getElementById('hud-lives');
     const hudErrors = document.getElementById('hud-errors');
 
     if (hudScore) {
-        hudScore.innerHTML = `⭐ Puntos: ${score}`;
+        
+        hudScore.innerHTML = ` Puntos: ${points * 100}`; 
     }
     if (hudLives) {
-        hudLives.innerHTML = `❤️ Vidas: ${lives}`;
+        hudLives.innerHTML = ` Vidas: ${lifes}`;
     }
     if (hudErrors) {
-        hudErrors.innerHTML = `❌ Errores: ${errors}`;
+        hudErrors.innerHTML = ` Errores: ${errors}`;
     }
 }
 
-// --- 4. Renderizado de la Pantalla del Puzzle ---
+
+//  4. Renderizado de la Pantalla del Puzzle 
 function createPuzzleScreen() {
     const currentQuestionData = puzzleQuestions[currentQuestionIndex];
-
     gameRoot.innerHTML = '';
-
     
+  
     const puzzleScreen = document.createElement('div');
     puzzleScreen.classList.add('background-level-container', 'd-flex', 'justify-content-center', 'align-items-center', 'py-5');
     puzzleScreen.id = 'puzzle-screen';
@@ -113,18 +102,18 @@ function createPuzzleScreen() {
     innerPuzzleBox.classList.add('inner-puzzle-box', 'puzzle-grid-layout');
 
 
-  
+ 
     const hudContainer = document.createElement('div');
     hudContainer.id = 'game-hud';
     hudContainer.classList.add('hud-container', 'grid-area-hud');
     
     hudContainer.innerHTML = `
-        <div id="hud-score" class="hud-item">⭐ Puntos: ${score}</div>
-        <div id="hud-lives" class="hud-item">❤️ Vidas: ${lives}</div>
+        <div id="hud-score" class="hud-item">⭐ Puntos: ${points * 100}</div>
+        <div id="hud-lives" class="hud-item">❤️ Vidas: ${lifes}</div>
         <div id="hud-errors" class="hud-item">❌ Errores: ${errors}</div>
     `;
 
-    // 2. Contenedor para el Título y la Ecuación (HEADER)
+    // 2. Contenedor para el Título y la Ecuación (
     const headerContent = document.createElement('div');
     headerContent.classList.add('header-content', 'grid-area-header');
     const title = document.createElement('h2');
@@ -139,7 +128,7 @@ function createPuzzleScreen() {
     headerContent.appendChild(equation);
 
 
-    // 3. Contenedor de Opciones (WRAPPER)
+    // 3. Contenedor de Opciones 
     const optionsWrapper = document.createElement('div');
     optionsWrapper.id = 'options-container-wrapper';
     optionsWrapper.classList.add('grid-area-options');
@@ -173,7 +162,7 @@ function createPuzzleScreen() {
     );
 
     // 5. Ensamblar la vista:
-    innerPuzzleBox.appendChild(hudContainer); // Añadir el HUD
+    innerPuzzleBox.appendChild(hudContainer); 
     innerPuzzleBox.appendChild(headerContent);
     innerPuzzleBox.appendChild(optionsWrapper);
     innerPuzzleBox.appendChild(characterImage);
@@ -184,9 +173,10 @@ function createPuzzleScreen() {
     gameRoot.appendChild(puzzleScreen);
 }
 
-// --- 5. Lógica del Click (Con Vidas) ---
+// === 5. Lógica del Click (SIN CAMBIOS FUNCIONALES)
+
 function handleOptionClick(selectedValue) {
-    // Desactivar botones temporalmente para evitar doble clic
+    
     document.querySelectorAll('.btn-option-puzzle').forEach(btn => btn.disabled = true);
 
     const currentQuestionData = puzzleQuestions[currentQuestionIndex];
@@ -194,69 +184,83 @@ function handleOptionClick(selectedValue) {
 
     // 1. Verificar la respuesta
     if (selectedValue === correctAnswer) {
-        score++;
-        alert('✅ ¡Respuesta Correcta! Puntos: ' + score);
+        points = points + 100
+        alert(' ¡Respuesta Correcta! Puntos: ' + points);
 
     } else {
-        lives--;
+        lifes--;
         errors++;
-        alert(`❌ ¡Incorrecto! La respuesta correcta era ${correctAnswer}. Vidas restantes: ${lives}.`);
-
+        alert(` ¡Incorrecto! La respuesta correcta era ${correctAnswer}. Vidas restantes: ${lifes}.`);
     }
 
-    // 2. Actualizar el HUD inmediatamente
+    
     updateHud();
 
-    // 3. Verificar si el juego terminó (Por Derrota o Victoria)
-    if (lives <= 0) {
-
+    
+    if (lifes <= 0) {
         showDefeatScreen(gameRoot);
         return;
     }
 
-  
     currentQuestionIndex++;
 
     if (currentQuestionIndex < totalQuestions) {
-        // Cargar la siguiente pregunta después de un breve retraso
+        
         setTimeout(() => {
             createPuzzleScreen();
         }, 1000);
     } else {
-
         showGameEndScreen();
     }
 }
 
-// --- 6. Funciones de Pantalla Final --- Modificar el front y el back
+// === 6. Funciones de Persistencia 
+
+function calculateTimePuzzle() {
+    let diff = endTime - startTime;
+
+    let seconds = Math.floor(diff / 1000);
+    let minutes = Math.floor((seconds % 3600) / 60);
+    seconds = seconds % 60;
+
+    let mm = String(minutes).padStart(2, '0');
+    let ss = String(seconds).padStart(2, '0');
+
+    playTime = `${mm}:${ss}`; 
+}
+
+
+function saveScore() {
+    const scoreGame1 = { puntos: points, tiempo_nivel: playTime, vidas: lifes, errores: 3 - lifes, id_user: id_usuario, id_game: id_juego, fecha: dateToday }
+    const score1Str = JSON.stringify(scoreGame1)
+    document.cookie = `score3=${score1Str}; path=/; max-age=3600 `;
+
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`http://localhost:8080/zero_game/public/saveScore`, {
+        method: 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+    })
+}
+//  7. Funciones de Pantalla Final 
+
 function showGameEndScreen() {
     
-    const finalScore = score;
+    endTime = Date.now(); 
+    calculateTimePuzzle(); 
+    const finalScore = points;
     const finalErrors = errors;
-    const totalTimeSeconds = 90; // SIMULADO: Reemplazar con el cálculo real del juego (endTime - startTime)
-
-  
-    const minutes = Math.floor(totalTimeSeconds / 60).toString().padStart(2, '0');
-    const seconds = (totalTimeSeconds % 60).toString().padStart(2, '0');
-    const formattedTime = `${minutes}:${seconds}s`;
-
-
     gameRoot.innerHTML = ''; 
-    
-    
     const victoryScreen = document.createElement('div');
     victoryScreen.classList.add('background-level-container', 'd-flex', 'justify-content-center', 'align-items-center', 'victory-screen');
-
-
-    
     const contentWrapper = document.createElement('div');
-    // Usaremos una clase flexible para el diseño de dos columnas
     contentWrapper.classList.add('d-flex', 'victory-content-wrapper'); 
-
-    // --- Columna Izquierda: Imagen del Cristal ---
     const imageColumn = document.createElement('div');
     imageColumn.classList.add('victory-image-column');
-    
     const crystalImage = document.createElement('img');
     crystalImage.src = VICTORY_IMAGE_SRC;
     crystalImage.alt = "Zero encuentra el cristal";
@@ -265,9 +269,6 @@ function showGameEndScreen() {
     crystalImage.height = 400;
     
     imageColumn.appendChild(crystalImage);
-
-
-    // --- Columna Derecha: Estadísticas ---
     const statsColumn = document.createElement('div');
     statsColumn.classList.add('victory-stats-column', 'text-center');
     
@@ -276,7 +277,7 @@ function showGameEndScreen() {
         
         <div class="stats-box">
             <h3 class="puzzle-title fs-25 my-4">ESTADÍSTICAS</h3>
-            <p class="fs-20">TIEMPO: <span class="stat-value">${formattedTime}</span></p>
+            <p class="fs-20">TIEMPO: <span class="stat-value">${playTime}s</span></p>
             <p class="fs-20">PUNTOS: <span class="stat-value">${finalScore * 100}p</span></p>
             <p class="fs-20">ERRORES: <span class="stat-value">${finalErrors}</span></p>
         </div>
@@ -284,26 +285,21 @@ function showGameEndScreen() {
         <button id="btn-regresar" class="btn btn-danger btn-lg mt-5">REGRESAR</button>
     `;
 
-    // 3. Ensamblar y añadir eventos
-    
-    // Evento para el botón REGRESAR
+    saveScore()
     const regresarButton = statsColumn.querySelector('#btn-regresar');
-    regresarButton.addEventListener('click', () => {
-      
-        window.location.reload(); 
+    regresarButton.addEventListener('click', () => {  
+        window.location.href = levelRt;
     });
-
     contentWrapper.appendChild(imageColumn);
     contentWrapper.appendChild(statsColumn);
     victoryScreen.appendChild(contentWrapper);
     gameRoot.appendChild(victoryScreen);
-    
-     
 }
 
-
 function showDefeatScreen(container) {
-    // Función de Derrota (usa tu código original)
+    endTime = Date.now(); 
+    calculateTimePuzzle(); 
+    saveScore();
     container.innerHTML = '';
     const gameOverScreen = document.createElement('div');
     gameOverScreen.className = 'background-level-container d-flex align-items-center justify-content-center';
@@ -319,7 +315,7 @@ function showDefeatScreen(container) {
     imageWrapper.className = 'image-wrapper mb-4';
 
     const image = document.createElement('img');
-    image.src = DEFEAT_IMAGE_SRC; // Usa la imagen de derrota
+    image.src = DEFEAT_IMAGE_SRC; 
     image.alt = 'Zero Derrotado';
     image.className = 'img-fluid';
 
@@ -333,7 +329,7 @@ function showDefeatScreen(container) {
     btnContinue.textContent = 'REINTENTAR';
 
     btnContinue.addEventListener('click', () => {
-        // Vuelve a cargar la página para reiniciar el juego
+       
         window.location.reload();
     });
 
@@ -342,7 +338,8 @@ function showDefeatScreen(container) {
     btnAbandon.textContent = 'ABANDONAR';
 
     btnAbandon.addEventListener('click', () => {
-        history.back();
+        
+        window.location.href = levelRt;
     });
 
     buttonsDiv.appendChild(btnContinue);

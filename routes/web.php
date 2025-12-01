@@ -30,6 +30,7 @@ Route::get('/config', [LandingController::class, 'config'])->name('superadmin.co
 Route::patch('/config', [UsuarioController::class, 'updateAdmin'])->name("update.admin");
 
 /*RUTAS DE NIVELES Y CLASSIFICACION*/
+
 Route::get('/levels', [JuegoController::class, 'index'])->name('levels.index');
 Route::get('/leaderboard', [PuntuacionController::class, 'index'])->name('score.index');
 Route::get('/levels/{id_game}', [JuegoController::class, 'introduction'])->name('levels.game');

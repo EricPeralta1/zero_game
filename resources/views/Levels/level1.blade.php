@@ -74,6 +74,9 @@
         const DEFEAT_IMAGE_SRC = "{{ asset('images/zero_defeat_forest.png') }}";
         const ZERO_IMAGE_SRC = "{{ asset('images/zero_analize.png') }}";
         const VICTORY_IMAGE_SRC = "{{ asset('images/zero_win _forest.png') }}";
+        const id_usuario = "{{ Auth::user()->id_user }}";
+        const id_juego =1
+        const levelRt = "{{ route('levels.index') }}";
     </script>
 <script src="{{ asset('js/introduccion.js') }}"></script>
 @endsection
