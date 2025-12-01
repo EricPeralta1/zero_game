@@ -28,7 +28,7 @@
 
 
     <div class="background-level-container2 d-flex justify-content-center align-items-center py-4">
-        <div class="level-box container p-4">
+        <div class="level-box container p-4" data-bg="{{ asset('images/lvl2_pantalla2.jpg') }}">
 
             <div class="level-title-section d-flex align-items-center mb-4">
                 <img src={{ asset("images/gemas/gema_2.png")}} alt="cristal piramide" class="title-icon me-3">
@@ -55,7 +55,7 @@
                         <img src={{ asset("images/level_2.png")}} alt="Piramide pixel" class="img-fluid d-block">
                     </div>
                     <div class="action-buttons d-flex gap-3 w-100 justify-content-end">
-                        <button class=" btn-orange">COMENZAR</button>
+                        <button  id="comenzar"class="btn-orange">COMENZAR</button>
                         <button class="btn-red">ATRÁS</button>
                     </div>
                 </div>
@@ -64,5 +64,7 @@
 
         </div>
     </div>
+
+    <script src="{{ asset('js/level2.js') }}"></script>
 
 @endsection
