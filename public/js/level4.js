@@ -1,19 +1,24 @@
+// START MENU
+const levelContainer = document.getElementById("level-container");
+const overlay = document.getElementById("overlay");
+const startGameBtn = document.getElementById("start-game-btn");
+const instructionsContainer = document.getElementById("instructions-container");
+
+startGameBtn.addEventListener("click", function () {
+    instructionsContainer.style.display = "none";
+    overlay.style.display = "none";
+    levelContainer.style.display = "flex";
+    startGame();
+});
+
 // GAME CONFIG
 const gameConfig = {
     errorSpeed: 2,
     spawnInterval: 3000,
-    errorSize: 80,
 };
-
-// GAME
-let activeErrors = [];
-let gameRunning = false;
-let spawnIntervalId = null;
-let animationFrameId = null;
 
 // OPERATIONS
 const operations = [
-    // EASY
     { problem: "18 _ 9 = 27", answer: "+" },
     { problem: "50 _ 17 = 33", answer: "-" },
     { problem: "12 _ 4 = 48", answer: "x" },
@@ -23,9 +28,13 @@ const operations = [
     { problem: "99 _ 33 = 3", answer: "/" },
     { problem: "142 _ 58 = 200", answer: "+" },
     { problem: "200 _ 125 = 75", answer: "-" },
-    { problem: "16 _ 2 = 256", answer: "x" },
+    { problem: "15 _ 8 = 120", answer: "x" },
+    { problem: "144 _ 12 = 12", answer: "/" },
+    { problem: "73 _ 27 = 100", answer: "+" },
+    { problem: "156 _ 39 = 6", answer: "/" },
+    { problem: "88 _ 44 = 44", answer: "-" },
+    { problem: "25 _ 13 = 325", answer: "x" },
 
-    // MEDIUM
     { problem: "1/2 _ 3/2 = 2", answer: "+" },
     { problem: "7/3 _ 4/3 = 1", answer: "-" },
     { problem: "5/6 _ 18 = 15", answer: "x" },
@@ -34,48 +43,40 @@ const operations = [
     { problem: "5 _ 1/5 = 1", answer: "x" },
     { problem: "8/3 _ 4 = 32/3", answer: "x" },
     { problem: "10 _ 5/2 = 4", answer: "/" },
+    { problem: "2/3 _ 1/3 = 1", answer: "+" },
+    { problem: "5/4 _ 1/4 = 1", answer: "-" },
+    { problem: "3/5 _ 10 = 6", answer: "x" },
+    { problem: "8 _ 2/3 = 12", answer: "/" },
+    { problem: "7/2 _ 2 = 7", answer: "x" },
+    { problem: "15 _ 3/5 = 25", answer: "/" },
 
-    // MEDIUM HARD
     { problem: "2^4 _ 16 = 32", answer: "+" },
-    { problem: "3^3 _ 9 = 18", answer: "x" },
+    { problem: "3^3 _ 9 = 18", answer: "-" },
     { problem: "3^3 _ 9 = 36", answer: "+" },
     { problem: "5^2 _ 25 = 0", answer: "-" },
-    { problem: "4^3 _ 8 = 64", answer: "/" },
-    { problem: "2^5 _ 4 = 32", answer: "+" },
+    { problem: "4^3 _ 8 = 8", answer: "/" },
+    { problem: "2^5 _ 4 = 8", answer: "/" },
     { problem: "9^2 _ 81 = 0", answer: "-" },
-    { problem: "7^2 _ 49 = 2401", answer: "x" },
+    { problem: "7^2 _ 7 = 343", answer: "x" },
+    { problem: "6^2 _ 12 = 48", answer: "+" },
+    { problem: "10^2 _ 50 = 50", answer: "-" },
+    { problem: "4^2 _ 4 = 64", answer: "x" },
+    { problem: "8^2 _ 16 = 4", answer: "/" },
+    { problem: "3^4 _ 81 = 0", answer: "-" },
+    { problem: "5^3 _ 25 = 5", answer: "/" },
+    { problem: "2^6 _ 32 = 96", answer: "+" },
 
-    // HARD
-    { problem: "(2x + 3) _ (x + 1) = 3x + 4", answer: "+" },
-    { problem: "(5x - 2) _ (3x + 7) = 2x - 9", answer: "-" },
-    { problem: "(x + 4) _ (x - 4) = x^2 - 16", answer: "x" },
-    { problem: "(3x - 1) _ (2x + 5) = 6x^2 + 13x - 5", answer: "x" },
-    { problem: "(x^2 + 2x) _ x = x^3 + 2x^2", answer: "x" },
-    { problem: "(2x + 5) _ (x - 3) = 2x + 5 - x + 3", answer: "-" },
-    { problem: "(4x - 8) _ 4 = x - 2", answer: "/" },
-    { problem: "(3x^2 - 2x + 1) _ (x^2 + x) = 4x^2 - x + 1", answer: "+" },
-
-    // VERY HARD
-    { problem: "(2x^2 + 3x - 5) _ (x^2 - x + 4) = x^2 + 4x - 9", answer: "-" },
-    { problem: "(x^3 + 2x) _ (x^2 - 3) = x^5 - 3x^3 + 2x^3 - 6x", answer: "x" },
-    { problem: "(5x^2 - x + 7) _ (x - 2) = 5x^2 - x + 7 + x - 2", answer: "+" },
-    { problem: "(3x - 4) _ (x^2 + x) = 3x^3 + 3x^2 - 4x^2 - 4x", answer: "x" },
-    { problem: "(4x^2 - 6) _ 2 = 2x^2 - 3", answer: "/" },
-    {
-        problem: "(x^2 + 6x + 9) _ (x^2 - 6x + 9) = x^4 - 36x^2 + 81",
-        answer: "x",
-    },
-
-    // IMPOSSIBLE
-    { problem: "(3/2)x _ (1/2)x = 2x", answer: "+" },
-    { problem: "(7x - 3) _ (2x - 9) = 5x + 6", answer: "-" },
-    { problem: "(x/3) _ 9 = 3x", answer: "x" },
-    { problem: "(5x - 15) _ 5 = x - 3", answer: "/" },
+    { problem: "256 _ 16 = 16", answer: "/" },
+    { problem: "13 _ 7 = 91", answer: "x" },
+    { problem: "1000 _ 250 = 750", answer: "-" },
+    { problem: "999 _ 111 = 9", answer: "/" },
+    { problem: "47 _ 53 = 100", answer: "+" },
+    { problem: "19 _ 6 = 114", answer: "x" },
+    { problem: "500 _ 125 = 4", answer: "/" },
+    { problem: "888 _ 444 = 444", answer: "-" },
 ];
 
 // HP
-const hp = 5;
-let currentHP = hp;
 const hpContainer = document.getElementById("hp-container");
 const hpImg = `<img src="../Images/heart.png" alt="HP">`;
 
@@ -96,14 +97,32 @@ function getZeroPosition() {
     };
 }
 
-const zeroPos = getZeroPosition();
+// INITIALIZE DRAGGABLE SYMBOLS
+function initDraggableSymbols() {
+    const symbols = document.querySelectorAll('p[draggable="true"]');
+
+    symbols.forEach((symbol) => {
+        symbol.addEventListener("dragstart", (e) => {
+            // ALLOW COPY OF THE DATA SPECIFIED
+            e.dataTransfer.effectAllowed = "copy";
+
+            // SET IN dataTransfer THE SYMBOL DATASET
+            e.dataTransfer.setData("text/plain", e.target.dataset.symbol);
+            e.target.style.opacity = "0.5";
+        });
+
+        symbol.addEventListener("dragend", (e) => {
+            e.target.style.opacity = "1";
+        });
+    });
+}
 
 // CREATE ERRORS
 function createError() {
     // GET RANDOM ITEM FROM ARRAY OF OPERATIONS
     const operation = operations[Math.floor(Math.random() * operations.length)];
 
-    // CREATE ERROR CONTAINER FOR IMG AND OPERATION
+    // CREATE ERROR CONTAINER FOR ERROR IMG AND OPERATION
     const errorContainer = document.createElement("div");
     errorContainer.className = "error-container";
     errorContainer.dataset.answer = operation.answer;
@@ -116,7 +135,7 @@ function createError() {
     errorContainer.style.left = `${startX}px`;
     errorContainer.style.top = `${startY}px`;
 
-    // CREATE ERROR DIV FOR IMG
+    // CREATE DIV FOR ERROR IMG
     const errorEnemy = document.createElement("div");
     errorEnemy.className = "error-enemy";
 
@@ -138,6 +157,7 @@ function createError() {
 
     // APPEND ERROR CONTAINER TO BODY
     document.body.appendChild(errorContainer);
+    const zeroPos = getZeroPosition();
 
     const error = {
         element: errorContainer,
@@ -150,6 +170,7 @@ function createError() {
     };
 
     activeErrors.push(error);
+    checkAnswer(errorContainer);
 
     return error;
 }
@@ -158,13 +179,18 @@ function createError() {
 function moveErrors() {
     // FOR EVERY ACTIVE ERROR:
     activeErrors.forEach((error, index) => {
+        const zeroPos = getZeroPosition();
+
         // GET DISTANCE BETWEEN ZERO AND ERROR
+        // horizontal distance
         const dx = zeroPos.x - error.x;
+        // vertical distance
         const dy = zeroPos.y - error.y;
+        // pythagoras theorem
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         // ERROR COLLISION WITH ZERO
-        if (distance < 1) {
+        if (distance < 10) {
             loseLife();
             removeError(index);
             return;
@@ -172,6 +198,7 @@ function moveErrors() {
 
         // MOVE ERROR TOWARDS ZERO
         if (distance > 0) {
+            // normalized directions
             error.x += (dx / distance) * gameConfig.errorSpeed;
             error.y += (dy / distance) * gameConfig.errorSpeed;
 
@@ -184,6 +211,62 @@ function moveErrors() {
     if (gameRunning) {
         animationFrameId = requestAnimationFrame(moveErrors);
     }
+}
+
+// CHECK ANSWER ON DROP
+const scoreText = document.getElementById("points-text");
+const kaosHPText = document.getElementById("kaos-hp");
+
+function checkAnswer(errorElement) {
+    // CHANGE STYLES WHEN DRAGGABLE IS ON ERROR
+    errorElement.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        // MAKE A COPY OF THE DATA IN dataTransfer
+        e.dataTransfer.dropEffect = "copy";
+        errorElement.style.transform = "scale(1.05)";
+    });
+
+    errorElement.addEventListener("dragleave", (e) => {
+        errorElement.style.transform = "";
+    });
+
+    // LOGIC ON ERROR DROP
+    errorElement.addEventListener("drop", (e) => {
+        e.preventDefault();
+        errorElement.style.transform = "";
+
+        // GET THE COPY OF THE DATA IN dataTransfer
+        const droppedSymbol = e.dataTransfer.getData("text/plain");
+        const correctAnswer = errorElement.dataset.answer;
+
+        // FIND INDEX OF ERROR IN ACTIVEERRORS
+        const errorIndex = activeErrors.findIndex(
+            (err) => err.element === errorElement
+        );
+
+        // COMPARE CORRECT ANSWER WITH P DATASET
+        if (droppedSymbol === correctAnswer) {
+            answerStreak++;
+
+            if (answerStreak > 3) {
+                const total = (answerStreak - 2) * 100;
+                score = score + total;
+                kaosHP = kaosHP - total;
+            } else {
+                score += 100;
+                kaosHP -= 100;
+            }
+
+            if (kaosHP < 0) {
+            }
+            removeError(errorIndex);
+            scoreText.textContent = `PUNTOS: ${score}`;
+            kaosHPText.textContent = `${kaosHP} HP`;
+            errorElement.remove();
+        } else {
+            answerStreak = 0;
+        }
+    });
 }
 
 // REMOVE ERROR
@@ -204,35 +287,103 @@ function loseLife() {
     }
 }
 
-// MAKE GAME OVER SCREEN ACTIVE
+const gameOverContainer = document.getElementById("game-over-container");
+const restartButton = document.getElementById("restart-btn");
+
+// GAME OVER
 function gameOver() {
     gameRunning = false;
     clearInterval(spawnIntervalId);
+    clearInterval(timeId);
     cancelAnimationFrame(animationFrameId);
 
     // CLEAN ALL ERRORS
     activeErrors.forEach((error) => error.element.remove());
     activeErrors = [];
+
+    levelContainer.style.display = "none";
+    overlay.style.display = "flex";
+    gameOverContainer.style.display = "flex";
 }
 
-// START GAME
+// WIN GAME
+const gameWinContainer = document.getElementById("game-win-container");
+const continueBtn = document.getElementById("continue-btn");
+function gameWin() {
+    gameRunning = false;
+    clearInterval(spawnIntervalId);
+    clearInterval(timeId);
+    cancelAnimationFrame(animationFrameId);
+
+    // CLEAN ALL ERRORS
+    activeErrors.forEach((error) => error.element.remove());
+    activeErrors = [];
+
+    levelContainer.style.display = "none";
+    overlay.style.display = "flex";
+    gameWinContainer.style.display = "flex";
+}
+
+// RESTART GAME
+restartButton.addEventListener("click", function () {
+    gameOverContainer.style.display = "none";
+    instructionsContainer.style.display = "flex";
+    overlay.style.display = "flex";
+});
+
+// TIME
+const timeText = document.getElementById("time-text");
+
+let timeId = null;
+function initTime() {
+    timeId = setInterval(() => {
+        time++;
+        timeText.textContent = `TIEMPO: ${time}`;
+    }, 1000);
+}
+
+// START GAME DEFAULT VALUES
+let activeErrors = [];
+let gameRunning = false;
+let spawnIntervalId = null;
+let animationFrameId = null;
+
+let score;
+let time;
+const hp = 5;
+let currentHP;
+let kaosHP;
+let answerStreak;
+
 function startGame() {
-    gameRunning = true;
+    activeErrors = [];
+    score = 0;
+    time = 0;
+    answerStreak = 0;
     currentHP = hp;
+    kaosHP = 3000;
+    timeText.textContent = `TIEMPO: ${time}`;
+    scoreText.textContent = `PUNTOS: ${score}`;
+    kaosHPText.textContent = `${kaosHP} HP`;
 
-    // SPAWN FIRST ERROR
-    createError();
+    gameRunning = true;
 
-    // LOOP TO SPAWN ERRORS
+    // DISPLAY HP
+    checkHP();
+
+    // INTERVAL TO SPAWN ERRORS
     spawnIntervalId = setInterval(() => {
         if (gameRunning) {
             createError();
         }
     }, gameConfig.spawnInterval);
 
-    // INIT ERROR MOVEMENT
+    // SPAWN FIRST ERROR
+    createError();
+    // INIT ERRORS MOVEMENT
     moveErrors();
+    // INIT SYMBOLS DRAGGABLE
+    initDraggableSymbols();
+    // INIT TIME
+    initTime();
 }
-
-checkHP();
-startGame();
