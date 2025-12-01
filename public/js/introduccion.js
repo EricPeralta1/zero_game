@@ -34,8 +34,25 @@ const puzzleQuestions = [
         equation: '4x = 24',
         options: [4, 5, 6, 7],
         correctAnswer: 6
-    }
+    },
+    {
+        equation:'2x =2',
+        options:[7,9,3,1],
+        correctAnswer:1
+    },
+    {
+        equation:'2^x=1',
+        options:[2,0,1,3],
+        correctAnswer:0,
+    },
+    
+
+
+
+
 ];
+
+
 
 const totalQuestions = puzzleQuestions.length;
 
@@ -197,7 +214,7 @@ function handleOptionClick(selectedValue) {
         return;
     }
 
-    // Avanzar a la siguiente pregunta
+  
     currentQuestionIndex++;
 
     if (currentQuestionIndex < totalQuestions) {
