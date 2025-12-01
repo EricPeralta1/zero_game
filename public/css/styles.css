@@ -1,7 +1,7 @@
 /*ESTILOS USADOS EN LA VISTA LEVELS*/
 
 .mapbackground {
-    height: calc(100vh - 75px); 
+    height: calc(100vh - 75px);
     background-image: url(../images/level_wide_bg.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -9,7 +9,7 @@
 }
 
 .levelCard {
-    max-height:fit-content;
+    max-height: fit-content;
     margin-left: auto;
     padding: 17px;
     background-color: #716F6F;
@@ -30,7 +30,7 @@
     border: 2px solid #000;
 }
 
-.levelDesc{
+.levelDesc {
     margin-top: 10px;
     background-color: #C7C7C7;
     border-radius: 20px;
@@ -39,7 +39,7 @@
     font-size: 18px;
 }
 
-.levelScore{
+.levelScore {
     background-color: #C7C7C7;
     padding: 0px 10px 0px 10px;
     align-items: center;
@@ -49,7 +49,7 @@
     margin: 0;
 }
 
-.playButton{
+.playButton {
     margin-left: 20px;
     background-color: #F96702;
     padding: 0px 10px 0px 10px;
@@ -60,31 +60,31 @@
     color: #fff;
 }
 
-.lvlNum{
+.lvlNum {
     margin-bottom: 0%;
     color: white;
 }
 
-.lvlNum.active{
+.lvlNum.active {
     margin-bottom: 0%;
     color: #F96702;
 }
 
-.lvlNum:hover{
+.lvlNum:hover {
     color: #BE440F;
 }
 
 /*ESTILOS DE LA VISTA DE PUNTUACIONES*/
 
 .lbbackground {
-    height: calc(100vh - 75px); 
+    height: calc(100vh - 75px);
     background-image: url(../images/leaderboard_bg.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.lbTitle{
+.lbTitle {
     max-width: 200px;
     margin-bottom: 0;
     text-wrap: balance;
@@ -98,7 +98,7 @@
     font-size: 30px;
 }
 
-.levelDataSelect{
+.levelDataSelect {
     padding: 15px;
     border-color: #000000;
     border-style: solid;
@@ -110,7 +110,7 @@
 
 }
 
-.btnLb{
+.btnLb {
     padding: 15px;
     border-color: #000000;
     border-style: solid;
@@ -121,7 +121,164 @@
     font-size: 30px;
 }
 
-.navbar_style{
+.navbar_style {
     text-decoration: none;
     color: white;
+}
+
+/*ESTILOS DE LEVEL 3*/
+.level3background {
+    min-height: calc(100vh - 75px);
+    background-image: url(../images/snowy_mountain.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.gameContainer {
+    padding: 40px;
+    font-family: VT323;
+    border: 3px solid #000;
+    border-radius: 15px;
+    background-color: #716F6F;
+    color: white;
+    max-width: 1200px;
+    width: 95%;
+}
+
+.gameData {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.gameInfo {
+    flex: 1;
+}
+
+.gameImage img {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    border: 3px solid #000;
+    border-radius: 10px;
+    image-rendering: pixelated;
+}
+
+.startGame, .goback {
+    width: 45%;
+    padding: 5px;
+    font-size: 25px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    color: white;
+}
+
+.startGame {
+    background-color: #F96702;
+}
+
+.goback {
+    background-color: #F91202;
+}
+
+.gameOverImg{
+    border-style: solid; 
+    border-radius: 5px; 
+    border-color: #000;
+    width: 500px;
+    height: 300px;
+}
+
+.winImg{
+    border-style: solid; 
+    border-radius: 20px; 
+    border-color: #000;
+    width: 500px;
+    height: 500px;
+}
+
+.statsContainer{
+    font-family: VT323;
+    border: 3px solid #000;
+    border-radius: 15px;
+    background-color: #716F6F;
+    color: white;
+    max-width: 400px;
+}
+
+.ingameContainer{
+    font-family: VT323;
+    border: 3px solid #000;
+    border-radius: 15px;
+    background-color: #716F6F;
+    color: white;
+}
+
+.questionBg {
+    background-image: url(../images/question_bkg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 30px;
+    border-style: solid;
+    border-color: #000;
+    border-width: 3px;
+}
+
+.liveBar{
+    border-radius: 30px;
+    border-style: solid;
+    border-color: #000;
+    border-width: 3px;
+    background-color: #D9D9D9;
+    padding: 15px;
+}
+
+.actionScreen{
+    background-image: url(../images/gamepanel_lvl3.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 20px;
+    position: relative;
+    width: 600px;
+    height: 400px;
+    background-color: #fbfbfb;
+    border-radius: 20px;
+    border-style: solid;
+}
+
+.fallingWord{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../images/falling_word.png);
+    height: 100px;
+    width: 100px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    position: absolute;
+    text-align: center;
+    font-size: 16px; 
+}
+
+.inputBackground{
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../images/key_ic.png);
+    height: 60px;
+    width: 60px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    position: absolute;
+    text-align: center;
+    font-size: 30px; 
 }

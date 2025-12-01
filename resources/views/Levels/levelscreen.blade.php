@@ -8,18 +8,6 @@
     </a>
 @endsection
 
-@section('user')
-    <div class="d-flex align-items-center gap-3 ">
-        <img src="images/zero_icon.png" alt="User Icon" width="65" height="60"
-            class="d-inline-block align-text-center">
-        <span class="text-white" style="font-family: VT323; font-size: 30px">{{ Auth::user()->nom_usuario }} </span>
-        <a class="ms-2" href="{{ route('logout') }}">
-            <img src="images/exit.png" alt="Logout" width="50" height="50"
-                class="d-inline-block align-text-center">
-        </a>
-    </div>
-@endsection
-
 @section('content')
     @php
         $juego1 = $juegos->find(1);
@@ -33,7 +21,7 @@
             </div>
             <p class="levelDesc">{{ $juego1->descripcion }}</p>
             <div class="d-flex justify-content-center align-items-center">
-                <p class="levelScore">HIGHSCORE: {{ $lvl1Score}}</p>
+                <p class="levelScore">HIGHSCORE: {{ $lvl1Score}}p</p>
                 <button class="playButton">COMENZAR</button>
             </div>
             <div class="d-flex justify-content-center align-items-center">

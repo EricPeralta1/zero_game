@@ -8,7 +8,15 @@
     min-height: calc(100vh - 75px); 
     width: 100%;
  
+}
 
+.background-level-container2 {
+   
+    background-image: url('../images/level_2.png'); 
+    background-size: cover;
+    background-position: center;
+    background-color: #2e4d2e;
+    min-height: calc(100vh - 75px); 
 }
 
 .level-box {
@@ -25,7 +33,6 @@
     border: 3px solid #000000;
     padding: 10px 15px;
 }
-
 
 .title-icon {
     width: 40px;   

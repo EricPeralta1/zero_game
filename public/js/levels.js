@@ -62,6 +62,7 @@ function redirectToLevel(juego) {
     window.location.href = `http://localhost:8080/zero_game/public/levels/${juego.id_game}`;
 }
 
+/*SEGUN LAS PUNTUACIONES DEL USUARIO, VA MIRANDO LA ID JUEGO DE CADA UNA, SI ES MAS GRANDE QUE EL NUMERO GUARDADO, SE ACTUALIZA, HASTA LLEGAR A 4.*/
 function lockLevels() {
     let highestUnlockedLevel = 1
 
