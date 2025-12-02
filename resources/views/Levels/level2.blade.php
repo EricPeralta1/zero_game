@@ -55,7 +55,7 @@
                         <img src={{ asset("images/level_2.png")}} alt="Piramide pixel" class="img-fluid d-block">
                     </div>
                     <div class="action-buttons d-flex gap-3 w-100 justify-content-end">
-                        <button  id="comenzar"class="btn-orange">COMENZAR</button>
+                        <button id="comenzar" class="btn-orange">COMENZAR</button>
                         <button class="btn-red">ATRÁS</button>
                     </div>
                 </div>
