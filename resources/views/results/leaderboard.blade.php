@@ -7,7 +7,6 @@
         <span class="ms-2" style="font-family: VT323; font-size: 30px">NIVELES</span>
     </a>
 @endsection
-
 @section('user')
     <div class="d-flex align-items-center gap-3 ">
         <img src="{{asset('images/zero_icon.png')}}" alt="User Icon" width="65" height="60"
@@ -17,7 +16,6 @@
         <img src="images/exit.png" alt="Logout" width="50" height="50" class="d-inline-block align-text-center">
     </div>
 @endsection
-
 @section('content')
     <div class="flex-column align-items-center vw-100 lbbackground" style="font-family: VT323">
         <div class="d-flex align-items-center vw-100 justify-content-center">

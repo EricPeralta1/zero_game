@@ -12,47 +12,27 @@
 
 .defeat-container h2 {
     
-    color: white !important;
-    margin-bottom: 1.5rem !important;
+    color: white ;
+    margin-bottom: 1.5rem ;
 
     
     font-family: 'VT323', monospace; 
     font-size: 24px;
 }
 
-/* Estilos para el contenedor de la imagen */
-.image-wrapper {
-    /* Estilos de la clase mb-4 */
-    margin-bottom: 1.5rem !important;
 
-    /* Estilos en línea del JS */
-    border: 1px solid #495057;
-    padding: 5px;
-    background-color: #343A40;
-}
 
-/* Estilos para la imagen en sí */
-.image-wrapper img {
-    /* Estilos de la clase img-fluid */
-    max-width: 100%;
-    height: auto;
-    
-    /* Estilos en línea del JS */
-    max-height: 200px;
-    object-fit: cover;
-}
 
-/* Estilos para el contenedor de botones */
 .defeat-container .d-flex {
-    /* Estilos de la clase mt-4 y gap-3 */
+    
     margin-top: 1.5rem !important;
     
     gap: 1rem; 
 }
 
-/* Estilos para el botón CONTINUAR? */
+
 .btn-warning.btn-lg {
-    /* Estilos en línea del JS */
+    
     font-family: 'VT323'; 
     background-color: #fd7e14; 
     border-color: #e66a00;
@@ -61,9 +41,9 @@
 }
 
 .btn-danger.btn-lg {
-    /* Estilos en línea del JS */
+    
     font-family: 'VT323';
-    background-color: #dc3545; /* Rojo de peligro de Bootstrap */
+    background-color: #dc3545; 
     border-color: #bd2130;
     color: white;
     
@@ -75,11 +55,10 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-   min-height: calc(85vh - 75px); 
-   position: relative;
-   display: flex; 
-    
-    /* 💡 CRÍTICO: Asegurar que ocupe todo el espacio del padre para anclajes absolutos */
+    min-height: calc(85vh - 75px); 
+    position: relative;
+    display: flex; 
+
     width: 100%;
     height: 100%;
     flex-direction: column; 
@@ -87,26 +66,11 @@
 }
 
 
-.puzzle-title {
-    /* Mantenemos el estilo de título */
-    color: white; 
-    font-family: 'VT323', monospace; 
-}
 
-.puzzle-equation {
-    /* Estilo del texto de la ecuación (3x + 5 = 11) */
-    color: white; 
-    font-family: 'VT323', monospace; 
-    font-size: 40px; /* Tamaño grande para destacar */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para mejor lectura */
-    margin-top: -10px; /* Ajuste para acercarlo al título */
-}
+
 .inner-puzzle-box {
-    
-    
 width: 100%;
     height: 100%;
-    /* Altura definida como el contenedor padre */
     min-height: calc(85vh - 75px); 
     
     flex-direction: column; 
@@ -114,69 +78,95 @@ width: 100%;
     align-items: center; 
     position: relative; 
 }
-/* Posicionar el contenido superior */
+
 .header-content {
-    text-align: center; 
-    margin-top: 3rem; 
-    z-index: 2; 
+
+    text-align: center;
+    margin-top: 3rem;
+    z-index: 2;
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #313A37;
+    border: 3px solid #242927; 
+    border-radius: 0;  
+    background-size: 3px 3px; 
 }
 
-/* Disponer las opciones como botones en fila */
+
+.puzzle-title {
+    font-family: 'VT323', monospace;  
+    margin: 0 0 5px 0;
+    
+    color:#00FFFF; 
+    
+        
+       
+        
+    
+}
+
+.puzzle-equation {
+    font-family: 'VT323', monospace;
+    font-size: 44px;
+   
+    display: block;
+
+    
+    color: #FFFFFF; 
+    ;
+}
+
+
+
+.hud-container{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'VT323';
+    color: rgb(255, 255, 255);
+}
+
 .grid-area-options {
     display: flex;
     width: 100%;
     justify-content: space-around; 
     position: absolute;
     
-    /* Ajustado para que los números estén centrados verticalmente dentro de las entradas */
-    top: 50%; /* Modificar este valor si es necesario */
     
+    top: 50%; 
     height: 100px; 
     z-index: 2;
-    padding:  0 5%; /* Ajuste de espaciado lateral */
+    padding:  0 5%; 
 }
 .grid-area-character {
-    /* 💡 FALTA: Activar el posicionamiento absoluto para que 'bottom' funcione */
     position: absolute; 
- 
-    /* 💡 FALTA: Centrar horizontalmente */
     left: 50%;
     transform: translateX(-50%);
-
-    /* Ahora sí, se ancla a 10px del suelo del inner-puzzle-box */
     bottom: 10px;
-    
     width: 150px; 
     height: auto; 
-    z-index: 5; /* Asegura que esté por encima de otros elementos */
+    z-index: 5;
 }
 .btn-option-puzzle {
-    /* CRÍTICO: Eliminar la apariencia de botón */
-    background: none; /* Fondo transparente */
-    border: none; /* Sin borde */
-    box-shadow: none; /* Sin sombra */
+   
+    background: none; 
+    border: none;
+    box-shadow: none; 
     padding: 0;
-    
-    /* CRÍTICO: Anclaje al centro del arco */
-    align-self: center; /* Centra el número en el eje vertical de su espacio */
-    
-    /* Estilo de Fuente y Color */
-    font-family: 'VT323', monospace; /* Fuente de estilo juego retro */
-    font-size: 50px; /* Tamaño grande para llenar el espacio */
-    color: white; /* Color blanco o ligeramente azulado para el brillo */
-    
-    /* Efecto de brillo o sombra exterior (simulando los píxeles claros de la imagen) */
+    align-self: center; 
+    font-family: 'VT323', monospace;
+    font-size: 50px; 
+    color: white; 
     text-shadow: 
-        0 0 5px #00FFFF, /* Sombra azul claro (simula brillo) */
+        0 0 5px #00FFFF, 
         0 0 10px #00FFFF,
-        2px 2px 0 #000, /* Sombra negra para el contorno pixelado */
+        2px 2px 0 #000, 
         -2px -2px 0 #000;
         
-    /* Asegurar que el botón no tenga un comportamiento de click visible */
+    
     transition: none;
     cursor: pointer;
     
-    /* Ajuste de tamaño para el área de click */
+    
     width: 50px; 
     height: 50px; 
     display: flex;
@@ -184,7 +174,7 @@ width: 100%;
     justify-content: center;
 }
 
-/* Asegurar que el efecto de click no cambie la apariencia */
+
 .btn-option-puzzle:hover, 
 .btn-option-puzzle:active {
     background: none;
@@ -192,4 +182,55 @@ width: 100%;
     box-shadow: none;
     border-color: transparent;
     opacity: 0.9; /* Pequeño cambio para indicar que es clickeable */
+}
+
+
+.statsContainer {
+    font-family: VT323;
+    border: 3px solid #000;
+    border-radius: 15px;
+    background-color: #716F6F;
+    color: white;
+    max-width: 400px;
+    
+    padding: 20px;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+
+.statsContainer h3 {
+    margin-top: 1rem; 
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem; 
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5); 
+}
+
+
+.statsContainer p {
+    font-size: 20px; 
+    margin-bottom: 1rem; 
+    text-align: left; 
+    display: flex;
+    justify-content: space-between;
+}
+
+.statsContainer .stat-value {
+    font-weight: bold; 
+    
+} 
+.victory-content-wrapper {
+     font-family: 'VT323', monospace;
+    height: 100%; 
+}
+
+.victory-stats-column {
+    font-family: 'VT323', monospace; 
+   
+}
+
+/* 2. Si se aplica a los títulos */
+.puzzle-title {
+    font-family: 'VT323', monospace;
+    
 }

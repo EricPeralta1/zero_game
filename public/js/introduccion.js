@@ -10,6 +10,7 @@ let dateToday;
 let startTime;
 let endTime;
 let playTime = ""; 
+let questionsToAsk = [];
 
 const puzzleQuestions = [
     {
@@ -18,21 +19,23 @@ const puzzleQuestions = [
         correctAnswer: 2
     },
     {
-        equation: '2x + 9 =21',
-        options: [5, 9, 7, 6],
-        correctAnswer: 6
-    },
-    {
-         equation: '2x +1=3',
-        options: [1, 2, 6, 0],
-        correctAnswer: 1
-    },
-
-    {
-         equation: '2^x=1',
-        options: [1, 2, 3, 0],
+        equation: '2^x = 1',
+        options: [1, 0, 2, 4],
         correctAnswer: 0
     },
+    {
+        equation: '7 + 2x = 19',
+        options: [6, 5, 4, 8],
+        correctAnswer: 6 
+    },
+
+    
+    {
+        equation: '3 + x = 9',
+        options: [1, 7, 3, 6],
+        correctAnswer:6  
+    }
+
     
 ];
 
@@ -55,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             points = 0;
             lifes = 3;
             errors = 0;
-            
+            questionsToAsk = [...puzzleQuestions];
             dateToday = new Date();
             startTime = Date.now();
 
@@ -74,7 +77,7 @@ function updateHud() {
 
     if (hudScore) {
         
-        hudScore.innerHTML = ` Puntos: ${points * 100}`; 
+        hudScore.innerHTML = ` Puntos: ${points }`; 
     }
     if (hudLives) {
         hudLives.innerHTML = ` Vidas: ${lifes}`;
@@ -87,8 +90,10 @@ function updateHud() {
 
 //  4. Renderizado de la Pantalla del Puzzle 
 function createPuzzleScreen() {
-    const currentQuestionData = puzzleQuestions[currentQuestionIndex];
-    gameRoot.innerHTML = '';
+    const randomIndex = Math.floor(Math.random() * questionsToAsk.length);
+    const currentQuestionData = questionsToAsk[randomIndex];  
+    gameRoot.setAttribute('data-current-random-index', randomIndex);
+      gameRoot.innerHTML = '';
     
   
     const puzzleScreen = document.createElement('div');
@@ -105,10 +110,10 @@ function createPuzzleScreen() {
  
     const hudContainer = document.createElement('div');
     hudContainer.id = 'game-hud';
-    hudContainer.classList.add('hud-container', 'grid-area-hud');
+    hudContainer.classList.add('hud-container', 'grid-area-hud',);
     
     hudContainer.innerHTML = `
-        <div id="hud-score" class="hud-item">⭐ Puntos: ${points * 100}</div>
+        <div id="hud-score" class="hud-item">⭐ Puntos: ${points }</div>
         <div id="hud-lives" class="hud-item">❤️ Vidas: ${lifes}</div>
         <div id="hud-errors" class="hud-item">❌ Errores: ${errors}</div>
     `;
@@ -161,7 +166,7 @@ function createPuzzleScreen() {
         'zero-puzzle-image'
     );
 
-    // 5. Ensamblar la vista:
+    // 5. Ensamblar la vista
     innerPuzzleBox.appendChild(hudContainer); 
     innerPuzzleBox.appendChild(headerContent);
     innerPuzzleBox.appendChild(optionsWrapper);
@@ -173,13 +178,14 @@ function createPuzzleScreen() {
     gameRoot.appendChild(puzzleScreen);
 }
 
-// === 5. Lógica del Click (SIN CAMBIOS FUNCIONALES)
+// === 5. Lógica del Click 
 
 function handleOptionClick(selectedValue) {
     
     document.querySelectorAll('.btn-option-puzzle').forEach(btn => btn.disabled = true);
+    const randomIndex = parseInt(gameRoot.getAttribute('data-current-random-index'));
 
-    const currentQuestionData = puzzleQuestions[currentQuestionIndex];
+    const currentQuestionData = questionsToAsk[randomIndex]; 
     const correctAnswer = currentQuestionData.correctAnswer;
 
     // 1. Verificar la respuesta
@@ -202,12 +208,11 @@ function handleOptionClick(selectedValue) {
         return;
     }
 
-    currentQuestionIndex++;
+   questionsToAsk.splice(randomIndex, 1);
 
-    if (currentQuestionIndex < totalQuestions) {
-        
+    if (questionsToAsk.length > 0) {
         setTimeout(() => {
-            createPuzzleScreen();
+            createPuzzleScreen(); // Llama a la siguiente pregunta aleatoria
         }, 1000);
     } else {
         showGameEndScreen();
@@ -230,72 +235,72 @@ function calculateTimePuzzle() {
 }
 
 
-function saveScore() {
-    const scoreGame1 = { puntos: points, tiempo_nivel: playTime, vidas: lifes, errores: 3 - lifes, id_user: id_usuario, id_game: id_juego, fecha: dateToday }
-    const score1Str = JSON.stringify(scoreGame1)
-    document.cookie = `score3=${score1Str}; path=/; max-age=3600 `;
 
-    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-    fetch(`http://localhost:8080/zero_game/public/saveScore`, {
-        method: 'PUT',
-        headers: {
-            'X-CSRF-TOKEN': token,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-    })
-}
 //  7. Funciones de Pantalla Final 
-
 function showGameEndScreen() {
-    
+    // 1. CÁLCULO Y VARIABLES
     endTime = Date.now(); 
     calculateTimePuzzle(); 
     const finalScore = points;
     const finalErrors = errors;
+    
+    // Crear el contenedor principal
     gameRoot.innerHTML = ''; 
     const victoryScreen = document.createElement('div');
     victoryScreen.classList.add('background-level-container', 'd-flex', 'justify-content-center', 'align-items-center', 'victory-screen');
+
     const contentWrapper = document.createElement('div');
-    contentWrapper.classList.add('d-flex', 'victory-content-wrapper'); 
+    contentWrapper.classList.add('d-flex','gap-2', 'victory-content-wrapper'); 
+
+    // 2. COLUMNA DE IMAGEN
     const imageColumn = document.createElement('div');
     imageColumn.classList.add('victory-image-column');
+    
     const crystalImage = document.createElement('img');
     crystalImage.src = VICTORY_IMAGE_SRC;
     crystalImage.alt = "Zero encuentra el cristal";
-    crystalImage.classList.add('img-fluid', 'crystal-image');
-    crystalImage.width = 500;
-    crystalImage.height = 400;
-    
+    crystalImage.classList.add('img-fluid', 'crystal-image', 'winImg'); 
     imageColumn.appendChild(crystalImage);
+
+    // 3. COLUMNA DE ESTADÍSTICAS (Limpia de clases de presentación)
     const statsColumn = document.createElement('div');
     statsColumn.classList.add('victory-stats-column', 'text-center');
-    
+
     statsColumn.innerHTML = `
-        <h2 class="puzzle-title fs-30 text-success">¡FELICIDADES! ¡EL CRISTAL ES TUYO!</h2>
-        
-        <div class="stats-box">
-            <h3 class="puzzle-title fs-25 my-4">ESTADÍSTICAS</h3>
-            <p class="fs-20">TIEMPO: <span class="stat-value">${playTime}s</span></p>
-            <p class="fs-20">PUNTOS: <span class="stat-value">${finalScore * 100}p</span></p>
-            <p class="fs-20">ERRORES: <span class="stat-value">${finalErrors}</span></p>
+        <div class="statsContainer">
+         <h2 class="puzzle-title fs-30  mb-5">¡FELICIDADES! ¡EL CRISTAL ES TUYO!</h2>
+            <h3 class="puzzle-title fs-25"> PUNTUACION FINAL</h3>
+            
+            <p>
+                 TIEMPO: <span class="stat-value">${playTime}s</span>
+            </p>
+            
+            <p>
+                 PUNTOS: <span class="stat-value">${finalScore}p</span>
+            </p>
+            
+            <p>
+                 ERRORES: <span class="stat-value">${finalErrors}</span>
+            </p>
+            <button id="btn-regresar" class="btn btn-danger btn-lg mt-5">REGRESAR</button>
         </div>
         
-        <button id="btn-regresar" class="btn btn-danger btn-lg mt-5">REGRESAR</button>
+        
     `;
 
-    saveScore()
+    // 4. LÓGICA DE BOTÓN Y ENSAMBLAJE
+    saveScore(); 
+
     const regresarButton = statsColumn.querySelector('#btn-regresar');
-    regresarButton.addEventListener('click', () => {  
+    regresarButton.addEventListener('click', () => {  
         window.location.href = levelRt;
     });
+    
     contentWrapper.appendChild(imageColumn);
     contentWrapper.appendChild(statsColumn);
     victoryScreen.appendChild(contentWrapper);
     gameRoot.appendChild(victoryScreen);
 }
-
 function showDefeatScreen(container) {
     endTime = Date.now(); 
     calculateTimePuzzle(); 
@@ -351,4 +356,21 @@ function showDefeatScreen(container) {
 
     gameOverScreen.appendChild(defeatContainer);
     container.appendChild(gameOverScreen);
+}
+
+function saveScore() {
+    const scoreGame1 = { puntos: points, tiempo_nivel: playTime, vidas: lifes, errores: 3 - lifes, id_user: id_usuario, id_game: id_juego, fecha: dateToday }
+    const score1Str = JSON.stringify(scoreGame1)
+    document.cookie = `score3=${score1Str}; path=/; max-age=3600 `;
+
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`http://localhost:8080/zero_game/public/saveScore`, {
+        method: 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+    })
 }
