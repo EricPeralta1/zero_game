@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="images/zero_icon.png">
-     <link rel="stylesheet" href="{{ asset('css/Levels.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/Levels.css') }}" />
     <title>ZERO</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> Ferdinand
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -23,6 +27,7 @@
     </script>
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+    @stack('styles')
 </head>
 
 <body>
