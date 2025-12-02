@@ -259,6 +259,11 @@ function checkAnswer(errorElement) {
                 kaosHP -= 100;
             }
 
+            if (kaosHP <= 1000) {
+                gameConfig.errorSpeed = 4;
+                gameConfig.spawnInterval = 2;
+            }
+
             if (kaosHP <= 0) {
                 gameWin();
             }
@@ -309,6 +314,8 @@ function gameOver() {
     levelContainer.style.display = "none";
     overlay.style.display = "flex";
     gameOverContainer.style.display = "flex";
+
+    setCookies();
 }
 
 // WIN GAME
@@ -346,6 +353,8 @@ function gameWin() {
         gameContainer.style.display = "none";
         gameCompleteContainer.style.display = "flex";
     });
+
+    setCookies();
 }
 
 // RESTART GAME
@@ -368,7 +377,32 @@ function initTime() {
 
 // STORE STATS IN COOKIES
 function setCookies() {
-    
+    const score4 = {
+        puntos: score,
+        tiempo_nivel: time,
+        vidas: hp,
+        errores: 5 - hp,
+        id_user: id_usuario,
+        id_game: 4,
+        fecha: new Date(),
+    };
+    const score4String = JSON.stringify(score4);
+    document.cookie = `score4=${score4String}; path=/; max-age=3600 `;
+
+    const token = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+
+    fetch(`http://localhost/zero_game/public/saveScore`, {
+        method: "PUT",
+        headers: {
+            "X-CSRF-TOKEN": token,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+    });
+
+    console.log(document.cookie);
 }
 
 // START GAME DEFAULT VALUES

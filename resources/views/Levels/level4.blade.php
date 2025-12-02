@@ -101,5 +101,8 @@
             <a href="{{ route('levels.index') }}">REGRESAR</a>
         </div>
     </div>
+    <script>
+        const id_usuario = {{ Auth::id() }}
+    </script>
     <script src="{{ asset('js/level4.js') }}"></script>
 @endsection
