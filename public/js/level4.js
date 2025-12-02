@@ -1,3 +1,15 @@
+// SOUNDS
+const sounds = {
+    errorHit: new Audio("../sounds/error_hit.mp3"),
+    hitKaos: new Audio("../sounds/hit_kaos.mp3"),
+    hitZero: new Audio("../sounds/hit_zero.mp3"),
+    kaosDeath: new Audio("../sounds/kaos_death.mp3"),
+    streak: new Audio("../sounds/streak.mp3"),
+};
+Object.values(sounds).forEach((sound) => {
+    sound.volume = 1;
+});
+
 // START MENU
 const levelContainer = document.getElementById("level-container");
 const overlay = document.getElementById("overlay");
@@ -191,6 +203,7 @@ function moveErrors() {
 
         // ERROR COLLISION WITH ZERO
         if (distance < 10) {
+            sounds.hitZero.play();
             score -= 10;
             scoreText.textContent = `PUNTOS: ${score}`;
             loseLife();
@@ -249,11 +262,15 @@ function checkAnswer(errorElement) {
         // COMPARE CORRECT ANSWER WITH P DATASET
         if (droppedSymbol === correctAnswer) {
             answerStreak++;
+            sounds.errorHit.play();
+            sounds.hitKaos.play();
 
             if (answerStreak > 3) {
                 const total = (answerStreak - 2) * 100;
                 score = score + total;
                 kaosHP = kaosHP - total;
+
+                sounds.streak.play();
             } else {
                 score += 100;
                 kaosHP -= 100;
@@ -289,6 +306,7 @@ function removeError(index) {
 
 // LOSE ONE LIFE
 function loseLife() {
+    sounds.hitZero.play();
     currentHP--;
     checkHP();
 
