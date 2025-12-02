@@ -197,7 +197,7 @@ hr {
 #game-win-container > img {
     width: 70%;
     height: auto;
-    max-width: 800px;
+    max-width: 600px;
     border-radius: 10px;
     border: 2px solid black;
 }

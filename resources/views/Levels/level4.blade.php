@@ -33,11 +33,12 @@
                     <p> Cada uno trae una operación matemática incompleta.</p>
                     <ul>
                         <img src="{{ asset('Images/error_example.png') }}" alt="Error example" id="error-example">
-                        <li>Arrastra el símbolo correcto (+, –, × o ÷) al Error</li>
-                        <li>Suélta el símbolo sobre el Error para completar la operación</li>
-                        <li>Si aciertas: el Error se desvanece y KAOS pierde poder</li>
-                        <li>A partir del tercer acierto seguido: ganas más puntos y debilitas más rápido a Zero</li>
-                        <li>Si el Error llega hasta Zero: pierdes una vida</li>
+                        <li>Arrastra el símbolo correcto (+, –, × o ÷) al Error.</li>
+                        <li>Suélta el símbolo sobre el Error para completar la operación.</li>
+                        <li>Si aciertas, el Error se desvanece y KAOS pierde poder.</li>
+                        <li>Si fallas, pierdes 5 puntos.</li>
+                        <li>A partir del tercer acierto seguido, ganas más puntos y debilitas más rápido a Zero.</li>
+                        <li>Si el Error llega hasta Zero, pierdes una vida y 10 puntos.</li>
                     </ul>
                     <h5>!COMPLETA LAS OPERACIONES PARA ACABAR CON KAOS!</h4>
                 </div>
@@ -58,7 +59,7 @@
                 </span>
             </div>
             <div id="game-win-container" style="display: none">
-                <img src="{{ asset('Images/zero_defeat_lvl4.png') }}" alt="Zero win">
+                <img src="{{ asset('Images/level4_complete.png') }}" alt="Zero win">
                 <div>
                     <p>¡FELICIDADES! ¡HAS DERROTADO A KAOS Y HAS CONSEGUIDO EL ÚLTIMO CRISTAL!</p>
                     <p>ESTADÍSTICAS</p>

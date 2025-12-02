@@ -13,8 +13,8 @@ startGameBtn.addEventListener("click", function () {
 
 // GAME CONFIG
 const gameConfig = {
-    errorSpeed: 2,
-    spawnInterval: 3000,
+    errorSpeed: 3,
+    spawnInterval: 2500,
 };
 
 // OPERATIONS
@@ -191,6 +191,8 @@ function moveErrors() {
 
         // ERROR COLLISION WITH ZERO
         if (distance < 10) {
+            score -= 10;
+            scoreText.textContent = `PUNTOS: ${score}`;
             loseLife();
             removeError(index);
             return;
@@ -257,13 +259,16 @@ function checkAnswer(errorElement) {
                 kaosHP -= 100;
             }
 
-            if (kaosHP < 0) {
+            if (kaosHP <= 0) {
+                gameWin();
             }
             removeError(errorIndex);
             scoreText.textContent = `PUNTOS: ${score}`;
             kaosHPText.textContent = `${kaosHP} HP`;
             errorElement.remove();
         } else {
+            score -= 5;
+            scoreText.textContent = `PUNTOS: ${score}`;
             answerStreak = 0;
         }
     });
@@ -319,9 +324,28 @@ function gameWin() {
     activeErrors.forEach((error) => error.element.remove());
     activeErrors = [];
 
+    // SHOW WIN SCREEN
     levelContainer.style.display = "none";
     overlay.style.display = "flex";
     gameWinContainer.style.display = "flex";
+
+    // DISPLAY GAME STATS
+    const timeWinText = document.getElementById("time-win-text");
+    const scoreWinText = document.getElementById("score-win-text");
+    timeWinText.textContent = `TIEMPO: ${time}s`;
+    scoreWinText.textContent = `PUNTOS: ${score}`;
+
+    // NAVIGATE
+    const gameCompleteContainer = document.getElementById(
+        "game-complete-container"
+    );
+    const gameContainer = document.getElementById("game-container");
+    continueBtn.addEventListener("click", function () {
+        levelContainer.style.display = "none";
+        gameWinContainer.style.display = "none";
+        gameContainer.style.display = "none";
+        gameCompleteContainer.style.display = "flex";
+    });
 }
 
 // RESTART GAME
@@ -338,8 +362,13 @@ let timeId = null;
 function initTime() {
     timeId = setInterval(() => {
         time++;
-        timeText.textContent = `TIEMPO: ${time}`;
+        timeText.textContent = `TIEMPO: ${time}s`;
     }, 1000);
+}
+
+// STORE STATS IN COOKIES
+function setCookies() {
+    
 }
 
 // START GAME DEFAULT VALUES
@@ -362,7 +391,7 @@ function startGame() {
     answerStreak = 0;
     currentHP = hp;
     kaosHP = 3000;
-    timeText.textContent = `TIEMPO: ${time}`;
+    timeText.textContent = `TIEMPO: ${time}s`;
     scoreText.textContent = `PUNTOS: ${score}`;
     kaosHPText.textContent = `${kaosHP} HP`;
 
