@@ -19,6 +19,32 @@ class PuntuacionController extends Controller
        return view('results.leaderboard', compact('puntuaciones', 'usuarios'));
     }
 
+    public function savescore(){
+        $data = $_COOKIE['score3'];
+        $score = json_decode($data, true);
+
+        $scores = puntuacion::All();
+        $savedScore =  puntuacion::where('id_user', $score['id_user'])->where('id_game', $score['id_game'])->first();
+
+        if ($savedScore != null) {
+            if($savedScore->puntos < $score['puntos']){
+                $savedScore->puntos = $score['puntos'];
+                $savedScore-> tiempo_nivel = $score['tiempo_nivel'];
+                $savedScore->save();
+            }
+        } else {
+            $newScore = new puntuacion;
+            $newScore->puntos = $score['puntos'];
+            $newScore->tiempo_nivel = $score['tiempo_nivel'];
+            $newScore->vidas = $score['vidas'];
+            $newScore->errores = $score['errores'];
+            $newScore->id_user = $score['id_user'];
+            $newScore->id_game = $score['id_game'];
+            $newScore->fecha = $score['fecha'];
+            $newScore->save();
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */

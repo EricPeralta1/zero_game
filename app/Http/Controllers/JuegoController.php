@@ -22,7 +22,7 @@ class JuegoController extends Controller
         
         if($userScores != null) {
             foreach ($userScores as $score) {
-                if($score->puntos > $lvl1Score){
+                if($score->id_game ==  1){
                     $lvl1Score = $score->puntos;
                 }
             }

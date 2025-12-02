@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -32,18 +33,11 @@
                 @yield('window_link')
             </div>
             <div>
-                <img src="images/zero_logo_navbar.png" alt="leaderboard" width="auto" height=75px>
+                <img src="{{ asset('images/zero_logo_navbar.png') }}" alt="leaderboard" width="auto" height=75px>
             </div>
             <div>
                 <div class="d-flex align-items-center gap-3 ">
-                    <img src="images/zero_icon.png" alt="User Icon" width="65" height="60"
-                        class="d-inline-block align-text-center">
-                    <span class="text-white"
-                        style="font-family: VT323; font-size: 30px">{{ Auth::user()->nom_usuario }}</span>
-                    <a class="ms-2">
-                        <img src="images/exit.png" alt="Logout" width="50" height="50"
-                            class="d-inline-block align-text-center">
-                    </a>
+                    @yield('user')
                 </div>
             </div>
         </div>
