@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="images/zero_icon.png">
-     <link rel="stylesheet" href="{{ asset('css/Levels.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/Levels.css') }}" />
     <title>ZERO</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,11 @@
     </script>
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{ asset('css/introduccion.css') }}" />
+=======
+    @stack('styles')
+>>>>>>> a249ccc871148e4b183dc02a7cfee24ca8c23f97
 </head>
 
 <body>
