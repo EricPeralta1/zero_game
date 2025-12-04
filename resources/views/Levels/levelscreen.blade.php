@@ -33,7 +33,7 @@
             </div>
             <p class="levelDesc">{{ $juego1->descripcion }}</p>
             <div class="d-flex justify-content-center align-items-center">
-                <p class="levelScore">HIGHSCORE: {{ $lvl1Score}}p</p>
+                <p class="levelScore">HIGHSCORE: {{ $lvl1Score }}p</p>
                 <button class="playButton">COMENZAR</button>
             </div>
             <div class="d-flex justify-content-center align-items-center">
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    
+
     <script>
         const juegos = @json($juegos);
         const userScores = @json($userScores)

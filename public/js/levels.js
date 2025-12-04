@@ -4,6 +4,15 @@ levelButtons.forEach(btn => {
     btn.addEventListener('click', changeLevelView);
 });
 
+/*PREPARA EL ENLACE DEL BOTÓN PARA EL PRIMER JUEGO*/
+let playButton = document.querySelector(".playButton")
+    playButton.addEventListener('click', () => {
+        const juego = juegos.find(j => j.id_game == 1);
+        redirectToLevel(juego);
+});
+
+/*AL SELECCIONAR UN NÚMERO DE NIVEL, CARGA LOS DETALLES REFERENTES A ESE NIVEL SEGÚN ESTE GUARDADO EN LA BD.
+LAS IMAGENES CARGAN INDICANDO JUEGO + ID_GAME*/
 function changeLevelView(event) {
 
     const level = event.target.getAttribute('data-level');
@@ -43,6 +52,7 @@ function changeLevelView(event) {
     });
 }
 
+/*AL CLICAR EL BOTÓN COMENZAR, REDIRIGE EL NAVEGADOR A LA RUTA DEL JUEGO SELECCIONADO */
 function redirectToLevel(juego) {
     window.location.href = `http://localhost/zero_game/public/levels/${juego.id_game}`;
 }

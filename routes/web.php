@@ -13,14 +13,14 @@ route::get('/Registro', [UsuarioController::class, 'index'])->name('templates.Re
 route::get('/Login', [LoginController::class, 'showLogin'])->name('login');
 route::post('/Login', [LoginController::class, 'Login'])->name('login.submit');
 
-/* LANDING PAGE MULTIIDIOMA*/
-Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
-
 Route::get('/', function () {
     return redirect()->route('login') ;
 });
 
 Route::middleware(['auth'])->group(function () {
+
+/* LANDING PAGE MULTIIDIOMA*/
+Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
 
 /* CONFIGURACIÓN DE ADMINS PARA SUPERADMIN*/
 Route::get('/config', [LandingController::class, 'config'])->name('superadmin.config');

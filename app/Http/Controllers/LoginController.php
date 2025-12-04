@@ -14,18 +14,18 @@ class LoginController extends Controller
         return view ('Templates.Login');
     }
 
-    public function login(Request $request) {
-        $Usuario = Usuario::where('nom_usuario', $request->input('nom_usuario'))->first();
-        
-        if($Usuario && Hash::check($request->input('password'), $Usuario->password)){
-            Auth::login($Usuario);
+        public function login(Request $request) {
+            $Usuario = Usuario::where('nom_usuario', $request->input('nom_usuario'))->first();
             
-            return redirect()->route('levels.index');
-        } else {
-            session()->flash('error','credenciales incorrectos');
-            return redirect()->back()->withInput();
-        }
-    } 
+            if($Usuario && Hash::check($request->input('password'), $Usuario->password)){
+                Auth::login($Usuario);
+                
+                return redirect()->route('landing.page', ['lang' => 'es']);
+            } else {
+                session()->flash('error','credenciales incorrectos');
+                return redirect()->back()->withInput();
+            }
+        } 
     
     /**
      * Store a newly created resource in storage.
