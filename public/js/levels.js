@@ -1,5 +1,9 @@
 const levelButtons = document.querySelectorAll('.lvlNum');
 
+levelButtons.forEach(btn => {
+    btn.addEventListener('click', changeLevelView);
+});
+
 /*PREPARA EL ENLACE DEL BOTÓN PARA EL PRIMER JUEGO*/
 let playButton = document.querySelector(".playButton")
     playButton.addEventListener('click', () => {
@@ -37,6 +41,8 @@ function changeLevelView(event) {
     levelButtons.forEach(btn => btn.classList.remove("active"));
     event.target.classList.add("active");
     
+    nivelActivoId = parseInt(level);
+
     let playButton = document.querySelector(".playButton")
     playButton.addEventListener('click', () => {
         redirectToLevel(juego);
@@ -45,7 +51,7 @@ function changeLevelView(event) {
 
 /*AL CLICAR EL BOTÓN COMENZAR, REDIRIGE EL NAVEGADOR A LA RUTA DEL JUEGO SELECCIONADO */
 function redirectToLevel(juego) {
-    window.location.href = `http://localhost:8080/zero_game/public/levels/${juego.id_game}`;
+    window.location.href = `http://localhost/zero_game/public/levels/${juego.id_game}`;
 }
 
 /*SEGUN LAS PUNTUACIONES DEL USUARIO, VA MIRANDO LA ID JUEGO DE CADA UNA, SI ES MAS GRANDE QUE EL NUMERO GUARDADO, SE ACTUALIZA, HASTA LLEGAR A 4.*/

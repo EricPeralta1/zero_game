@@ -69,8 +69,6 @@
             </div>
         </div>
     </div>
-
-
     <script>
         const juegos = @json($juegos);
         const userScores = @json($userScores)

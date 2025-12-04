@@ -1,16 +1,18 @@
 @extends('Templates.navbar')
 
 @section('window_link')
-    <img src={{ asset("images/leaderboard_icon.png") }} alt="leaderboard" width="55" height="50"
-        class="d-inline-block align-text-center">
-    <span class="ms-2" style="font-family: VT323; font-size: 30px">Niveles</span>
+    <a class="d-flex align-items-center navbar_style" href="{{ route('score.index') }}">
+        <img src="{{ asset('images/leaderboard_icon.png') }}" alt="leaderboard" width="55" height="50"
+            class="d-inline-block align-text-center">
+        <span class="ms-2" style="font-family: VT323; font-size: 30px">CLASIFICACIÓN</span>
+    </a>
 @endsection
 
 @section('user')
     <div class="d-flex align-items-center gap-3 ">
         <img src={{ asset("images/zero_icon.png")}} alt="User Icon" width="65" height="60"
             class="d-inline-block align-text-center">
-        <span class="text-white" style="font-family: VT323; font-size: 30px">MAX VIDAL</span>
+        <span class="text-white" style="font-family: VT323; font-size: 30px">{{ Auth::user()->nom_usuario }}</span>
         <a class="ms-2">
             <img src={{ asset("images/exit.png")}} alt="Logout" width="50" height="50"
                 class="d-inline-block align-text-center">
@@ -56,7 +58,7 @@
                     </div>
                     <div class="action-buttons d-flex gap-3 w-100 justify-content-end">
                         <button id="comenzar" class="btn-orange">COMENZAR</button>
-                        <button class="btn-red">ATRÁS</button>
+                        <button class="btn-red" onclick= "history.back()">ATRÁS</button>
                     </div>
                 </div>
 
