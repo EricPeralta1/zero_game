@@ -300,7 +300,7 @@ function win() {
                         <img src="../images/lvl2_win.png" alt="win_lvl2" class="img-fluid d-block">
                     </div>
                     <div class="action-buttons d-flex gap-3 w-100 justify-content-end">
-                        <button  id="comenzar"class="btn-orange">VOLVER AL INICIO</button>
+                        <button class="btn-orange inicio">VOLVER AL INICIO</button>
                     </div>
                 </div>
 
@@ -308,6 +308,14 @@ function win() {
 
         </div>
     `;
+
+    // Añadir evento al botón de inicio (win)
+    const btnInicio = box.querySelector('.inicio');
+    if (btnInicio) {
+        btnInicio.addEventListener('click', () => {
+            window.location.href = '../levels';
+        });
+    }
 };
 
 function defeat() {
@@ -335,8 +343,8 @@ function defeat() {
                         <img src="../images/zero_defeat.png" alt="defeat_lvl2" class="img-fluid d-block">
                     </div>
                     <div class="action-buttons d-flex gap-3 w-100 justify-content-end">
-                        <button class="btn-orange">VOLVER AL INICIO</button>
-                        <button class="btn-red">REINTENTAR</button>
+                        <button class="btn-orange inicio">VOLVER AL INICIO</button>
+                        <button class="btn-red reintentar">REINTENTAR</button>
                     </div>
                 </div>
 
@@ -344,6 +352,22 @@ function defeat() {
 
         </div>
     `;
+
+    // Añadir evento al botón de inicio (defeat)
+    const btnInicio = box.querySelector('.inicio');
+    if (btnInicio) {
+        btnInicio.addEventListener('click', () => {
+            window.location.href = '../levels';
+        });
+    }
+
+    // Añadir evento al botón reintentar (defeat)
+    const btnReintentar = box.querySelector('.reintentar');
+    if (btnReintentar) {
+        btnReintentar.addEventListener('click', () => {
+            window.location.reload();
+        });
+    }
 };
 
 /* ----------------------------------------
@@ -368,7 +392,8 @@ function activarEventosRespuesta(container, ops, correcta, hearts) {
 
                 // Sumar puntos por respuesta correcta
                 puntos += 100;
-
+                console.log(puntos);
+                
                 // Bloquear las otras opciones para que no se puedan clicar
                 const allSpans = container.querySelectorAll('span');
                 allSpans.forEach(s => {
@@ -413,4 +438,10 @@ function activarEventosRespuesta(container, ops, correcta, hearts) {
             }
         });
     });
+}
+
+function saveScore() {
+    
+
+
 }
