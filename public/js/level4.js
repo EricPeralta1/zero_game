@@ -5,9 +5,18 @@ const sounds = {
     hitZero: new Audio("../sounds/hit_zero.mp3"),
     kaosDeath: new Audio("../sounds/kaos_death.mp3"),
     streak: new Audio("../sounds/streak.mp3"),
+    bgGame: new Audio("../sounds/bg_game.mp3"),
+    bgMenu: new Audio("../sounds/bg_menu.mp3"),
+    win: new Audio("../sounds/win.mp3"),
 };
 Object.values(sounds).forEach((sound) => {
-    sound.volume = 1;
+    sound.volume = 0.5;
+});
+
+const playAudioBtn = document.getElementById("play-audio-btn");
+playAudioBtn.addEventListener("click", function () {
+    sounds.bgMenu.loop = true;
+    sounds.bgMenu.play();
 });
 
 // START MENU
@@ -17,6 +26,7 @@ const startGameBtn = document.getElementById("start-game-btn");
 const instructionsContainer = document.getElementById("instructions-container");
 
 startGameBtn.addEventListener("click", function () {
+    sounds.bgMenu.pause();
     instructionsContainer.style.display = "none";
     overlay.style.display = "none";
     levelContainer.style.display = "flex";
@@ -31,6 +41,7 @@ const gameConfig = {
 
 // OPERATIONS
 const operations = [
+    // Operaciones básicas con enteros
     { problem: "18 _ 9 = 27", answer: "+" },
     { problem: "50 _ 17 = 33", answer: "-" },
     { problem: "12 _ 4 = 48", answer: "x" },
@@ -43,10 +54,33 @@ const operations = [
     { problem: "15 _ 8 = 120", answer: "x" },
     { problem: "144 _ 12 = 12", answer: "/" },
     { problem: "73 _ 27 = 100", answer: "+" },
-    { problem: "156 _ 39 = 6", answer: "/" },
+    { problem: "156 _ 39 = 4", answer: "/" },
     { problem: "88 _ 44 = 44", answer: "-" },
     { problem: "25 _ 13 = 325", answer: "x" },
 
+    // Más operaciones básicas
+    { problem: "45 _ 15 = 60", answer: "+" },
+    { problem: "100 _ 25 = 75", answer: "-" },
+    { problem: "7 _ 8 = 56", answer: "x" },
+    { problem: "63 _ 9 = 7", answer: "/" },
+    { problem: "234 _ 66 = 300", answer: "+" },
+    { problem: "500 _ 275 = 225", answer: "-" },
+    { problem: "16 _ 5 = 80", answer: "x" },
+    { problem: "120 _ 8 = 15", answer: "/" },
+    { problem: "89 _ 11 = 100", answer: "+" },
+    { problem: "150 _ 75 = 75", answer: "-" },
+    { problem: "22 _ 4 = 88", answer: "x" },
+    { problem: "96 _ 6 = 16", answer: "/" },
+    { problem: "37 _ 13 = 50", answer: "+" },
+    { problem: "200 _ 88 = 112", answer: "-" },
+    { problem: "14 _ 7 = 98", answer: "x" },
+    { problem: "108 _ 9 = 12", answer: "/" },
+    { problem: "65 _ 35 = 100", answer: "+" },
+    { problem: "300 _ 125 = 175", answer: "-" },
+    { problem: "11 _ 11 = 121", answer: "x" },
+    { problem: "144 _ 16 = 9", answer: "/" },
+
+    // Operaciones con fracciones
     { problem: "1/2 _ 3/2 = 2", answer: "+" },
     { problem: "7/3 _ 4/3 = 1", answer: "-" },
     { problem: "5/6 _ 18 = 15", answer: "x" },
@@ -62,6 +96,24 @@ const operations = [
     { problem: "7/2 _ 2 = 7", answer: "x" },
     { problem: "15 _ 3/5 = 25", answer: "/" },
 
+    // Más operaciones con fracciones
+    { problem: "3/4 _ 1/4 = 1", answer: "+" },
+    { problem: "5/6 _ 1/6 = 2/3", answer: "-" },
+    { problem: "2/5 _ 15 = 6", answer: "x" },
+    { problem: "6 _ 3/2 = 4", answer: "/" },
+    { problem: "7/8 _ 1/8 = 1", answer: "+" },
+    { problem: "11/5 _ 1/5 = 2", answer: "-" },
+    { problem: "4/7 _ 14 = 8", answer: "x" },
+    { problem: "20 _ 4/5 = 25", answer: "/" },
+    { problem: "1/3 _ 2/3 = 1", answer: "+" },
+    { problem: "9/5 _ 4/5 = 1", answer: "-" },
+    { problem: "3/8 _ 16 = 6", answer: "x" },
+    { problem: "9 _ 3/4 = 12", answer: "/" },
+    { problem: "5/6 _ 6 = 5", answer: "x" },
+    { problem: "18 _ 2/3 = 27", answer: "/" },
+    { problem: "1/4 _ 3/4 = 1", answer: "+" },
+
+    // Operaciones con potencias
     { problem: "2^4 _ 16 = 32", answer: "+" },
     { problem: "3^3 _ 9 = 18", answer: "-" },
     { problem: "3^3 _ 9 = 36", answer: "+" },
@@ -78,6 +130,24 @@ const operations = [
     { problem: "5^3 _ 25 = 5", answer: "/" },
     { problem: "2^6 _ 32 = 96", answer: "+" },
 
+    // Más operaciones con potencias
+    { problem: "2^3 _ 4 = 12", answer: "+" },
+    { problem: "3^2 _ 6 = 3", answer: "-" },
+    { problem: "5^2 _ 5 = 125", answer: "x" },
+    { problem: "6^2 _ 6 = 6", answer: "/" },
+    { problem: "4^2 _ 8 = 24", answer: "+" },
+    { problem: "7^2 _ 14 = 35", answer: "-" },
+    { problem: "3^3 _ 3 = 81", answer: "x" },
+    { problem: "10^2 _ 25 = 4", answer: "/" },
+    { problem: "2^5 _ 16 = 48", answer: "+" },
+    { problem: "8^2 _ 32 = 32", answer: "-" },
+    { problem: "2^4 _ 2 = 32", answer: "x" },
+    { problem: "9^2 _ 9 = 9", answer: "/" },
+    { problem: "5^2 _ 10 = 35", answer: "+" },
+    { problem: "6^3 _ 108 = 108", answer: "-" },
+    { problem: "4^3 _ 4 = 256", answer: "x" },
+
+    // Operaciones con números grandes
     { problem: "256 _ 16 = 16", answer: "/" },
     { problem: "13 _ 7 = 91", answer: "x" },
     { problem: "1000 _ 250 = 750", answer: "-" },
@@ -86,6 +156,49 @@ const operations = [
     { problem: "19 _ 6 = 114", answer: "x" },
     { problem: "500 _ 125 = 4", answer: "/" },
     { problem: "888 _ 444 = 444", answer: "-" },
+
+    // Más operaciones con números grandes
+    { problem: "375 _ 125 = 250", answer: "-" },
+    { problem: "24 _ 25 = 600", answer: "x" },
+    { problem: "720 _ 90 = 8", answer: "/" },
+    { problem: "456 _ 234 = 690", answer: "+" },
+    { problem: "800 _ 400 = 400", answer: "-" },
+    { problem: "17 _ 12 = 204", answer: "x" },
+    { problem: "540 _ 60 = 9", answer: "/" },
+    { problem: "777 _ 223 = 1000", answer: "+" },
+    { problem: "950 _ 450 = 500", answer: "-" },
+    { problem: "32 _ 16 = 512", answer: "x" },
+    { problem: "1000 _ 40 = 25", answer: "/" },
+    { problem: "365 _ 135 = 500", answer: "+" },
+    { problem: "600 _ 275 = 325", answer: "-" },
+    { problem: "21 _ 15 = 315", answer: "x" },
+    { problem: "480 _ 24 = 20", answer: "/" },
+    { problem: "625 _ 375 = 1000", answer: "+" },
+    { problem: "750 _ 350 = 400", answer: "-" },
+    { problem: "28 _ 18 = 504", answer: "x" },
+    { problem: "960 _ 32 = 30", answer: "/" },
+
+    // Operaciones mixtas desafiantes
+    { problem: "77 _ 11 = 7", answer: "/" },
+    { problem: "36 _ 9 = 45", answer: "+" },
+    { problem: "95 _ 45 = 50", answer: "-" },
+    { problem: "9 _ 13 = 117", answer: "x" },
+    { problem: "225 _ 15 = 15", answer: "/" },
+    { problem: "128 _ 72 = 200", answer: "+" },
+    { problem: "333 _ 111 = 222", answer: "-" },
+    { problem: "26 _ 8 = 208", answer: "x" },
+    { problem: "144 _ 18 = 8", answer: "/" },
+    { problem: "199 _ 101 = 300", answer: "+" },
+    { problem: "555 _ 222 = 333", answer: "-" },
+    { problem: "35 _ 9 = 315", answer: "x" },
+    { problem: "432 _ 36 = 12", answer: "/" },
+    { problem: "87 _ 13 = 100", answer: "+" },
+    { problem: "400 _ 175 = 225", answer: "-" },
+    { problem: "23 _ 11 = 253", answer: "x" },
+    { problem: "576 _ 24 = 24", answer: "/" },
+    { problem: "445 _ 55 = 500", answer: "+" },
+    { problem: "666 _ 333 = 333", answer: "-" },
+    { problem: "29 _ 14 = 406", answer: "x" },
 ];
 
 // HP
@@ -340,6 +453,10 @@ function gameOver() {
 const gameWinContainer = document.getElementById("game-win-container");
 const continueBtn = document.getElementById("continue-btn");
 function gameWin() {
+    sounds.kaosDeath.play();
+    sounds.win.play();
+    sounds.bgGame.pause();
+
     gameRunning = false;
     clearInterval(spawnIntervalId);
     clearInterval(timeId);
@@ -377,9 +494,11 @@ function gameWin() {
 
 // RESTART GAME
 restartButton.addEventListener("click", function () {
+    sounds.bgMenu.play();
     gameOverContainer.style.display = "none";
     instructionsContainer.style.display = "flex";
     overlay.style.display = "flex";
+    sounds.bgGame.pause();
 });
 
 // TIME
@@ -442,7 +561,7 @@ function startGame() {
     time = 0;
     answerStreak = 0;
     currentHP = hp;
-    kaosHP = 3000;
+    kaosHP = 5000;
     timeText.textContent = `TIEMPO: ${time}s`;
     scoreText.textContent = `PUNTOS: ${score}`;
     kaosHPText.textContent = `${kaosHP} HP`;
@@ -467,4 +586,8 @@ function startGame() {
     initDraggableSymbols();
     // INIT TIME
     initTime();
+    //INIT AUDIO
+    sounds.bgMenu.pause();
+    sounds.bgGame.loop = true;
+    sounds.bgGame.play();
 }
