@@ -79,5 +79,5 @@
         const id_juego =1
         const levelRt = "{{ route('levels.index') }}";
     </script>
-<script src="{{ asset('js/introduccion.js') }}"></script>
+<script src="{{ asset('js/level1.js') }}"></script>
 @endsection
