@@ -25,21 +25,21 @@
         "team_section": {
             "title": "CREATIVE TEAM",
             "team": {
-                "tasks_title": "Responsibilities",
+                "tasks_title": "",
                 "ferdinand": {
-                    "role": "Role",
+                    "role": "Developer",
                     "responsibilities": ["", ""]
                 },
                 "eric": {
-                    "role": "Role",
+                    "role": "Developer",
                     "responsibilities": ["", ""]
                 },
                 "brian": {
-                    "role": "Role",
+                    "role": "Developer",
                     "responsibilities": ["", ""]
                 },
                 "max": {
-                    "role": "Role",
+                    "role": "Developer",
                     "responsibilities": ["", ""]
                 }
             }
@@ -53,13 +53,7 @@
         }
     },
     "ca": {
-        "navbar": [
-            "INICI",
-            "HISTÒRIA",
-            "NIVELLS",
-            "RÀNQUING",
-            "EQUIP"
-        ],
+        "navbar": ["INICI", "HISTÒRIA", "NIVELLS", "RÀNQUING", "EQUIP"],
         "hero_title": "AJUDA EN ZERO A SALVAR EL POBLE DÍGIT!",
         "hero_btn": "JUGAR ARA",
         "story_section": {
@@ -84,21 +78,21 @@
         "team_section": {
             "title": "EQUIP CREATIU",
             "team": {
-                "tasks_title": "Responsabilitats",
+                "tasks_title": "",
                 "ferdinand": {
-                    "role": "Rol",
+                    "role": "Programador",
                     "responsibilities": ["", ""]
                 },
                 "eric": {
-                    "role": "Rol",
+                    "role": "Programador",
                     "responsibilities": ["", ""]
                 },
                 "brian": {
-                    "role": "Rol",
+                    "role": "Programador",
                     "responsibilities": ["", ""]
                 },
                 "max": {
-                    "role": "Rol",
+                    "role": "Programador",
                     "responsibilities": ["", ""]
                 }
             }
@@ -112,13 +106,7 @@
         }
     },
     "es": {
-        "navbar": [
-            "INICIO",
-            "HISTORIA",
-            "NIVELES",
-            "RANKING",
-            "EQUIPO"
-        ],
+        "navbar": ["INICIO", "HISTORIA", "NIVELES", "RANKING", "EQUIPO"],
         "hero_title": "¡AYUDA A ZERO A SALVAR EL PUEBLO DÍGITO!",
         "hero_btn": "JUGAR YA",
         "story_section": {
@@ -143,21 +131,21 @@
         "team_section": {
             "title": "EQUIPO CREATIVO",
             "team": {
-                "tasks_title": "Responsabilidades",
+                "tasks_title": "",
                 "ferdinand": {
-                    "role": "Rol",
+                    "role": "Programador",
                     "responsibilities": ["", ""]
                 },
                 "eric": {
-                    "role": "Rol",
+                    "role": "Programador",
                     "responsibilities": ["", ""]
                 },
                 "brian": {
-                    "role": "Rol",
+                    "role": "Programador",
                     "responsibilities": ["", ""]
                 },
                 "max": {
-                    "role": "Rol",
+                    "role": "Programador",
                     "responsibilities": ["", ""]
                 }
             }
