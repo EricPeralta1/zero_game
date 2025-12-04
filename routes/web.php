@@ -13,17 +13,15 @@ route::get('/Registro', [UsuarioController::class, 'index'])->name('templates.Re
 route::get('/Login', [LoginController::class, 'showLogin'])->name('login');
 route::post('/Login', [LoginController::class, 'Login'])->name('login.submit');
 
+/* LANDING PAGE MULTIIDIOMA*/
+Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
+
 Route::get('/', function () {
     return redirect()->route('login') ;
 });
 
 Route::middleware(['auth'])->group(function () {
 
-route::post ('/Registro',[LoginController::class, 'store'])->name('usuario.store');
-route:: get ('/Registro',[UsuarioController::class, 'index'])->name('templates.Registro');
-
-/* LANDING PAGE MULTIIDIOMA*/
-Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
 /* CONFIGURACIÓN DE ADMINS PARA SUPERADMIN*/
 Route::get('/config', [LandingController::class, 'config'])->name('superadmin.config');
 Route::patch('/config', [UsuarioController::class, 'updateAdmin'])->name("update.admin");
@@ -37,6 +35,8 @@ Route::put('/saveScore', [PuntuacionController::class, 'savescore'])->name('leve
 
 //CERRAR SESSION
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+route::get('/metrics', [JuegoController::class, 'metrics'])->name('game.metrics');
 });
 
 Route::fallback(function () {

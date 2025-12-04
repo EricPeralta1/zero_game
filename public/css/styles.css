@@ -282,3 +282,34 @@
     text-align: center;
     font-size: 30px; 
 }
+
+.metricsButton{
+    border-radius: 25px;
+    background-color: #372358;
+    color: white;
+    font-size: 25px;
+    padding: 5px 50px 5px;
+    margin-bottom: 10px;
+}
+
+.metricsSelect {
+    padding: 10px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    background-color: #372358;
+    color: white;
+    font-size: 20px;
+}
+
+.metricsBtnScores {
+    padding: 10px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    background-color: #372358;
+    color: white;
+    font-size: 20px;
+}

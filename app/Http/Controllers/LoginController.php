@@ -38,6 +38,7 @@ class LoginController extends Controller
         $hashedPassword = Hash::make($request->input('password'));
         $usuario->password = $hashedPassword;
           $usuario->id_rol = 1; 
+          $usuario->returning_player = 0;
            $usuario->save();
         // 5. Redirección después del registro exitoso
         return redirect()->route('login')->with('success', '¡Registro exitoso! Por favor, inicia sesión con tus nuevas credenciales.');

@@ -1,7 +1,9 @@
 let gameQuestions = [
     { question: "¿Cuál es el área de un círculo?", answer: "π x r x r" },
     { question: "¿Cuál es el perímetro de un cuadrado?", answer: "4 x lado" },
-    { question: "¿Cuál es el área de un cuadrado?", answer: "lado x lado" }
+    { question: "¿Cuál es el área de un cuadrado?", answer: "lado x lado" },
+    {question: "¿Cuál es el área de un rectángulo?", answer: "base x altura"},
+    {question: "¿Cuál es la suma de los ángulos interiores de un triángulo?", answer: "180°"}
 ];
 
 let shownQuestions = []
@@ -121,7 +123,7 @@ function dropAnswers(random) {
         answer = gameQuestions[rdAnswer].answer
         word.textContent = answer
         word.style.top = "0px"
-        randomPos = Math.random() * (gamePanel.clientWidth - 80) + "px"
+        randomPos = Math.random() * (gamePanel.clientWidth - 90) + "px"
         word.style.left = randomPos
 
 

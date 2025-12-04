@@ -5,13 +5,15 @@ namespace App\Models {
     /**
      * App\Models\Seccion
      *
+     * @property int|null $tiempo
      * @property int $id_user
-     * @property string $tiempo_sesion
+     * @property string $fecha_sesion
      * @property int $id_session
      * @property-read \App\Models\Usuario $Usuario
      * @method static \Illuminate\Database\Eloquent\Builder<Seccion>|Seccion whereIdSession($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Seccion>|Seccion whereTiempoSesion($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Seccion>|Seccion whereFechaSesion($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Seccion>|Seccion whereIdUser($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Seccion>|Seccion whereTiempo($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Seccion>|Seccion newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Seccion>|Seccion newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Seccion>|Seccion query()
@@ -636,6 +638,7 @@ namespace App\Models {
     /**
      * App\Models\Usuario
      *
+     * @property int|null $returning_player
      * @property int $id_rol
      * @property string $password
      * @property string $email
@@ -653,6 +656,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario whereEmail($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario wherePassword($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario whereIdRol($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario whereReturningPlayer($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario query()
@@ -1274,7 +1278,7 @@ namespace App\Models {
      * @property int|null $id_user
      * @property int|null $errores
      * @property int|null $vidas
-     * @property string $tiempo_nivel
+     * @property string|null $tiempo_nivel
      * @property int $puntos
      * @property int $id_puntuacion
      * @property-read \App\Models\Usuario $Usuario

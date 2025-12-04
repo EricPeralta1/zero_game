@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\juego;
+use App\Models\Seccion;
 use App\Models\Usuario;
 use App\Models\puntuacion;
 use Illuminate\Http\Request;
@@ -42,6 +43,15 @@ class JuegoController extends Controller
         } else if ($juegoespecifico->id_game == 3){
             return view('Levels.level3', compact('juegos', 'juegoespecifico'));
         }
+    }
+
+    public function metrics(){
+        
+        $sessiones = Seccion::all();
+        $usuarios = Usuario::all();
+        $puntuaciones = puntuacion::all();
+
+        return view('metrics.metrics', compact('sessiones', 'usuarios', 'puntuaciones'));
     }
 
     /**
