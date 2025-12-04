@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     public function showLogin() {
-
-        return view ('Templates.Login');
+        if(Auth::check()){
+            return redirect()->route('landing.page', ['lang' => 'es']); 
+        } else {
+            return view ('Templates.Login');
+        }
     }
 
         public function login(Request $request) {
@@ -46,8 +49,6 @@ class LoginController extends Controller
     public function logout(Request $request){
         Auth::logout();
         return redirect('/');
-
-
     }
 
 }
