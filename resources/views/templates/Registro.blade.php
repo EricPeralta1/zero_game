@@ -63,6 +63,9 @@
             </form>
         </div>
     </div>
+    <script>
+        const usuarios = @json($usuarios);
+    </script>
     <script src="{{ asset('js/Registro.js') }}"></script>
 </body>
 </html>

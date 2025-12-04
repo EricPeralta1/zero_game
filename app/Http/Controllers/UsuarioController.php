@@ -13,7 +13,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('templates.Registro');
+        $usuarios = Usuario::all();
+
+        return view('templates.Registro', compact('usuarios'));
     }
 
 
