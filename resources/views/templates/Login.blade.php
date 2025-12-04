@@ -22,6 +22,14 @@
             <h2 class="text-center acceso-mundo">ACCESO AL MUNDO</h2>
             <form method="post" action="{{ route('login.submit') }}"> 
                 @csrf 
+                 @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
+                @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+                
                 <div class="mb-3">
                     <input type="text" class="form-control custom-input" placeholder="Nombre Usuario" id="nom_usuario" name="nom_usuario" required autofocus>
                     @error('nom_usuario') 

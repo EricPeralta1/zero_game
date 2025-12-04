@@ -25,7 +25,7 @@ class LoginController extends Controller
                 
                 return redirect()->route('landing.page', ['lang' => 'es']);
             } else {
-                session()->flash('error','credenciales incorrectos');
+                session()->flash('error','Credenciales incorrectas');
                 return redirect()->back()->withInput();
             }
         } 
