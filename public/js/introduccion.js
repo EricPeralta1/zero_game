@@ -6,38 +6,185 @@ let points = 0;
 let lifes = 3;
 let errors = 0;
 const gameRoot = document.getElementById('dynamic-container');
+let rachapoints=0;
 let dateToday;
 let startTime;
 let endTime;
 let playTime = ""; 
 let questionsToAsk = [];
 
+
+const difficultyPoints={
+  'easy': 50,
+  'medium': 100,
+  'hard': 150,
+}
+
+
+
 const puzzleQuestions = [
     {
         equation: '3x + 5 = 11',
         options: [2, 3, 4, 5],
-        correctAnswer: 2
+        correctAnswer: 2,
+        dificulty:'medium'
     },
     {
         equation: '2^x = 1',
         options: [1, 0, 2, 4],
-        correctAnswer: 0
+        correctAnswer: 0,
+        dificulty:'extra'
+        
     },
     {
         equation: '7 + 2x = 19',
         options: [6, 5, 4, 8],
-        correctAnswer: 6 
+        correctAnswer: 6,
+         dificulty:'hard'
     },
 
-    
     {
         equation: '3 + x = 9',
         options: [1, 7, 3, 6],
-        correctAnswer:6  
+        correctAnswer:6,
+        dificulty:'medium'  
+    },
+    {
+        equation: 'x * 30 = 240',
+        options: [6, 7, 8, 9],
+        correctAnswer:8,
+        dificulty:'easy'  
+    },
+
+    {
+        equation: '(5 + 3) * x - 10 = 30',
+        options: [4, 5, 6, 7],
+        correctAnswer:5,
+        dificulty:'medium'  
+    },
+    {
+        equation: 'x³ = 8',
+        options: [8, 5, 1, 2],
+        correctAnswer:2,
+        dificulty:'medium'  
+    },
+
+    {
+        equation: '4 + x = 20',
+        options: [4, 15, 16, 10],
+        correctAnswer: 16,
+        dificulty: 'easy'
+    },
+
+     {
+        equation: '1/2 + 4/2 = x',
+        options: ['4/2', '1/2', '5/2', '6/2'],
+        correctAnswer: '5/2',
+        dificulty: 'easy'
+    },
+
+    {
+    equation: '(5 * 4) + (2 * 5) = x',
+    options: [20, 25, 30, 35],
+    correctAnswer: 30,
+    dificulty: 'extra'
+   },
+
+   {
+    equation: '1/3 + 1/2  = x',
+    options: ['3/2', '2/3', '2/3', '5/6'],
+    correctAnswer: '5/6',
+    dificulty: 'hard'
+}, 
+{
+    equation: '10 + 13 + 2 = x',
+    options: [38, 25, 42, 45],
+    correctAnswer: 25,
+    dificulty: 'easy'
+}, 
+{
+    equation: '(150 + 75) - (20 + 30) = x',
+    options: [165, 175, 185, 195],
+    correctAnswer: 175,
+    dificulty: 'hard'
+},
+{
+        equation: '2³ + 4² = x',
+        options: [20, 24, 30, 32],
+        correctAnswer: 24, 
+        dificulty: 'extra'
+    },
+    {
+        equation: '(5 * 10) + (2 * 50) + 10 = x',
+        options: [150, 160, 200, 180],
+        correctAnswer: 160, 
+        dificulty: 'extra'
+    },
+    {
+        equation: '1/2 + 1/4 + 1/8 = x',
+        options: ['7/8', '5/8', '3/4', '1'],
+        correctAnswer: '7/8', 
+        dificulty: 'extra'
+    },
+    {
+        equation: '5 + 5⁵ = x',
+        options: [3125, 3130, 5000, 3150],
+        correctAnswer: 3130, 
+        dificulty: 'extra'
+    },
+    {
+        equation: '1200 + 800 + 50 = x',
+        options: [1950, 2000, 2050, 2150],
+        correctAnswer: 2050,
+        dificulty: 'extra'
+    },
+    {
+        equation: '15 + 20 + 5 = x',
+        options: [30, 40, 50, 60],
+        correctAnswer: 40,
+        dificulty: 'easy'
+    },
+    {
+        equation: '(100 + 50) + 75 = x',
+        options: [200, 225, 250, 175],
+        correctAnswer: 225,
+        dificulty: 'medium'
+    },
+    {
+        equation: '45 + 35 = x',
+        options: [70, 80, 90, 100],
+        correctAnswer: 80,
+        dificulty: 'easy'
+    },
+    {
+        equation: '9 + 11 + 20 = x',
+        options: [30, 35, 40, 45],
+        correctAnswer: 40,
+        dificulty: 'medium'
+    },
+    {
+        equation: '1/4 + 3/4 = x',
+        options: ['1/4', '2/4', '3/4', '1'],
+        correctAnswer: '1',
+        dificulty: 'hard'
+    }
+ 
+];
+
+
+//  Función para seleccionar preguntas aleatorias y limitar el total
+function selectRandomQuestions(questionsArray, limit) {
+    let tempArray = [...questionsArray];
+    let selectedQuestions = [];
+    const numToSelect = Math.min(limit, tempArray.length);
+    for (let i = 0; i < numToSelect; i++) {
+        const randomIndex = Math.floor(Math.random() * tempArray.length);
+        selectedQuestions.push(tempArray[randomIndex]);
+        tempArray.splice(randomIndex, 1);
     }
 
-    
-];
+    return selectedQuestions;
+}
 
 const totalQuestions = puzzleQuestions.length;
 
@@ -53,12 +200,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (introContent) {
                 introContent.classList.add('d-none');
             }
-            
+             
             currentQuestionIndex = 0;
             points = 0;
             lifes = 3;
             errors = 0;
-            questionsToAsk = [...puzzleQuestions];
+            rachapoints = 0;
+            questionsToAsk = selectRandomQuestions(puzzleQuestions, 10);
             dateToday = new Date();
             startTime = Date.now();
 
@@ -68,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-//  3. Función para Actualizar 
+//   Función para Actualizar 
 
 function updateHud() {
     const hudScore = document.getElementById('hud-score');
@@ -88,11 +236,34 @@ function updateHud() {
 }
 
 
-//  4. Renderizado de la Pantalla del Puzzle 
+//   Renderizado de la Pantalla del Puzzle 
 function createPuzzleScreen() {
-    const randomIndex = Math.floor(Math.random() * questionsToAsk.length);
-    const currentQuestionData = questionsToAsk[randomIndex];  
+    let randomIndex;
+    let currentQuestionData;
+
+    //  Lógica de la Pregunta 'Extra' ---
+    const extraQuestionIndex = questionsToAsk.findIndex(q => q.dificulty === 'extra');
+    
+    
+    if (rachapoints == 3 && extraQuestionIndex !== -1) {
+        randomIndex = extraQuestionIndex;
+        currentQuestionData = questionsToAsk[randomIndex];
+        
+        console.log("¡Racha de 3 aciertos! Mostrando pregunta 'extra'.");
+
+    } else {
+        
+        randomIndex = Math.floor(Math.random() * questionsToAsk.length);
+        currentQuestionData = questionsToAsk[randomIndex]; 
+    } 
+
+
+
+
     gameRoot.setAttribute('data-current-random-index', randomIndex);
+
+
+    
       gameRoot.innerHTML = '';
     
   
@@ -106,6 +277,12 @@ function createPuzzleScreen() {
     const innerPuzzleBox = document.createElement('div');
     innerPuzzleBox.classList.add('inner-puzzle-box', 'puzzle-grid-layout');
 
+   
+const notificationArea = document.createElement('div');
+notificationArea.id = 'game-notification-area';
+notificationArea.classList.add('notification-message', 'grid-area-message');
+innerPuzzleBox.appendChild(notificationArea);
+
 
  
     const hudContainer = document.createElement('div');
@@ -118,22 +295,28 @@ function createPuzzleScreen() {
         <div id="hud-errors" class="hud-item">❌ Errores: ${errors}</div>
     `;
 
-    // 2. Contenedor para el Título y la Ecuación (
+    // Contenedor para el Título y la Ecuación 
     const headerContent = document.createElement('div');
     headerContent.classList.add('header-content', 'grid-area-header');
-    const title = document.createElement('h2');
-    title.textContent = 'Encuentra el valor de x';
-    title.classList.add('puzzle-title', 'fs-30');
-
+   const title = document.createElement('h2');
+    if (currentQuestionData.dificulty === 'extra') {
+         title.textContent = ' BONUS: ¡DOBLE PUNTAJE!';  
+         title.classList.add('puzzle-title', 'fs-30', 'text-warning');
+    } else {
+         title.textContent = 'Encuentra el valor de x';
+         title.classList.add('puzzle-title', 'fs-30');
+    }
     const equation = document.createElement('p');
     equation.textContent = currentQuestionData.equation;
     equation.classList.add('puzzle-equation', 'fs-40');
+
+   
 
     headerContent.appendChild(title);
     headerContent.appendChild(equation);
 
 
-    // 3. Contenedor de Opciones 
+    //  Contenedor de Opciones 
     const optionsWrapper = document.createElement('div');
     optionsWrapper.id = 'options-container-wrapper';
     optionsWrapper.classList.add('grid-area-options');
@@ -150,7 +333,7 @@ function createPuzzleScreen() {
     });
 
 
-    // 4. Personaje 
+    //  Personaje 
     const characterImage = document.createElement('img');
     characterImage.id = 'puzzle-character';
     characterImage.src = ZERO_IMAGE_SRC;
@@ -166,7 +349,7 @@ function createPuzzleScreen() {
         'zero-puzzle-image'
     );
 
-    // 5. Ensamblar la vista
+    //  Ensamblar la vista
     innerPuzzleBox.appendChild(hudContainer); 
     innerPuzzleBox.appendChild(headerContent);
     innerPuzzleBox.appendChild(optionsWrapper);
@@ -178,7 +361,33 @@ function createPuzzleScreen() {
     gameRoot.appendChild(puzzleScreen);
 }
 
-// === 5. Lógica del Click 
+function showNotification(message, isCorrect) {
+    const notificationArea = document.getElementById('game-notification-area');
+    if (!notificationArea) return;
+
+    //  Limpiar y establecer la clase de estilo
+    notificationArea.textContent = message;
+    notificationArea.classList.remove('msg-correct', 'msg-incorrect', 'msg-extra');
+    
+    if (isCorrect === true) {
+        notificationArea.classList.add('msg-correct');
+    } else if (isCorrect === false) {
+        notificationArea.classList.add('msg-incorrect');
+    } else {
+        // Para mensajes informativos (como el extra)
+        notificationArea.classList.add('msg-extra'); 
+    }
+    
+    notificationArea.style.opacity = 1; 
+
+    
+    setTimeout(() => {
+        notificationArea.style.opacity = 0;
+    }, 2000); 
+}
+
+
+//   Lógica del Click 
 
 function handleOptionClick(selectedValue) {
     
@@ -187,16 +396,50 @@ function handleOptionClick(selectedValue) {
 
     const currentQuestionData = questionsToAsk[randomIndex]; 
     const correctAnswer = currentQuestionData.correctAnswer;
+    const dificulty = currentQuestionData.dificulty; 
+    let pointsAwarded = 0;
+    let notificationMessage = "";
 
-    // 1. Verificar la respuesta
+    //  Verificar la respuesta
     if (selectedValue === correctAnswer) {
-        points = points + 100
-        alert(' ¡Respuesta Correcta! Puntos: ' + points);
+        
+        
+        if (dificulty === 'extra') {
+            
+            pointsAwarded = difficultyPoints['hard'] * 2;
+            notificationMessage = `¡BONUS! ¡Doble Puntos! Ganaste ${pointsAwarded}p.`;
+            rachapoints = 0; 
+        } else {
+            pointsAwarded = difficultyPoints[dificulty] || 50; 
+            rachapoints++; 
+            notificationMessage = `¡Correcto! Ganaste ${pointsAwarded}p. Racha: ${rachapoints}`;
+            console.log('correcto')
+        }
+        
+        points += pointsAwarded;
+    
+        
+        showNotification(notificationMessage, dificulty === 'extra' ? 'extra' : true);
 
     } else {
-        lifes--;
+      
+        rachapoints = 0; // La racha se rompe
+        const correctMsg = currentQuestionData.correctAnswer;
+        
+       
+        if (dificulty !== 'extra') {
+            lifes--;
+            notificationMessage = `¡Incorrecto! 💔 -1 Vida. La respuesta correcta era ${correctMsg}.`;
+            showNotification(notificationMessage, false);
+            console.log('incorrecto')
+        } else {
+            
+            notificationMessage = `¡Incorrecto en la pregunta Extra! La respuesta correcta era ${correctMsg}. No pierdes vidas.`;
+          
+            showNotification(notificationMessage, false); 
+        }
+        
         errors++;
-        alert(` ¡Incorrecto! La respuesta correcta era ${correctAnswer}. Vidas restantes: ${lifes}.`);
     }
 
     
@@ -208,18 +451,19 @@ function handleOptionClick(selectedValue) {
         return;
     }
 
-   questionsToAsk.splice(randomIndex, 1);
+    // Eliminar la pregunta ya usada
+    questionsToAsk.splice(randomIndex, 1);
 
     if (questionsToAsk.length > 0) {
         setTimeout(() => {
-            createPuzzleScreen(); // Llama a la siguiente pregunta aleatoria
+            createPuzzleScreen(); 
         }, 1000);
     } else {
         showGameEndScreen();
     }
 }
 
-// === 6. Funciones de Persistencia 
+//  
 
 function calculateTimePuzzle() {
     let diff = endTime - startTime;
@@ -236,15 +480,15 @@ function calculateTimePuzzle() {
 
 
 
-//  7. Funciones de Pantalla Final 
+//   Funciones de Pantalla Final 
 function showGameEndScreen() {
-    // 1. CÁLCULO Y VARIABLES
+    
     endTime = Date.now(); 
     calculateTimePuzzle(); 
     const finalScore = points;
     const finalErrors = errors;
     
-    // Crear el contenedor principal
+   
     gameRoot.innerHTML = ''; 
     const victoryScreen = document.createElement('div');
     victoryScreen.classList.add('background-level-container', 'd-flex', 'justify-content-center', 'align-items-center', 'victory-screen');
@@ -252,7 +496,7 @@ function showGameEndScreen() {
     const contentWrapper = document.createElement('div');
     contentWrapper.classList.add('d-flex','gap-2', 'victory-content-wrapper'); 
 
-    // 2. COLUMNA DE IMAGEN
+    //  COLUMNA DE IMAGEN
     const imageColumn = document.createElement('div');
     imageColumn.classList.add('victory-image-column');
     
@@ -262,7 +506,7 @@ function showGameEndScreen() {
     crystalImage.classList.add('img-fluid', 'crystal-image', 'winImg'); 
     imageColumn.appendChild(crystalImage);
 
-    // 3. COLUMNA DE ESTADÍSTICAS (Limpia de clases de presentación)
+    //. COLUMNA DE ESTADÍSTICAS (Limpia de clases de presentación)
     const statsColumn = document.createElement('div');
     statsColumn.classList.add('victory-stats-column', 'text-center');
 
@@ -288,7 +532,7 @@ function showGameEndScreen() {
         
     `;
 
-    // 4. LÓGICA DE BOTÓN Y ENSAMBLAJE
+    //  LÓGICA DE BOTÓN Y ENSAMBLAJE
     saveScore(); 
 
     const regresarButton = statsColumn.querySelector('#btn-regresar');

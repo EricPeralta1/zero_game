@@ -233,4 +233,38 @@ width: 100%;
 .puzzle-title {
     font-family: 'VT323', monospace;
     
+}/* Estilos básicos para el contenedor de la notificación */
+.notification-message {
+    /* Posicionamiento y capa */
+    position: absolute; /* Asegúrate de que el contenedor padre tenga position: relative */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar */
+    z-index: 100;
+
+    /* Apariencia */
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    
+    /* Transición */
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 0.5s ease-out; /* Transición suave al ocultarse */
+}
+
+/* Clases de estado */
+.msg-correct {
+    background-color: rgba(40, 167, 69, 0.9); /* Verde */
+}
+
+.msg-incorrect {
+    background-color: rgba(220, 53, 69, 0.9); /* Rojo */
+}
+
+.msg-extra {
+    background-color: rgba(255, 193, 7, 0.9); /* Amarillo/Dorado */
+    color: black;
 }
