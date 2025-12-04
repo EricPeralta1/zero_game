@@ -1,59 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img width="200" height="200" alt="color_mid" src="https://github.com/user-attachments/assets/ad29331a-a581-47ad-9975-1b06e636f3be"/></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+## Bienvenido a ZERO. ¡Empieza la aventura ahora!
+
+***
+
+### CONTENIDOS
+
+
+1 | ¿QUÉ ÉS ZERO?
+
+2 | INFORMACIÓN DEL JUEGO
+
+3 | CARACTERÍSTICAS
+
+***
+
+## ¿QUE ÉS ZERO?
+
+### Un villano ha abierto el portal de los errores, y solo Zero puede devolver la normalidad a Pueblo Dígito.
+
+Nuestro equipo presenta ZERO, nuestra web con juegos para aprender matemáticas de la mano de Zero.
+
+- ¿De qué trata ZERO?
+
+<p align="center"><img width="100" height="200" alt="color_mid" src="https://github.com/user-attachments/assets/c59c0f30-41a9-4a46-b56e-b9135db30592"> <img width="75" height="75" alt="color_mid" src="https://github.com/user-attachments/assets/bae79021-cb10-461f-bbf6-78a5a829c38f"> <img width="100" height="200" alt="color_mid" src="https://github.com/user-attachments/assets/97d7ef95-f76c-4d15-9916-3f4bba78f096">
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Un villano conocido como Doctor Kaos ha disperado los Cristales Matemágicos, liberando los Errores, criaturas que comen y devoran los números y la lógica por todo el lugar.
+Pueblo Dígito se ve sumido en descontrol, pero Zero, nuestro héroe, pretende reunir los 4 cristales para sellar de nuevo a los Errores.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Para ello, ZERO deberá recorrer 4 zonas:
+ - El Bosque de la Suma, donde proliferan las sumas y restas.
+ - El Desierto Avanzado, donde encontrará ruinas y pirámides con operaciones matemáticas avanzadas.
+ - Las Montañas Geométricas, las cuales deberá subir siguiendo las indicaciones del camino y escalando la montaña.
+ - La Ciudad del Saber, donde se encuentra el Doctor Kaos y los Errores.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+***
 
-## Learning Laravel
+## FUNCIONES DE LA APLICACIÓN
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Este juego web incluye:
+- Registro y inicio de sesión de usuarios
+- Landing Page, introuducción para los nuevos usuarios para que vean que trata el juego.
+- Pantalla de selección de nivel.
+- 4 Juegos/Niveles, cada uno con su estética y mecánicas centradas en matemáticas.
+- Pantalla de clasificación, que incluye los records guardados de cada nivel.
+- Sistema de gestión de usuarios y puntuaciones, por parte de superadmins y admins.
+- Métricas, que incluyen información estadística sobre aspectos como puntuaciones, partidas guardadas x juego, predicción de usuarios sobre si rejuegan o abandonan...
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+***
 
-## Laravel Sponsors
+## CARACTERÍSTICAS
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+La aplicación ha sido creada usando HTML, JS, CSS y Bootstrap y Laravel.
 
-### Premium Partners
+***
+Para más información de uso, características en profundidad y explicación de despliegue, recomendamos consultar nuestra [Wiki](https://github.com/bpiguavep2526-sketch/Kanblue/wiki). 
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Esperamos que disfrute de utilizar nuestra experiéncia.
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+https://zero.epsdespliegue.tech/
+***
