@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Classes\UsuarioClass;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -69,12 +70,33 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(Request $request)
     {
-        //
+        $request->validate([
+            'id' => 'required|exists:usuarios,id_user'
+        ]);
+
+        try {
+            $user = Usuario::findOrFail($request->id);
+            
+            if ($user->id === Auth::id()) {
+                return back()->with('error', 'No puedes eliminar tu propia cuenta.');
+            }
+
+            if ($user->role === 'admin') {
+                return back()->with('error', 'No se puede eliminar usuarios administradores.');
+            }
+
+            $user->delete();
+
+            return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente.');
+            
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al eliminar el usuario: ' . $e->getMessage());
+        }
     }
 
-    public function updateAdmin(Request $request) {
+    public function updateUser(Request $request) {
         $user = Usuario::find($request->input('id'));
 
         if (!$user) {

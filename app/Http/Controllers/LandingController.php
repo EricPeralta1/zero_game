@@ -23,7 +23,7 @@ class LandingController extends Controller
     }
 
     public function config() {
-        $admins = Usuario::all()->where('id_rol', "is", 2);
-        return view("config", compact("admins"));
+        $users = Usuario::whereIn('id_rol', [1, 2])->get();
+        return view("config", compact("users"));
     }
 }

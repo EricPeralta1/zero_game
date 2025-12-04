@@ -24,9 +24,14 @@ route:: get ('/Registro',[UsuarioController::class, 'index'])->name('templates.R
 
 /* LANDING PAGE MULTIIDIOMA*/
 Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
-/* CONFIGURACIÓN DE ADMINS PARA SUPERADMIN*/
+/* CONFIGURACIÓN DE USUARIOS PARA SUPERADMIN*/
 Route::get('/config', [LandingController::class, 'config'])->name('superadmin.config');
-Route::patch('/config', [UsuarioController::class, 'updateAdmin'])->name("update.admin");
+Route::patch('/config', [UsuarioController::class, 'updateUser'])->name("update.user");
+Route::delete('/config', [UsuarioController::class, 'destroy'])->name("delete.user");
+
+/* CONFIGURACIÓN DE JUEGOS PARA ADMINS */
+Route::get('/stats', [LandingController::class, 'stats'])->name('admin.stats');
+Route::patch('/stats', [UsuarioController::class, 'updateStats'])->name("update.stats");
 
 /*RUTAS DE NIVELES Y CLASSIFICACION*/
 Route::get('/levels', [JuegoController::class, 'index'])->name('levels.index');
