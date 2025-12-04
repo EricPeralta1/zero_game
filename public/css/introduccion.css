@@ -1,0 +1,236 @@
+
+.defeat-container {
+    background-color: #6C757D;
+    border: 2px solid #495057;
+    max-width: 500px;
+    width: 90%;
+    padding: 1.5rem !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+
+.defeat-container h2 {
+    
+    color: white ;
+    margin-bottom: 1.5rem ;
+
+    
+    font-family: 'VT323', monospace; 
+    font-size: 24px;
+}
+
+
+
+
+.defeat-container .d-flex {
+    
+    margin-top: 1.5rem !important;
+    
+    gap: 1rem; 
+}
+
+
+.btn-warning.btn-lg {
+    
+    font-family: 'VT323'; 
+    background-color: #fd7e14; 
+    border-color: #e66a00;
+    color: white;
+    
+}
+
+.btn-danger.btn-lg {
+    
+    font-family: 'VT323';
+    background-color: #dc3545; 
+    border-color: #bd2130;
+    color: white;
+    
+}
+
+.juego_box{
+
+    background-image: url(../images/game_1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: calc(85vh - 75px); 
+    position: relative;
+    display: flex; 
+
+    width: 100%;
+    height: 100%;
+    flex-direction: column; 
+    align-items: center;
+}
+
+
+
+
+.inner-puzzle-box {
+width: 100%;
+    height: 100%;
+    min-height: calc(85vh - 75px); 
+    
+    flex-direction: column; 
+    
+    align-items: center; 
+    position: relative; 
+}
+
+.header-content {
+
+    text-align: center;
+    margin-top: 3rem;
+    z-index: 2;
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #313A37;
+    border: 3px solid #242927; 
+    border-radius: 0;  
+    background-size: 3px 3px; 
+}
+
+
+.puzzle-title {
+    font-family: 'VT323', monospace;  
+    margin: 0 0 5px 0;
+    
+    color:#00FFFF; 
+    
+        
+       
+        
+    
+}
+
+.puzzle-equation {
+    font-family: 'VT323', monospace;
+    font-size: 44px;
+   
+    display: block;
+
+    
+    color: #FFFFFF; 
+    ;
+}
+
+
+
+.hud-container{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'VT323';
+    color: rgb(255, 255, 255);
+}
+
+.grid-area-options {
+    display: flex;
+    width: 100%;
+    justify-content: space-around; 
+    position: absolute;
+    
+    
+    top: 50%; 
+    height: 100px; 
+    z-index: 2;
+    padding:  0 5%; 
+}
+.grid-area-character {
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    width: 150px; 
+    height: auto; 
+    z-index: 5;
+}
+.btn-option-puzzle {
+   
+    background: none; 
+    border: none;
+    box-shadow: none; 
+    padding: 0;
+    align-self: center; 
+    font-family: 'VT323', monospace;
+    font-size: 50px; 
+    color: white; 
+    text-shadow: 
+        0 0 5px #00FFFF, 
+        0 0 10px #00FFFF,
+        2px 2px 0 #000, 
+        -2px -2px 0 #000;
+        
+    
+    transition: none;
+    cursor: pointer;
+    
+    
+    width: 50px; 
+    height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.btn-option-puzzle:hover, 
+.btn-option-puzzle:active {
+    background: none;
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+    opacity: 0.9; /* Pequeño cambio para indicar que es clickeable */
+}
+
+
+.statsContainer {
+    font-family: VT323;
+    border: 3px solid #000;
+    border-radius: 15px;
+    background-color: #716F6F;
+    color: white;
+    max-width: 400px;
+    
+    padding: 20px;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+
+.statsContainer h3 {
+    margin-top: 1rem; 
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem; 
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5); 
+}
+
+
+.statsContainer p {
+    font-size: 20px; 
+    margin-bottom: 1rem; 
+    text-align: left; 
+    display: flex;
+    justify-content: space-between;
+}
+
+.statsContainer .stat-value {
+    font-weight: bold; 
+    
+} 
+.victory-content-wrapper {
+     font-family: 'VT323', monospace;
+    height: 100%; 
+}
+
+.victory-stats-column {
+    font-family: 'VT323', monospace; 
+   
+}
+
+/* 2. Si se aplica a los títulos */
+.puzzle-title {
+    font-family: 'VT323', monospace;
+    
+}

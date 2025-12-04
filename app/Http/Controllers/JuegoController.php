@@ -42,16 +42,25 @@ class JuegoController extends Controller
             return view('Levels.level2', compact('juegos', 'juegoespecifico'));
         } else if ($juegoespecifico->id_game == 3){
             return view('Levels.level3', compact('juegos', 'juegoespecifico'));
+        } else if ($juegoespecifico->id_game == 4){
+            return view('Levels.level4', compact('juegos', 'juegoespecifico'));
         }
     }
 
     public function metrics(){
-        
         $sessiones = Seccion::all();
         $usuarios = Usuario::all();
         $puntuaciones = puntuacion::all();
 
         return view('metrics.metrics', compact('sessiones', 'usuarios', 'puntuaciones'));
+    }
+
+    public function inicio_juego($id_game){
+
+        $juegos = juego::all();
+         $juegoespecifico = $juegos->find($id_game);
+         return view('game.game1', compact('juegos','juegoespecifico'));
+           
     }
 
     /**

@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    
 
 /* LANDING PAGE MULTIIDIOMA*/
 Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
@@ -27,9 +28,12 @@ Route::get('/config', [LandingController::class, 'config'])->name('superadmin.co
 Route::patch('/config', [UsuarioController::class, 'updateAdmin'])->name("update.admin");
 
 /*RUTAS DE NIVELES Y CLASSIFICACION*/
+
 Route::get('/levels', [JuegoController::class, 'index'])->name('levels.index');
 Route::get('/leaderboard', [PuntuacionController::class, 'index'])->name('score.index');
 Route::get('/levels/{id_game}', [JuegoController::class, 'introduction'])->name('levels.game');
+Route::get('/game/{id_game}', [JuegoController::class, 'inicio_juego'])
+    ->name('juego.iniciar');
 
 Route::put('/saveScore', [PuntuacionController::class, 'savescore'])->name('levels.save');
 
@@ -42,6 +46,9 @@ route::get('/metrics', [JuegoController::class, 'metrics'])->name('game.metrics'
 Route::fallback(function () {
     return redirect('/Login');
 });
+
+
+
 
 
 

@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=VT323&display=swap" rel="stylesheet">
-    s
+    
     <link href="{{ asset('css/Login.css') }}" rel="stylesheet"> 
 </head>
 <body class="imagenfondo">

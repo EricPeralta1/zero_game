@@ -1,8 +1,4 @@
 const levelButtons = document.querySelectorAll('.lvlNum');
-let nivelActivoId = 1;
-levelButtons.forEach(btn => {
-    btn.addEventListener('click', changeLevelView);
-});
 
 /*PREPARA EL ENLACE DEL BOTÓN PARA EL PRIMER JUEGO*/
 let playButton = document.querySelector(".playButton")
@@ -14,7 +10,6 @@ let playButton = document.querySelector(".playButton")
 /*AL SELECCIONAR UN NÚMERO DE NIVEL, CARGA LOS DETALLES REFERENTES A ESE NIVEL SEGÚN ESTE GUARDADO EN LA BD.
 LAS IMAGENES CARGAN INDICANDO JUEGO + ID_GAME*/
 function changeLevelView(event) {
-
     const level = event.target.getAttribute('data-level');
     const juego = juegos.find(j => j.id_game == level);
 
@@ -41,11 +36,7 @@ function changeLevelView(event) {
 
     levelButtons.forEach(btn => btn.classList.remove("active"));
     event.target.classList.add("active");
-    nivelActivoId = juego.id_game;
-    nivelActivoId = parseInt(level);
-
-
-
+    
     let playButton = document.querySelector(".playButton")
     playButton.addEventListener('click', () => {
         redirectToLevel(juego);
@@ -54,7 +45,7 @@ function changeLevelView(event) {
 
 /*AL CLICAR EL BOTÓN COMENZAR, REDIRIGE EL NAVEGADOR A LA RUTA DEL JUEGO SELECCIONADO */
 function redirectToLevel(juego) {
-    window.location.href = `http://localhost/zero_game/public/levels/${juego.id_game}`;
+    window.location.href = `http://localhost:8080/zero_game/public/levels/${juego.id_game}`;
 }
 
 /*SEGUN LAS PUNTUACIONES DEL USUARIO, VA MIRANDO LA ID JUEGO DE CADA UNA, SI ES MAS GRANDE QUE EL NUMERO GUARDADO, SE ACTUALIZA, HASTA LLEGAR A 4.*/
@@ -63,17 +54,19 @@ function lockLevels() {
 
     if (userScores != null) {
         userScores.forEach(score => {
-            if (score.id_game >= highestUnlockedLevel && score.id_game != 4) {
-                highestUnlockedLevel++;
+            // Lógica para determinar el siguiente nivel a desbloquear
+            if (score.id_game == highestUnlockedLevel && score.id_game != 4) {
+                 highestUnlockedLevel++;
             }
         })
         levelButtons.forEach(btn => {
-            if (btn.getAttribute('data-level') > highestUnlockedLevel) {
+            if (parseInt(btn.getAttribute('data-level')) > highestUnlockedLevel) {
                 btn.style.pointerEvents = "none";
                 btn.style.color = "#431806";
             }
         })
     } else {
+        // Si no hay scores, solo el nivel 1 está activo
         levelButtons.forEach(btn => {
             if (btn.getAttribute('data-level') != highestUnlockedLevel) {
                 btn.style.pointerEvents = "none";

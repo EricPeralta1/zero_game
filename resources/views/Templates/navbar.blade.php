@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/x-icon" href="images/zero_icon.png">
-     <link rel="stylesheet" href="{{ asset('css/Levels.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/Levels.css') }}" />
     <title>ZERO</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,8 @@
     <script src="https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js"></script>
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/introduccion.css') }}" />
+    @stack('styles')
 </head>
 
 <body>
@@ -34,7 +36,7 @@
                 @yield('window_link')
             </div>
             <div>
-                <img src="{{ asset('images/zero_logo_navbar.png') }}" alt="leaderboard" width="auto" height=75px>
+                <img src="{{asset('images/zero_logo_navbar.png')}}" alt="leaderboard" width="auto" height=75px>
             </div>
             <div>
                 <div class="d-flex align-items-center gap-3 ">

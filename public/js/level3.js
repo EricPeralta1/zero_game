@@ -434,7 +434,7 @@ function saveScore() {
 
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch(`http://localhost/zero_game/public/saveScore`, {
+    fetch(`http://localhost:8080/zero_game/public/saveScore`, {
         method: 'PUT',
         headers: {
             'X-CSRF-TOKEN': token,
