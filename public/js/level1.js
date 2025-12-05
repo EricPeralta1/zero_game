@@ -171,8 +171,16 @@ const puzzleQuestions = [
  
 ];
 
+// --- . Funciones de Preparación y Utilidad ---
+/**
+ * @function selectRandomQuestions
+ * Selecciona un número limitado y aleatorio de preguntas del array fuente.
+ * Esto asegura que cada partida tenga un conjunto único de problemas.
+ * @param {Array<Object>} questionsArray - El array fuente de todas las preguntas.
+ * @param {number} limit - El número máximo de preguntas a seleccionar.
+ * @returns {Array<Object>} Un nuevo array con las preguntas seleccionadas.
+ */
 
-//  Función para seleccionar preguntas aleatorias y limitar el total
 function selectRandomQuestions(questionsArray, limit) {
     let tempArray = [...questionsArray];
     let selectedQuestions = [];
@@ -188,7 +196,7 @@ function selectRandomQuestions(questionsArray, limit) {
 
 const totalQuestions = puzzleQuestions.length;
 
-// Inicialización del Juego
+// --- 3. Inicialización del Juego (DOM Ready) ---
 
 document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById('boton_comenzar');
@@ -214,9 +222,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+// --- 4. Funciones de UI/HUD ---
 
+/**
+ * @function updateHud
+ * Actualiza los contadores de Puntos, Vidas y Errores en la interfaz.
+ */
 
-//   Función para Actualizar 
 
 function updateHud() {
     const hudScore = document.getElementById('hud-score');
@@ -235,8 +247,11 @@ function updateHud() {
     }
 }
 
-
-//   Renderizado de la Pantalla del Puzzle 
+/**
+ * @function createPuzzleScreen
+ * Renderiza la pantalla del puzzle, incluyendo la lógica de selección de preguntas (normal/extra).
+ */
+ 
 function createPuzzleScreen() {
     let randomIndex;
     let currentQuestionData;
@@ -252,10 +267,34 @@ function createPuzzleScreen() {
         console.log("¡Racha de 3 aciertos! Mostrando pregunta 'extra'.");
 
     } else {
+        // Si no hay racha de 3 O no hay 'extra' disponibles, seleccionar una pregunta no-'extra' aleatoria.
+        
+        // 1. Filtrar solo preguntas que NO sean 'extra' para la selección aleatoria
+        const nonExtraQuestions = questionsToAsk.filter(q => q.dificulty !== 'extra');
         
-        randomIndex = Math.floor(Math.random() * questionsToAsk.length);
-        currentQuestionData = questionsToAsk[randomIndex]; 
-    } 
+        if (nonExtraQuestions.length > 0) {
+            
+            // 2. Seleccionar un índice aleatorio DENTRO del array de preguntas no-'extra'
+            const randomNonExtraIndex = Math.floor(Math.random() * nonExtraQuestions.length);
+            const selectedNonExtraQuestion = nonExtraQuestions[randomNonExtraIndex];
+            
+            // 3. Encontrar el índice original de esa pregunta en el array questionsToAsk
+            // Esto es crucial para poder eliminarla correctamente después de responderla
+            randomIndex = questionsToAsk.findIndex(q => q === selectedNonExtraQuestion);
+            currentQuestionData = selectedNonExtraQuestion;
+            
+        } else if (questionsToAsk.length > 0) {
+            // Caso de respaldo: solo quedan preguntas 'extra' y no hay racha de 3.
+            // Para evitar un loop o bloqueo, simplemente selecciona la primera restante.
+            randomIndex = 0;
+            currentQuestionData = questionsToAsk[randomIndex];
+            console.warn("Solo quedan preguntas 'extra' y no se alcanzó la racha. Mostrando una 'extra' como pregunta normal.");
+
+        } else {
+             // Esto no debería pasar si el juego se detiene al acabar preguntas
+            return; 
+        }
+    }
 
 
 
@@ -290,9 +329,9 @@ innerPuzzleBox.appendChild(notificationArea);
     hudContainer.classList.add('hud-container', 'grid-area-hud',);
     
     hudContainer.innerHTML = `
-        <div id="hud-score" class="hud-item">⭐ Puntos: ${points }</div>
-        <div id="hud-lives" class="hud-item">❤️ Vidas: ${lifes}</div>
-        <div id="hud-errors" class="hud-item">❌ Errores: ${errors}</div>
+        <div id="hud-score" class="hud-item"> Puntos: ${points }</div>
+        <div id="hud-lives" class="hud-item"> Vidas: ${lifes}</div>
+        <div id="hud-errors" class="hud-item"> Errores: ${errors}</div>
     `;
 
     // Contenedor para el Título y la Ecuación 
@@ -361,11 +400,17 @@ innerPuzzleBox.appendChild(notificationArea);
     gameRoot.appendChild(puzzleScreen);
 }
 
+/**
+ * @function showNotification
+ * Muestra un mensaje temporal de retroalimentación (Correcto/Incorrecto/Extra).
+ * @param {string} message - El texto del mensaje.
+ * @param {boolean|string} isCorrect - `true` para correcto, `false` para incorrecto, o 'extra' para bonus.
+ */
+
 function showNotification(message, isCorrect) {
     const notificationArea = document.getElementById('game-notification-area');
     if (!notificationArea) return;
 
-    //  Limpiar y establecer la clase de estilo
     notificationArea.textContent = message;
     notificationArea.classList.remove('msg-correct', 'msg-incorrect', 'msg-extra');
     
@@ -374,7 +419,7 @@ function showNotification(message, isCorrect) {
     } else if (isCorrect === false) {
         notificationArea.classList.add('msg-incorrect');
     } else {
-        // Para mensajes informativos (como el extra)
+       
         notificationArea.classList.add('msg-extra'); 
     }
     
@@ -387,10 +432,13 @@ function showNotification(message, isCorrect) {
 }
 
 
-//   Lógica del Click 
+/**
+ * @function handleOptionClick
+ * Gestiona el evento de clic en una opción de respuesta.
+ * @param {number|string} selectedValue - El valor de la opción seleccionada.
+ */
 
 function handleOptionClick(selectedValue) {
-    
     document.querySelectorAll('.btn-option-puzzle').forEach(btn => btn.disabled = true);
     const randomIndex = parseInt(gameRoot.getAttribute('data-current-random-index'));
 
@@ -402,49 +450,39 @@ function handleOptionClick(selectedValue) {
 
     //  Verificar la respuesta
     if (selectedValue === correctAnswer) {
-        
-        
         if (dificulty === 'extra') {
-            
             pointsAwarded = difficultyPoints['hard'] * 2;
             notificationMessage = `¡BONUS! ¡Doble Puntos! Ganaste ${pointsAwarded}p.`;
             rachapoints = 0; 
-        } else {
+        } 
+        else {
             pointsAwarded = difficultyPoints[dificulty] || 50; 
             rachapoints++; 
             notificationMessage = `¡Correcto! Ganaste ${pointsAwarded}p. Racha: ${rachapoints}`;
             console.log('correcto')
         }
-        
-        points += pointsAwarded;
-    
-        
+        points += pointsAwarded; 
         showNotification(notificationMessage, dificulty === 'extra' ? 'extra' : true);
 
-    } else {
-      
-        rachapoints = 0; // La racha se rompe
+    } 
+       else {
+        rachapoints = 0; 
         const correctMsg = currentQuestionData.correctAnswer;
-        
-       
         if (dificulty !== 'extra') {
             lifes--;
-            notificationMessage = `¡Incorrecto! 💔 -1 Vida. La respuesta correcta era ${correctMsg}.`;
+            notificationMessage = `¡Incorrecto!  -1 Vida. La respuesta correcta era ${correctMsg}.`;
             showNotification(notificationMessage, false);
             console.log('incorrecto')
         } else {
             
             notificationMessage = `¡Incorrecto en la pregunta Extra! La respuesta correcta era ${correctMsg}. No pierdes vidas.`;
-          
             showNotification(notificationMessage, false); 
         }
         
         errors++;
     }
-
     
     updateHud();
-
     
     if (lifes <= 0) {
         showDefeatScreen(gameRoot);
@@ -463,32 +501,29 @@ function handleOptionClick(selectedValue) {
     }
 }
 
-//  
+/**
+ * @function calculateTimePuzzle
+ * Calcula el tiempo total de juego y lo formatea a MM:SS.
+ */ 
 
 function calculateTimePuzzle() {
     let diff = endTime - startTime;
-
     let seconds = Math.floor(diff / 1000);
     let minutes = Math.floor((seconds % 3600) / 60);
     seconds = seconds % 60;
-
     let mm = String(minutes).padStart(2, '0');
     let ss = String(seconds).padStart(2, '0');
-
     playTime = `${mm}:${ss}`; 
 }
-
-
-
-//   Funciones de Pantalla Final 
+/**
+ * @function showGameEndScreen
+ * Muestra la pantalla de victoria/fin del juego exitoso.
+ */
 function showGameEndScreen() {
-    
     endTime = Date.now(); 
     calculateTimePuzzle(); 
     const finalScore = points;
     const finalErrors = errors;
-    
-   
     gameRoot.innerHTML = ''; 
     const victoryScreen = document.createElement('div');
     victoryScreen.classList.add('background-level-container', 'd-flex', 'justify-content-center', 'align-items-center', 'victory-screen');
@@ -532,19 +567,23 @@ function showGameEndScreen() {
         
     `;
 
-    //  LÓGICA DE BOTÓN Y ENSAMBLAJE
+    // Guarda la puntuación antes de que el usuario se vaya
     saveScore(); 
-
     const regresarButton = statsColumn.querySelector('#btn-regresar');
     regresarButton.addEventListener('click', () => {  
         window.location.href = levelRt;
     });
-    
     contentWrapper.appendChild(imageColumn);
     contentWrapper.appendChild(statsColumn);
     victoryScreen.appendChild(contentWrapper);
     gameRoot.appendChild(victoryScreen);
 }
+
+/**
+ * @function showDefeatScreen
+ * Muestra la pantalla de derrota (Game Over).
+ * @param {HTMLElement} container - El contenedor donde se renderizará la pantalla.
+ */
 function showDefeatScreen(container) {
     endTime = Date.now(); 
     calculateTimePuzzle(); 
@@ -602,6 +641,10 @@ function showDefeatScreen(container) {
     container.appendChild(gameOverScreen);
 }
 
+/**
+ * @function saveScore
+ * Almacena la puntuación final de la partida, tanto en una cookie como en el servidor.
+ */
 function saveScore() {
     const scoreGame1 = { puntos: points, tiempo_nivel: playTime, vidas: lifes, errores: 3 - lifes, id_user: id_usuario, id_game: id_juego, fecha: dateToday }
     const score1Str = JSON.stringify(scoreGame1)
