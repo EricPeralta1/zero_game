@@ -66,6 +66,10 @@
 
         </div>
     </div>
+    <script>
+        const id_usuario = "{{ Auth::user()->id_user }}";
+        const id_juego =2
+    </script>
 
     <script src="{{ asset('js/level2.js') }}"></script>
 
