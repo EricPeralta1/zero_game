@@ -1,0 +1,321 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/zero_icon.png') }}">
+    <title>Configuracion Estaísticas</title>
+    <link rel="stylesheet" href="{{ asset('css/config.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <p>CONFIGURACIÓN DE ESTADÍSTICAS</p>
+            <a href="{{ route('landing.page', 'es') }}"><img src="{{ asset('Images/zero_logo_navbar.png') }}"
+                    alt="ZERO Logo"></a>
+            <p>ADMIN</p>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <div id="config-titles">
+                <span>Nombre</span>
+                <span>Correo</span>
+                <span>Rol</span>
+            </div>
+            <div>
+                @foreach ($users as $user)
+                    <a href="{{ route('admin.stats.user', $user->id_user) }}" class="user-link">
+                        <div class="user">
+                            <span>{{ $user->nom_usuario }}</span>
+                            <span>{{ $user->email }}</span>
+                            <span>
+                                @if ($user->id_rol == 1)
+                                    Usuario
+                                @elseif ($user->id_rol == 2)
+                                    Admin
+                                @elseif ($user->id_rol == 3)
+                                    Superadmin
+                                @endif
+                            </span>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+<style>
+    /* GLOBAL CONFIG */
+    @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=VT323&display=swap");
+
+    .vt323-regular {
+        font-family: "VT323", monospace;
+        font-weight: 300;
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    img {
+        width: 100px;
+    }
+
+    :root {
+        --color-violet: #220f37;
+        --color-orange: #f64a00;
+        --color-white: #ffffff;
+        --color-black: #000;
+    }
+
+    form {
+        font-family: "Lato", sans-serif;
+    }
+
+    /* NAV BAR*/
+    header {
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        background-color: var(--color-violet);
+        color: var(--color-white);
+        padding: 0 10px;
+        font-family: "VT323", sans-serif;
+    }
+
+    nav {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    nav>p:first-child {
+        margin-right: auto;
+        width: 50%;
+    }
+
+    nav>p:last-child {
+        margin-left: auto;
+    }
+
+    /* MAIN & USER GRID*/
+    main {
+        width: 100%;
+        height: 80%;
+        padding: 10px;
+        box-sizing: border-box;
+        font-family: "Lato", sans-serif;
+        font-size: 0.8rem;
+    }
+
+    main>div {
+        max-width: 1200px;
+        max-height: 100%;
+        overflow: auto;
+        scrollbar-width: thin;
+
+        background-color: #f0f0f0;
+        margin: 0 auto;
+        border: 1px solid black;
+    }
+
+    .user>span,
+    #config-titles>span {
+        box-sizing: border-box;
+        padding: 8px;
+    }
+
+    #config-titles,
+    .user {
+        display: grid;
+        grid-template-columns: 2fr 2fr 1fr;
+        min-width: 600px;
+    }
+
+    #config-titles {
+        background-color: var(--color-orange);
+        color: var(--color-white);
+        text-align: center;
+
+        border-bottom: 1px solid black;
+    }
+
+    .user-link {
+        border-bottom: 1px solid black;
+        text-decoration: none;
+        color: black;
+    }
+
+    .user {
+        border-bottom: 1px solid black;
+    }
+
+    .user:last-child {
+        border-bottom: none;
+    }
+
+    #config-titles span {
+        border-right: 1px solid black;
+    }
+
+    #config-titles span:last-child {
+        border-right: none;
+    }
+
+    .user span {
+        display: flex;
+        align-items: center;
+        border-right: 1px solid black;
+    }
+
+    .user span:last-child {
+        border-right: none;
+    }
+
+    span>button {
+        width: 100%;
+        height: 100%;
+        padding: 7px;
+        border: none;
+    }
+
+    .update-btn {
+        background-color: rgb(0, 2, 94);
+        color: var(--color-white);
+    }
+
+    .update-btn:hover {
+        background-color: rgb(0, 3, 202);
+    }
+
+    .delete-btn {
+        background-color: rgb(184, 0, 0);
+        color: var(--color-white);
+    }
+
+    .delete-btn:hover {
+        background-color: rgb(230, 0, 0);
+    }
+
+    .user:is(:focus, :active, :hover) {
+        background-color: rgb(209, 209, 209);
+    }
+
+    /* FORM */
+    #popup {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+
+        background-color: #00000091;
+    }
+
+    #update-user-form,
+    #delete-user-form {
+        max-width: 400px;
+        width: 100%;
+        background-color: white;
+        color: #000;
+
+        display: none;
+        flex-direction: column;
+        padding: 20px;
+        font-size: 0.8rem;
+    }
+
+    input,
+    select {
+        margin-bottom: 10px;
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+
+    label {
+        margin-bottom: 5px;
+    }
+
+    #update-user-form>div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 20px;
+        padding: 0;
+    }
+
+    #update-user-form>div>button {
+        padding: 7px 0;
+        max-width: 50%;
+        width: 100%;
+        margin-left: auto;
+        color: white;
+        font-size: 0.7rem;
+        border: none;
+    }
+
+    #update-user-form>div>button:last-child {
+        background-color: rgb(0, 2, 94);
+    }
+
+    #update-user-form>div>button:first-child {
+        background-color: #f64a00;
+    }
+
+    /* DELETE USER FORM */
+    #delete-user-form {
+        gap: 10px;
+        text-align: center;
+    }
+
+    #delete-user-form>span {
+        display: flex;
+        gap: 10px;
+    }
+
+    #delete-user-form>span>button:first-child {
+        background-color: rgb(0, 3, 202);
+        color: white;
+    }
+
+    #delete-user-form>span>button:last-child {
+        background-color: rgb(230, 0, 0);
+        color: white;
+    }
+
+    @media (max-width: 900px) {
+        main {
+            font-size: 0.65rem;
+        }
+
+        main>div>div span {
+            padding: 6px;
+        }
+
+        span>button {
+            font-size: 0.65rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        nav>p {
+            font-size: 0.85rem;
+        }
+    }
+</style>

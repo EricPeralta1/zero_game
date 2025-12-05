@@ -26,4 +26,9 @@ class LandingController extends Controller
         $users = Usuario::whereIn('id_rol', [1, 2])->get();
         return view("config", compact("users"));
     }
+
+    public function stats() {
+        $users = Usuario::all();
+        return view("stats", compact("users"));
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\juego;
+use App\Models\puntuacion;
 use Illuminate\Http\Request;
 use App\Classes\UsuarioClass;
 use Illuminate\Support\Facades\Auth;
@@ -109,5 +111,36 @@ class UsuarioController extends Controller
 
         $user->save();
         return redirect()->back()->with('success', 'Usuario actualizado correctamente');
+    }
+
+    public function statsUser($player_id) {
+        $user = Usuario::where('id_user', $player_id)->first();
+
+
+        $games = juego::all();
+        $playsByGame = $user->Puntaciones->groupBy('id_game');
+
+        return view("statsUser", compact("user", 'games', 'playsByGame'));
+    }
+
+    public function updateStats(Request $request, $player_id) {
+        $validated = $request->validate([
+            'id_puntuacion' => 'required|exists:puntuaciones,id_puntuacion',
+            'puntos' => 'required|integer|min:0',
+            'tiempo_nivel' => 'required|string|max:50',
+            'vidas' => 'required|integer|min:0|max:5',
+            'errores' => 'required|integer|min:0',
+        ]);
+
+        $play = puntuacion::where('id_puntuacion', $validated['id_puntuacion'])->where('id_user', $player_id)->firstOrFail();
+        
+        $play->update([
+            'puntos' => $validated['puntos'],
+            'tiempo_nivel' => $validated['tiempo_nivel'],
+            'vidas' => $validated['vidas'],
+            'errores' => $validated['errores'],
+        ]);
+
+        return redirect()->back()->with('success', 'Partida actualizada correctamente');
     }
 }

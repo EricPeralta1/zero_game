@@ -402,6 +402,7 @@ function checkAnswer(errorElement) {
             kaosHPText.textContent = `${kaosHP} HP`;
             errorElement.remove();
         } else {
+            errors++;
             score -= 5;
             scoreText.textContent = `PUNTOS: ${score}`;
             answerStreak = 0;
@@ -518,7 +519,7 @@ function setCookies() {
         puntos: score,
         tiempo_nivel: time,
         vidas: hp,
-        errores: 5 - hp,
+        errores: errors,
         id_user: id_usuario,
         id_game: 4,
         fecha: new Date(),
@@ -554,11 +555,13 @@ const hp = 5;
 let currentHP;
 let kaosHP;
 let answerStreak;
+let errors;
 
 function startGame() {
     activeErrors = [];
     score = 0;
     time = 0;
+    errors = 0;
     answerStreak = 0;
     currentHP = hp;
     kaosHP = 5000;
