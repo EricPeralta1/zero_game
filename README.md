@@ -56,7 +56,7 @@ Este juego web incluye:
 La aplicación ha sido creada usando HTML, JS, CSS y Bootstrap y Laravel.
 
 ***
-Para más información de uso, características en profundidad y explicación de despliegue, recomendamos consultar nuestra [Wiki](https://github.com/bpiguavep2526-sketch/Kanblue/wiki). 
+Para más información de uso, características en profundidad y explicación de despliegue, recomendamos consultar nuestra [Wiki](https://github.com/EricPeralta1/zero_game/wiki). 
 
 ### Esperamos que disfrute de utilizar nuestra experiéncia.
 
