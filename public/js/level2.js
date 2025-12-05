@@ -313,6 +313,7 @@ function win() {
     const btnInicio = box.querySelector('.inicio');
     if (btnInicio) {
         btnInicio.addEventListener('click', () => {
+            saveScore(); // Guardar puntuación al terminar nivel
             window.location.href = '../levels';
         });
     }
@@ -357,6 +358,7 @@ function defeat() {
     const btnInicio = box.querySelector('.inicio');
     if (btnInicio) {
         btnInicio.addEventListener('click', () => {
+            saveScore(); // Guardar puntuación al terminar nivel
             window.location.href = '../levels';
         });
     }
@@ -365,6 +367,7 @@ function defeat() {
     const btnReintentar = box.querySelector('.reintentar');
     if (btnReintentar) {
         btnReintentar.addEventListener('click', () => {
+            puntos = 0; // Resetear puntos al reintentar
             window.location.reload();
         });
     }
@@ -440,8 +443,35 @@ function activarEventosRespuesta(container, ops, correcta, hearts) {
     });
 }
 
+
 function saveScore() {
+    const id_usuario = document.querySelector('meta[name="id_usuario"]')?.getAttribute('content') || '';
+    const id_juego = document.querySelector('meta[name="id_juego"]')?.getAttribute('content') || '2';
+    const dateToday = new Date().toISOString().split('T')[0];
     
+    const scoreGame2 = { 
+        puntuacion: puntos, 
+        id_user: id_usuario, 
+        id_game: id_juego, 
+        fecha: dateToday 
+    };
+    
+    const score2Str = JSON.stringify(scoreGame2);
+    document.cookie = `score2=${score2Str}; path=/; max-age=3600`;
 
+    const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
+    if (!token) {
+        console.warn('No CSRF token found');
+        return;
+    }
+
+    fetch(`http://localhost:8080/zero_game/public/saveScore`, {
+        method: 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(scoreGame2)
+    })
 }
