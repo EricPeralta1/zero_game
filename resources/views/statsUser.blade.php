@@ -36,7 +36,7 @@
                                 data-hp="{{ $play->vidas }}" data-errors="{{ $play->errores }}"
                                 data-score="{{ $play->puntos }}">
                                 <div class="match-header">
-                                    <span class="match-score">{{ $play->puntos }} pts</span>
+                                    <span class="match-score">📊 Puntos: {{ $play->puntos }} pts</span>
                                 </div>
                                 <div class="match-stats">
                                     <div class="stat">
@@ -64,7 +64,7 @@
         </div>
     </main>
     <div id="overlay">
-        <form action="{{ route('update.stats', $user->id_user) }}" id="update-stats">
+        <form action="{{ route('update.stats', $user->id_user) }}" id="update-stats" method="POST">
             @csrf
             @method('PATCH')
             <h3 id="title-game">TITULO JUEGO</h3>
@@ -82,7 +82,7 @@
             <input type="number" name="puntos" id="score" required>
 
             <label for="time">Tiempo</label>
-            <input type="text" name="tiempo_nivel" id="time" required>
+            <input type="number" name="tiempo_nivel" id="time" required>
 
             <label for="hp">Vidas</label>
             <input type="number" name="vidas" id="hp" min="0" max="5" required>

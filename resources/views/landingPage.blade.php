@@ -42,6 +42,15 @@
                             </svg>
                         </a>
                     @endif
+                    @if ((Auth::check() && Auth::user()->id_rol == 3) || Auth::user()->id_rol == 2)
+                        <a href="{{ route('admin.stats') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="s-icon s-icon-icon-stats" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 14c-.4 0-.667-.267-.667-.667V6.667C7.333 6.267 7.6 6 8 6s.667.267.667.667v6.666c0 .4-.267.667-.667.667Zm4.667-.667V2.667c0-.4-.267-.667-.667-.667s-.666.267-.666.667v10.666c0 .4.266.667.666.667s.667-.267.667-.667Zm-8 0v-2.666c0-.4-.267-.667-.667-.667s-.667.267-.667.667v2.666c0 .4.267.667.667.667s.667-.267.667-.667Z" />
+                            </svg>
+                        </a>
+                    @endif
                 </div>
             </div>
         </nav>
