@@ -16,16 +16,24 @@ route::post('/Login', [LoginController::class, 'Login'])->name('login.submit');
 Route::get('/', function () {
     return redirect()->route('login') ;
 });
+/* LANDING PAGE MULTIIDIOMA*/
+Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
 
 Route::middleware(['auth'])->group(function () {
     
 
-/* LANDING PAGE MULTIIDIOMA*/
-Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
 
-/* CONFIGURACIÓN DE ADMINS PARA SUPERADMIN*/
-Route::get('/config', [LandingController::class, 'config'])->name('superadmin.config');
-Route::patch('/config', [UsuarioController::class, 'updateAdmin'])->name("update.admin");
+    /* CONFIGURACIÓN DE USUARIOS PARA SUPERADMIN*/
+    Route::get('/config', [LandingController::class, 'config'])->name('superadmin.config');
+    Route::patch('/config', [UsuarioController::class, 'updateUser'])->name("update.user");
+    Route::delete('/config', [UsuarioController::class, 'destroy'])->name("delete.user");
+
+
+    /* CONFIGURACIÓN DE JUEGOS PARA ADMINS */
+    Route::get('/stats', [LandingController::class, 'stats'])->name('admin.stats');
+    Route::get('/stats/{player_id}', [UsuarioController::class, 'statsUser'])->name('admin.stats.user');
+    Route::patch('/stats/{player_id}', [UsuarioController::class, 'updateStats'])->name("update.stats");
+    Route::delete('/stats/{player_id}/{score_id}', [UsuarioController::class, 'deleteStats'])->name("delete.stats");
 
 /*RUTAS DE NIVELES Y CLASSIFICACION*/
 
@@ -35,7 +43,7 @@ Route::get('/levels/{id_game}', [JuegoController::class, 'introduction'])->name(
 Route::get('/game/{id_game}', [JuegoController::class, 'inicio_juego'])
     ->name('juego.iniciar');
 
-Route::put('/saveScore', [PuntuacionController::class, 'savescore'])->name('levels.save');
+    Route::put('/saveScore', [PuntuacionController::class, 'savescore'])->name('levels.save');
 
 //CERRAR SESSION
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -46,9 +54,6 @@ route::get('/metrics', [JuegoController::class, 'metrics'])->name('game.metrics'
 Route::fallback(function () {
     return redirect('/Login');
 });
-
-
-
 
 
 

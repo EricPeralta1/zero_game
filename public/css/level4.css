@@ -55,8 +55,19 @@ button {
 
     display: grid;
     grid-template-columns: 1fr 5fr 5fr;
-    max-width: 1000px;
+    max-width: 1200px;
     height: auto;
+
+    position: relative;
+}
+
+#play-audio-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    background-color: #f1743f;
 }
 
 #instructions-container > div:first-child {
@@ -82,7 +93,7 @@ button {
 #error-example {
     position: absolute;
     width: auto;
-    height: 60px;
+    height: 80px;
     top: -40px;
     right: -30px;
 }
@@ -95,7 +106,7 @@ hr {
     margin: 0.5rem 0 !important;
 }
 
-#instructions-container > div:last-child {
+#instructions-container > div:nth-child(3) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -103,24 +114,24 @@ hr {
     gap: 20px;
 }
 
-#instructions-container > div:last-child > img {
+#instructions-container > div:nth-child(3) > img {
     width: 80%;
     border-radius: 10px;
     border: 2px solid black;
 }
 
-#instructions-container > div:last-child > span {
+#instructions-container > div:nth-child(3) > span {
     display: flex;
     gap: 20px;
 }
 
-#instructions-container > div:last-child > span > button {
+#instructions-container > div:nth-child(3) > span > button {
     padding: 8px 30px;
     border-radius: 10px;
     border: 1px solid black;
 }
 
-#instructions-container > div:last-child > span > a {
+#instructions-container > div:nth-child(3) > span > a {
     color: white;
     text-decoration: none;
     padding: 8px 30px;
@@ -128,10 +139,10 @@ hr {
     border: 1px solid black;
 }
 
-#instructions-container > div:last-child > span > button:first-child {
+#instructions-container > div:nth-child(3) > span > button:first-child {
     background-color: var(--color-orange);
 }
-#instructions-container > div:last-child > span > a:last-child {
+#instructions-container > div:nth-child(3) > span > a:last-child {
     background-color: #f91202;
 }
 
@@ -269,7 +280,7 @@ hr {
     background-color: #716f6f;
     border: 4px solid black;
     margin: 0 auto;
-    min-width: 290px;
+    min-width: 297px;
     width: auto;
     min-height: 50px;
 }
@@ -354,6 +365,7 @@ hr {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
         sans-serif;
+    z-index: 100;
 }
 
 #kaos-container {
@@ -419,7 +431,7 @@ hr {
     flex-direction: column;
     align-items: end;
     gap: 5px;
-    z-index: 100;
+    z-index: 90;
 
     width: max-content;
     height: max-content;
@@ -433,7 +445,7 @@ hr {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: 100;
+    z-index: 99;
 
     display: flex;
     align-items: end;

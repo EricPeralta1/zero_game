@@ -28,6 +28,7 @@
     <div id="game-container">
         <div id="overlay">
             <div id="instructions-container">
+
                 <div>
                     <img src="{{ asset('Images/gemas/gema_4.png') }}" alt="Cristal 4">
                 </div>
@@ -61,6 +62,8 @@
                         <a href="{{ route('levels.index') }}">ATRÁS</a>
                     </span>
                 </div>
+                
+                <button id="play-audio-btn">PLAY MUSIC</button>
             </div>
             <div id="game-over-container" style="display: none">
                 <h2>ZERO FUE DERROTADO...</h2>

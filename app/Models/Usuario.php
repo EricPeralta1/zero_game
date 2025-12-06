@@ -39,6 +39,6 @@ class Usuario extends Authenticatable
      */
     public function Puntaciones(): HasMany
     {
-        return $this->hasMany(Puntuacion::class, 'id_puntuacion');
+        return $this->hasMany(Puntuacion::class, 'id_user');
     }
 }
