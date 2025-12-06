@@ -23,24 +23,21 @@ class UsuarioController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-       
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $usuario=new Usuario();
-        $usuario->nom_usuario=$request->input('nom_usuario');
-        $usuario->email=$request->input('email');
-         $usuario->password=$request->input('password');
-        $usuario->id_rol = 1; 
+        $usuario = new Usuario();
+        $usuario->nom_usuario = $request->input('nom_usuario');
+        $usuario->email = $request->input('email');
+        $usuario->password = $request->input('password');
+        $usuario->id_rol = 1;
 
-           $usuario->save();
-        
+        $usuario->save();
+
         // 5. Redirección después del registro exitoso
         return redirect()->route('usuario.index')->with('success', '¡Registro exitoso! Por favor, inicia sesión con tus nuevas credenciales.');
     }
@@ -80,7 +77,7 @@ class UsuarioController extends Controller
 
         try {
             $user = Usuario::findOrFail($request->id);
-            
+
             if ($user->id === Auth::id()) {
                 return back()->with('error', 'No puedes eliminar tu propia cuenta.');
             }
@@ -91,14 +88,14 @@ class UsuarioController extends Controller
 
             $user->delete();
 
-            return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente.');
-            
+            return redirect()->back()->with('success', 'Usuario eliminado correctamente.');
         } catch (\Exception $e) {
             return back()->with('error', 'Error al eliminar el usuario: ' . $e->getMessage());
         }
     }
 
-    public function updateUser(Request $request) {
+    public function updateUser(Request $request)
+    {
         $user = Usuario::find($request->input('id'));
 
         if (!$user) {
@@ -113,7 +110,8 @@ class UsuarioController extends Controller
         return redirect()->back()->with('success', 'Usuario actualizado correctamente');
     }
 
-    public function statsUser($player_id) {
+    public function statsUser($player_id)
+    {
         $user = Usuario::where('id_user', $player_id)->first();
 
 
@@ -123,17 +121,18 @@ class UsuarioController extends Controller
         return view("statsUser", compact("user", 'games', 'playsByGame'));
     }
 
-    public function updateStats(Request $request, $player_id) {
+    public function updateStats(Request $request, $player_id)
+    {
         $validated = $request->validate([
             'id_puntuacion' => 'required|exists:puntuaciones,id_puntuacion',
-            'puntos' => 'required|integer|min:0',
-            'tiempo_nivel' => 'required|string|max:50',
+            'puntos' => 'required|integer',
+            'tiempo_nivel' => 'required|integer',
             'vidas' => 'required|integer|min:0|max:5',
             'errores' => 'required|integer|min:0',
         ]);
 
         $play = puntuacion::where('id_puntuacion', $validated['id_puntuacion'])->where('id_user', $player_id)->firstOrFail();
-        
+
         $play->update([
             'puntos' => $validated['puntos'],
             'tiempo_nivel' => $validated['tiempo_nivel'],

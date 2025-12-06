@@ -16,6 +16,10 @@ matchCards.forEach((card) => {
         inputs[7].value = datasets.hp;
         inputs[8].value = datasets.errors;
 
+        if (datasets.gameid !== 4) {
+            inputs[7].max = 3;
+        }
+
         const titleGame = document.getElementById("title-game");
         titleGame.textContent = datasets.gametitle;
 
