@@ -42,7 +42,7 @@
                             </svg>
                         </a>
                     @endif
-                    @if ((Auth::check() && Auth::user()->id_rol == 3) || Auth::user()->id_rol == 2)
+                    @if ((Auth::check() && Auth::user()->id_rol == 3) || (Auth::check() && Auth::user()->id_rol == 2))
                         <a href="{{ route('admin.stats') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 class="s-icon s-icon-icon-stats" viewBox="0 0 16 16">
