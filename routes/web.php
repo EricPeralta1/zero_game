@@ -16,12 +16,12 @@ route::post('/Login', [LoginController::class, 'Login'])->name('login.submit');
 Route::get('/', function () {
     return redirect()->route('login') ;
 });
-/* LANDING PAGE MULTIIDIOMA*/
-Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
+
 
 Route::middleware(['auth'])->group(function () {
     
-
+    /* LANDING PAGE MULTIIDIOMA*/
+    Route::get("/zero/{lang}", [LandingController::class, 'index'])->name('landing.page');
 
     /* CONFIGURACIÓN DE USUARIOS PARA SUPERADMIN*/
     Route::get('/config', [LandingController::class, 'config'])->name('superadmin.config');
