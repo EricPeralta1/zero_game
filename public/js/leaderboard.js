@@ -15,8 +15,11 @@ function updateScoreView(event) {
     let selectedOption = option.options[option.selectedIndex];
     let level = selectedOption.getAttribute("data-level");
 
-    puntuaciones.forEach(score => {
-        if (score.id_game == level) {
+    const puntuacionesOrdenadas = puntuaciones
+    .filter(score => score.id_game == level)
+    .sort((a, b) => parseInt(b.puntos) - parseInt(a.puntos));
+
+    puntuacionesOrdenadas.forEach(score => {
             const tableRow = document.createElement("tr")
             tableRow.classList.add("table-dark")
             tableRow.id = "scorePlayer"
@@ -43,7 +46,6 @@ function updateScoreView(event) {
             console.log(tableRow)
 
             table.append(tableRow)
-        }
     });
 }
 

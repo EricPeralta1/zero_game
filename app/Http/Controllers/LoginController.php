@@ -63,7 +63,7 @@ class LoginController extends Controller
             $data = json_decode($cookie, true);
 
             $fechaFin = Carbon::now('UTC');
-            $fechaInicio = Carbon::parse($data['fechaini'])->setTimezone('UTC');
+            $fechaInicio = Carbon::parse($data['fechaini']);
             $tiempo_sesion = (int) $fechaInicio->diffInSeconds($fechaFin);
 
             $sesion = new Seccion();
