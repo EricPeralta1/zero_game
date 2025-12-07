@@ -6,7 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Puntuación global
-let puntos = 0;
+let points = 0;
+let lifes = 3;
+let startTime
+let endTime
+let dateToday
+let playTime = ""
 
 /* ----------------------------------------
    Función Principal
@@ -14,6 +19,8 @@ let puntos = 0;
 function iniciarJuego(e) {
     e.preventDefault();
 
+    dateToday = new Date();
+    startTime = Date.now()
 
     const box = document.querySelector(".level-box");
     if (!box) return;
@@ -292,7 +299,7 @@ function win() {
 
                     <h3 class="mt-4 mb-2 text-white" style="font-family: 'VT323'; font-size: 30px;">ESTADISTICAS</h3>
                     
-                    <h2 class="mt-4 mb-2 text-white" style="font-family: 'VT323'; font-size: 25px;">Has conseguido ${puntos} puntos</h2>
+                    <h2 class="mt-4 mb-2 text-white" style="font-family: 'VT323'; font-size: 25px;">Has conseguido ${points} puntos</h2>
                 </div>
                 <div class="col-12 col-lg-5 d-flex flex-column align-items-end image-action-container mt-4 mt-lg-0">
 
@@ -323,6 +330,8 @@ function defeat() {
     const box = document.querySelector(".level-box");
 
     if (!box) return;
+
+    saveScore(); // Guardar puntuación al terminar nivel
 
     // Limpiar la div existente
     box.innerHTML = "";
@@ -358,7 +367,6 @@ function defeat() {
     const btnInicio = box.querySelector('.inicio');
     if (btnInicio) {
         btnInicio.addEventListener('click', () => {
-            saveScore(); // Guardar puntuación al terminar nivel
             window.location.href = '../levels';
         });
     }
@@ -367,7 +375,7 @@ function defeat() {
     const btnReintentar = box.querySelector('.reintentar');
     if (btnReintentar) {
         btnReintentar.addEventListener('click', () => {
-            puntos = 0; // Resetear puntos al reintentar
+            points = 0; // Resetear puntos al reintentar
             window.location.reload();
         });
     }
@@ -394,8 +402,8 @@ function activarEventosRespuesta(container, ops, correcta, hearts) {
                 span.style.color = "#000";
 
                 // Sumar puntos por respuesta correcta
-                puntos += 100;
-                console.log(puntos);
+                points += 100;
+                console.log(points);
                 
                 // Bloquear las otras opciones para que no se puedan clicar
                 const allSpans = container.querySelectorAll('span');
@@ -428,8 +436,9 @@ function activarEventosRespuesta(container, ops, correcta, hearts) {
                 if (heartImgs.length > 0) {
                     heartImgs[heartImgs.length - 1].remove();
                     // Restar puntos por respuesta incorrecta
-                    puntos -= 50;
-                    console.log('Puntos:', puntos);
+                    points -= 50;
+                    lifes = lifes - 1;
+                    console.log('Puntos:', points);
 
                     const remaining = hearts.querySelectorAll('img').length;
                     if (remaining === 0) {
@@ -443,28 +452,36 @@ function activarEventosRespuesta(container, ops, correcta, hearts) {
     });
 }
 
+function calculateTime() {
+    endTime = Date.now()
+    let diff = endTime - startTime;
+
+    let seconds = Math.floor(diff / 1000);
+    let minutes = Math.floor((seconds % 3600) / 60);
+    seconds = seconds % 60;
+
+    let mm = String(minutes).padStart(2, '0');
+    let ss = String(seconds).padStart(2, '0');
+
+    playTime = `${mm}:${ss}`; 
+}
 
 function saveScore() {
-    const dateToday = new Date().toISOString().split('T')[0];
+    calculateTime()
     
-    const scoreGame2 = { 
-        puntuacion: puntos,
-        id_user: id_usuario,
-        id_game: id_juego,
-        fecha: dateToday
-    };
+    const scoreGame = { puntos: points, tiempo_nivel: playTime, vidas: lifes, errores: 3 - lifes, id_user: id_usuario, id_game: id_juego, fecha: dateToday }
     
-    const score2Str = JSON.stringify(scoreGame2);
-    document.cookie = `score2=${score2Str}; path=/; max-age=3600`;
+    const score2Str = JSON.stringify(scoreGame);
+    document.cookie = `scoresave=${score2Str}; path=/; max-age=3600`;
 
     const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-    fetch(`http://localhost:8080/zero_game/public/saveScore`, {
+    fetch(`http://localhost/zero_game/public/saveScore`, {
         method: 'PUT',
         headers: {
             'X-CSRF-TOKEN': token,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(scoreGame2)
+        body: JSON.stringify({})
     })
 }

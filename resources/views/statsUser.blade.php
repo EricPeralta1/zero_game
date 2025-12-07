@@ -82,7 +82,7 @@
             <input type="number" name="puntos" id="score" required>
 
             <label for="time">Tiempo</label>
-            <input type="number" name="tiempo_nivel" id="time" required>
+            <input type="text" name="tiempo_nivel" id="time" required>
 
             <label for="hp">Vidas</label>
             <input type="number" name="vidas" id="hp" min="0" max="5" required>

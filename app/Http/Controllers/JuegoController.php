@@ -31,6 +31,7 @@ class JuegoController extends Controller
         return view('Levels.levelscreen', compact('juegos', 'userScores', 'lvl1Score'));
     }
 
+    /*SEGÚN LA ID DEL JUEGO ELEGIDO EN LA PANTALLA LEVELS, CARGAMOS LA VISTA DEL NIVEL CORRESPONDIENTE.*/
     public function introduction($id_game){
 
         $juegos = juego::all();
@@ -47,6 +48,7 @@ class JuegoController extends Controller
         }
     }
 
+    /*CARGA LA PANTALLA METRICAS*/
     public function metrics(){
         $sessiones = Seccion::all();
         $usuarios = Usuario::all();

@@ -292,6 +292,7 @@ function showScoreMetrics() {
     showGameData.append(showData)
 
     let gameDataDiv = document.createElement("div")
+    gameDataDiv.classList.add('d-flex', 'flex-column', 'align-items-center')
     gameDataDiv.classList.add("gameData")
 
     let gameSection = document.createElement("div")
@@ -387,7 +388,6 @@ async function loadGameMetrics() {
         avg_errors = game_scores['errores'].astype(int).mean()
 
         fig, ax = plt.subplots(figsize=(12,6))
-        ax.bar(['PUNTOS'], avg_score, color='skyblue')
         ax.bar(['VIDAS'], avg_lifes, color='skyblue')
         ax.bar(['ERRORES'], avg_errors, color='skyblue')
 
@@ -404,12 +404,16 @@ async function loadGameMetrics() {
 
         img = document.createElement("img")
         img.src = "data:image/png;base64," + img_base64
-        img.style.width = "900px"
+        img.style.width = "500px"
         img.style.display = "block"
         img.style.margin = "20px auto"
 
+        puntos = document.createElement('h4')
+        puntos.textContent = "PUNTOS: " + str(avg_score)
+
         gameDataDiv = document.querySelector(".gameData")
         gameDataDiv.append(img)
+        gameDataDiv.append(puntos)
         
         `)
     }

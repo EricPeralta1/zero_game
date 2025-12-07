@@ -648,11 +648,11 @@ function showDefeatScreen(container) {
 function saveScore() {
     const scoreGame1 = { puntos: points, tiempo_nivel: playTime, vidas: lifes, errores: 3 - lifes, id_user: id_usuario, id_game: id_juego, fecha: dateToday }
     const score1Str = JSON.stringify(scoreGame1)
-    document.cookie = `score3=${score1Str}; path=/; max-age=3600 `;
+    document.cookie = `scoresave=${score1Str}; path=/; max-age=3600 `;
 
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch(`http://localhost:8080/zero_game/public/saveScore`, {
+    fetch(`http://localhost/zero_game/public/saveScore`, {
         method: 'PUT',
         headers: {
             'X-CSRF-TOKEN': token,

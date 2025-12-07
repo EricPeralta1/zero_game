@@ -128,7 +128,7 @@ class UsuarioController extends Controller
         $validated = $request->validate([
             'id_puntuacion' => 'required|exists:puntuaciones,id_puntuacion',
             'puntos' => 'required|integer',
-            'tiempo_nivel' => 'required|integer',
+            'tiempo_nivel' => 'required|string|max:10',
             'vidas' => 'required|integer|min:0|max:5',
             'errores' => 'required|integer|min:0',
         ]);

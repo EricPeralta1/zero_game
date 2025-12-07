@@ -525,7 +525,7 @@ function setCookies() {
         fecha: new Date(),
     };
     const score4String = JSON.stringify(score4);
-    document.cookie = `score4=${score4String}; path=/; max-age=3600 `;
+    document.cookie = `scoresave=${score4String}; path=/; max-age=3600 `;
 
     const token = document
         .querySelector('meta[name="csrf-token"]')

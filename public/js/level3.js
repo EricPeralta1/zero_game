@@ -1,3 +1,4 @@
+/*VARIABLES GLOBALES DEL JUEGO*/
 let gameQuestions = [
     { question: "¿Cuál es el área de un círculo?", answer: "π x r x r" },
     { question: "¿Cuál es el perímetro de un cuadrado?", answer: "4 x lado" },
@@ -19,9 +20,11 @@ let endTime
 let dateToday
 let playTime = ""
 
+/*INICIA EL JUEGO AL CLICAR EL BOTÓN COMENZAR*/
 let start = document.querySelector('.startGame')
 start.addEventListener('click', startGame)
 
+/*FUNCION PRINCIPAL QUE INICIA EL JUEGO, LIMPIA EL CONTENEDOR DEL TUTORIAL Y CREA EL CONTENEDOR DEL JUEGO*/
 function startGame() {
 
     dateToday = new Date();
@@ -82,6 +85,7 @@ function startGame() {
     dropAnswers(random)
 }
 
+/*AL EMPEZAR LA PARTE DE RESPONDER PREGUNTA, CARGA EL CONTENEDOR DE RESPUESTA USANDO EL INDEX RANDOM GENERADO PREVIAMENTE*/
 function loadQuestion(random) {
     let questionCont = document.querySelector(".questionBg");
 
@@ -147,6 +151,8 @@ function dropAnswers(random) {
     }, 1500)
 }
 
+/*COMPRUEBA LA RESPUESTA CLICADA. SE PARA EL INTERVAL DE GENERACIÓN DE PREGUNTAS. LUEGO, SE COMPREBUA SI LA RESPUESTA SELECCIONADA
+COINCIDE CON LA DE LA PREGUNTA. SI ES ASÍ, AUMENTA LA VELOCIDAD DEL MINIJUEGO, DE LO CONTRARIO SE RALENTECE.*/
 function checkQTE(answersInterval, word, random) {
 
     if (word.textContent != gameQuestions[random].answer) {
@@ -211,6 +217,9 @@ function checkQTE(answersInterval, word, random) {
 
 }
 
+/*PERMITE GENERAR LAS TECLAS EN POSICIÓN ALEATORIA (SEGÚN LAS DIMENSIONES DEL CONTENEDOR), GENERA UNA TECLA CON TEXTO
+(QUE NO ESTÉ EN PANTALLA) Y TRAS UN TIEMPO SE RETIRA. TRAS 20S, REGENERA LA PANTALLA DE PREGUNTAS CARGANDO UNA 
+PREGUNTA QUE NO HAYA APARECIDO. */
 function climbQTE() {
     let gamePanel = document.querySelector(".actionScreen")
 
@@ -294,6 +303,7 @@ function climbQTE() {
     }, 20000)
 }
 
+/* COMPRUEBA QUE LA TECLA PRESIONADA SEA EQUIVALENTE A UNA DE LAS GENERADAS EN PANTALLA*/
 function checkPress() {
     document.addEventListener("keydown", event => {
         let currKeys = document.querySelectorAll(".inputBackground")
@@ -414,6 +424,7 @@ function displayResults() {
     saveScore();
 }
 
+/*CALCULA EL TIEMPO EN MILISEGUNDOS, Y LUEGO CREA UN STRING MM:SS*/
 function calculateTime() {
     let diff = endTime - startTime;
 
@@ -427,14 +438,16 @@ function calculateTime() {
     playTime = `${mm}:${ss}`; 
 }
 
+
+/*GUARDA LA PUNTUACIÓN EN UNAS COOKIES, Y LUEGO HACEMOS FETCH A LA RUTA DE GUARDAR PUNTOS PARA GUARDAR.*/
 function saveScore() {
     const scoreGame3 = { puntos: points, tiempo_nivel: playTime, vidas: lifes, errores: 3 - lifes, id_user: id_usuario, id_game: id_juego, fecha: dateToday }
     const score3Str = JSON.stringify(scoreGame3)
-    document.cookie = `score3=${score3Str}; path=/; max-age=3600 `;
+    document.cookie = `scoresave=${score3Str}; path=/; max-age=3600 `;
 
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch(`http://localhost:8080/zero_game/public/saveScore`, {
+    fetch(`http://localhost/zero_game/public/saveScore`, {
         method: 'PUT',
         headers: {
             'X-CSRF-TOKEN': token,

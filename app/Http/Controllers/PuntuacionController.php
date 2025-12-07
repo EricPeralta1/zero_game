@@ -20,7 +20,7 @@ class PuntuacionController extends Controller
     }
 
     public function savescore(){
-        $data = $_COOKIE['score3'];
+        $data = $_COOKIE['scoresave'];
         $score = json_decode($data, true);
 
         $scores = puntuacion::All();

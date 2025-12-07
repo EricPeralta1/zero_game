@@ -11,7 +11,7 @@ class Seccion extends Model
    protected $table = 'sesiones';
     protected $primaryKey = 'id_session';
     public $timestamps = false;
-    protected $fillable=['tiempo_sesion','id_user'];
+    protected $fillable=['fecha_sesion','id_user', 'tiempo'];
 
 
 
