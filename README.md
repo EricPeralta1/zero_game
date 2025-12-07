@@ -60,5 +60,5 @@ Para más información de uso, características en profundidad y explicación de
 
 ### Esperamos que disfrute de utilizar nuestra experiéncia.
 
-https://zero.epsdespliegue.tech/
+[https://zero.epsdespliegue.tech/](https://zero.epsdespliegue.tech/zero_game/public/Login)
 ***
