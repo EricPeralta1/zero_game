@@ -26,9 +26,15 @@ class LoginController extends Controller
             $Usuario = Usuario::where('nom_usuario', $request->input('nom_usuario'))->first();
             
             if($Usuario && Hash::check($request->input('password'), $Usuario->password)){
-                Auth::login($Usuario);
-                
-                return redirect()->route('landing.page', ['lang' => 'es']);
+
+                if ($Usuario->active == 0) {
+                    session()->flash('error','Esta cuenta está desactivada.');
+                    return redirect()->back()->withInput();
+                } else {
+                    Auth::login($Usuario);
+                    return redirect()->route('landing.page', ['lang' => 'es']);
+                }
+               
             } else {
                 session()->flash('error','Credenciales incorrectas');
                 return redirect()->back()->withInput();
@@ -47,6 +53,7 @@ class LoginController extends Controller
         $usuario->password = $hashedPassword;
           $usuario->id_rol = 1; 
           $usuario->returning_player = 0;
+          $usuario->active = 1;
            $usuario->save();
         // 5. Redirección después del registro exitoso
         return redirect()->route('login')->with('success', '¡Registro exitoso! Por favor, inicia sesión con tus nuevas credenciales.');

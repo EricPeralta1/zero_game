@@ -88,11 +88,12 @@ class UsuarioController extends Controller
                 return back()->with('error', 'No se puede eliminar usuarios administradores.');
             }
 
-            $user->delete();
+            $user->active = 0;
+            $user->save();
 
-            return redirect()->back()->with('success', 'Usuario eliminado correctamente.');
+            return redirect()->back()->with('success', 'Usuario desactivado correctamente.');
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al eliminar el usuario: ' . $e->getMessage());
+            return back()->with('error', 'Error al desactivar el usuario: ' . $e->getMessage());
         }
     }
 

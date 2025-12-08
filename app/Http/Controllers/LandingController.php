@@ -26,7 +26,7 @@ class LandingController extends Controller
     /*PERMITE MOSTRAR LA VISTA DE CONFIGURACIÓN PARA EDITAR USUARIOS, DE ROL USUARIO O ADMIN, DISPONBILE PARA
     SUPERADMINS*/
     public function config() {
-        $users = Usuario::whereIn('id_rol', [1, 2])->get();
+        $users = Usuario::whereIn('id_rol', [1, 2])->where('active', 1)->get();
         return view("config", compact("users"));
     }
 

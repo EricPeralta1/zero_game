@@ -638,6 +638,7 @@ namespace App\Models {
     /**
      * App\Models\Usuario
      *
+     * @property int|null $active
      * @property int|null $returning_player
      * @property int $id_rol
      * @property string $password
@@ -657,6 +658,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario wherePassword($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario whereIdRol($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario whereReturningPlayer($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario whereActive($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Usuario>|Usuario query()
